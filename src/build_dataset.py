@@ -290,7 +290,7 @@ FOUNDING = {
     'harmoneyes': (2012, 'M'),
     'gowerlabs': (2013, 'H'),
     '格式塔科技 (gestala)': (2026, 'H'),
-    'dusq': (2018, 'M'),  # actually sustainable clothing brand, not neurotech
+    'dusq': (2023, 'H'),  # sleep-science, India (formerly InnerGize) — reccy has wrong country
     'dixi medical': (1988, 'H'),
     'diagnostic biochips, inc.': (2013, 'H'),
     'inflammasense': (2021, 'M'),
@@ -488,7 +488,7 @@ SOURCES = {
     'harmoneyes': 'https://pitchbook.com/profiles/company/741168-10',
     'gowerlabs': 'https://www.ucl.ac.uk/impact/case-studies/2022/apr/gowerlabs-advancing-optical-brain-imaging-neuroscience-applications-industry',
     '格式塔科技 (gestala)': 'https://m.tech.china.com/redian/2026/0105/012026_1792327.html',
-    'dusq': 'https://dusq.nl/en/about/',
+    'dusq': 'https://www.business-standard.com/content/press-releases-ani/indian-sleep-science-startup-dusq-formerly-innergize-raises-24-cr-to-challenge-global-sleep-tech-leaders-126021600674_1.html',
     'dixi medical': 'https://diximedical.com/about',
     'diagnostic biochips, inc.': 'https://diagnosticbiochips.com/our-story',
     'inflammasense': 'https://pitchbook.com/profiles/company/522913-78',
@@ -628,6 +628,8 @@ COUNTRY_MAP = {
     'France': 'France', 'Germany': 'Germany', 'Italy': 'Italy', 'Spain': 'Spain',
     'Switzerland': 'Switzerland', 'Netherlands': 'Netherlands',
     'The Netherlands': 'Netherlands',
+    'Noord-Holland': 'Netherlands', 'Zuid-Holland': 'Netherlands',
+    'Amsterdam': 'Netherlands',
     'Belgium': 'Belgium', 'Ireland': 'Ireland', 'Sweden': 'Sweden',
     'Denmark': 'Denmark', 'Norway': 'Norway', 'Finland': 'Finland',
     'Austria': 'Austria', 'Lithuania': 'Lithuania', 'Poland': 'Poland',

@@ -80,12 +80,13 @@ Cases where web research contradicts the reccy.dev listing. We **keep reccy's va
 - **Source:** https://www.humannitymedtec.org/
 - **Decision:** founding_year = 1985 (H), but flagged here because this is a parent-foundation date, not a "current entity" date. Compare to Bioness/Bioventus pattern.
 
-### Dusq — listed as neurotech, actually sustainable clothing
+### Dusq — listed as Netherlands, actually India
 
-- **reccy says:** Dusq, neurotech company in Noord-Holland
-- **Web finds:** Dusq is a sustainable baby clothing / lifestyle brand, not neurotech at all.
-- **Source:** https://dusq.nl/en/about/
-- **Decision:** founding_year set to 2018 (M) per their About page, but this row should probably be removed from the dataset entirely in v0.2.0. Logged here as an entity-type mismatch, not just a field mismatch.
+- **reccy says:** Dusq, Haarlem, Noord-Holland, website `dusq.com`
+- **Web finds:** DUSQ is a sleep-science startup headquartered in India (formerly InnerGize, known from Shark Tank India). Founded 2023 by Dr. Siddhant Bhargava, Shalmali Kadu, and Mitansh Khurana. Raised ₹24 crore seed in Feb 2026 from Fireside Ventures, Antler India, etc. Fully on-topic as neurotech.
+- **Source:** https://www.business-standard.com/content/press-releases-ani/indian-sleep-science-startup-dusq-formerly-innergize-raises-24-cr-to-challenge-global-sleep-tech-leaders-126021600674_1.html
+- **Decision:** founding_year = 2023 (H). country kept as Netherlands per reccy. Candidate for country fix in v0.2.0.
+- **Note (v0.1.2 error, corrected in v0.1.3):** The v0.1.2 release initially classified Dusq as "sustainable baby clothing" with founding_year 2018. This was wrong — the researcher went to `dusq.nl` (an unrelated Dutch clothing brand) instead of `dusq.com` (the actual reccy-listed company). Root cause: blindly matching company name to a `.nl` domain because the reccy row said Netherlands. Lesson: always use the exact `website` field from reccy, not the country-implied TLD.
 
 ## v0.1.3 lookup-key bug class
 
