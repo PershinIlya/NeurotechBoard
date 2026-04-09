@@ -29,4 +29,12 @@ env/
 
 # Claude Code local settings and worktrees (personal, not shared)
 .claude/settings.local.json
+.claude/launch.json
 .claude/worktrees/
+.claude/plans/
+
+# Observable Framework site — build artifacts and deps
+site/node_modules/
+site/dist/
+site/.observablehq/
+site/src/.observablehq/

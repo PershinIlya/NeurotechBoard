@@ -1,0 +1,440 @@
+---
+title: NeurotechBoard
+toc: false
+---
+
+<style>
+  .hero {
+    padding: 2rem 0 1rem 0;
+    border-bottom: 1px solid var(--theme-foreground-faintest);
+    margin-bottom: 1rem;
+  }
+  .hero h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    margin: 0;
+    line-height: 1.1;
+    background: linear-gradient(135deg, #4f46e5 0%, #06b6d4 50%, #10b981 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .hero p.tagline {
+    font-size: 1.15rem;
+    color: var(--theme-foreground-muted);
+    max-width: 60ch;
+    margin: 0.5rem 0 0 0;
+  }
+  .stat-card {
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--theme-foreground-faintest);
+    border-radius: 8px;
+    background: var(--theme-background-alt);
+  }
+  .stat-card .label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--theme-foreground-muted);
+    margin: 0;
+  }
+  .stat-card .value {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0.25rem 0 0 0;
+    color: var(--theme-foreground);
+    font-variant-numeric: tabular-nums;
+  }
+  .stat-card .sub {
+    font-size: 0.8rem;
+    color: var(--theme-foreground-muted);
+    margin: 0.1rem 0 0 0;
+  }
+  .section-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--theme-foreground-muted);
+    margin: 2.5rem 0 0.25rem 0;
+  }
+  h2 {
+    margin-top: 0.25rem;
+    font-size: 1.5rem;
+  }
+  .caption {
+    color: var(--theme-foreground-muted);
+    font-size: 0.9rem;
+    max-width: 70ch;
+    margin: 0.25rem 0 1rem 0;
+  }
+  .about-block {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--theme-foreground-faintest);
+    color: var(--theme-foreground-muted);
+    font-size: 0.9rem;
+    max-width: 75ch;
+  }
+  .about-block a { color: var(--theme-foreground); }
+</style>
+
+<div class="hero">
+  <h1>NeurotechBoard</h1>
+  <p class="tagline">
+    An open, interactive landscape of the global neurotech industry.
+    Tracking company formations, geographies, modalities, and lifecycles —
+    with honest confidence tiers and linked sources.
+  </p>
+</div>
+
+```js
+const companies = await FileAttachment("data/companies.csv").csv({typed: true});
+```
+
+```js
+// ---- Pre-computed summary stats ----
+const nCompanies = companies.length;
+const nCountries = new Set(companies.map(d => d.country).filter(Boolean)).size;
+const nWithYear = companies.filter(d => d.founding_year).length;
+const yearCoverage = (nWithYear / nCompanies * 100).toFixed(1);
+const years = companies.map(d => d.founding_year).filter(d => d);
+const yearMin = d3.min(years);
+const yearMax = d3.max(years);
+const yearSpan = `${yearMin}–${yearMax}`;
+const lifecycleCounts = d3.rollup(
+  companies,
+  v => v.length,
+  d => d.lifecycle_status || "unknown"
+);
+const nActive = lifecycleCounts.get("active") || 0;
+const nDead = lifecycleCounts.get("dead_domain") || 0;
+```
+
+<div class="grid grid-cols-4" style="margin-top: 0.5rem;">
+  <div class="stat-card">
+    <p class="label">Companies tracked</p>
+    <p class="value">${nCompanies}</p>
+    <p class="sub">from reccy.dev, dedup applied</p>
+  </div>
+  <div class="stat-card">
+    <p class="label">Countries</p>
+    <p class="value">${nCountries}</p>
+    <p class="sub">across 6 regions</p>
+  </div>
+  <div class="stat-card">
+    <p class="label">Founding years span</p>
+    <p class="value">${yearSpan}</p>
+    <p class="sub">${yearCoverage}% coverage (${nWithYear}/${nCompanies})</p>
+  </div>
+  <div class="stat-card">
+    <p class="label">Live sites</p>
+    <p class="value">${nActive}</p>
+    <p class="sub">${nDead} dead domains detected</p>
+  </div>
+</div>
+
+<p class="section-label">§1 Timeline</p>
+
+## When neurotech companies were founded
+
+<p class="caption">
+  Each bar is a year. Colors show regional split. Hover for details;
+  click the legend to toggle regions. Most of the dataset is young —
+  the modern neurotech wave starts around 2014.
+</p>
+
+```js
+// Filter to rows with a known year and clip outliers to 1990+ for the main chart
+const timelineData = companies.filter(d => d.founding_year && d.founding_year >= 1990);
+
+const regionOrder = ["North America", "Europe", "Asia", "MENA", "Oceania", "LATAM", "Other"];
+const regionColors = {
+  "North America": "#4f46e5",
+  "Europe":        "#06b6d4",
+  "Asia":          "#10b981",
+  "MENA":          "#f59e0b",
+  "Oceania":       "#ec4899",
+  "LATAM":         "#8b5cf6",
+  "Other":         "#94a3b8",
+  "":              "#cbd5e1"
+};
+```
+
+```js
+display(Plot.plot({
+  width,
+  height: 380,
+  marginLeft: 50,
+  marginBottom: 40,
+  x: {
+    label: "Founding year →",
+    tickFormat: "d",
+    labelAnchor: "right"
+  },
+  y: {
+    label: "↑ Companies founded",
+    grid: true,
+  },
+  color: {
+    legend: true,
+    domain: regionOrder,
+    range: regionOrder.map(r => regionColors[r] || "#94a3b8"),
+    label: "Region"
+  },
+  marks: [
+    Plot.rectY(
+      timelineData,
+      Plot.binX(
+        {y: "count"},
+        {
+          x: "founding_year",
+          fill: "region",
+          interval: 1,
+          order: regionOrder,
+          tip: {
+            format: {
+              x: "d",
+              y: true,
+              fill: true
+            }
+          }
+        }
+      )
+    ),
+    Plot.ruleY([0])
+  ]
+}))
+```
+
+<p class="section-label">§2 Modalities</p>
+
+## What tech the industry is built on
+
+<p class="caption">
+  Primary category is derived heuristically from reccy's industry tags —
+  wearables, medical devices, therapeutics, diagnostics, software/AI platforms,
+  research tools, hardware, and long-tail others. It's a form-factor axis,
+  not a technology axis. Hover for exact counts.
+</p>
+
+```js
+const modalityOrder = [
+  "Wearable",
+  "Medical Device",
+  "Therapeutics",
+  "Diagnostics",
+  "Software/AI",
+  "Research Tools",
+  "Hardware",
+  "Other"
+];
+const modalityColors = {
+  "Wearable":       "#2563eb",
+  "Medical Device": "#0891b2",
+  "Therapeutics":   "#7c3aed",
+  "Diagnostics":    "#ea580c",
+  "Software/AI":    "#059669",
+  "Research Tools": "#10b981",
+  "Hardware":       "#dc2626",
+  "Other":          "#64748b",
+};
+```
+
+```js
+display(Plot.plot({
+  width,
+  height: 260,
+  marginLeft: 100,
+  marginRight: 20,
+  x: {label: "Companies →", grid: true},
+  y: {label: null, domain: modalityOrder},
+  color: {
+    domain: modalityOrder,
+    range: modalityOrder.map(m => modalityColors[m] || "#64748b")
+  },
+  marks: [
+    Plot.barX(
+      companies,
+      Plot.groupY(
+        {x: "count"},
+        {
+          y: "primary_modality",
+          fill: "primary_modality",
+          sort: {y: "x", reverse: true},
+          tip: true
+        }
+      )
+    ),
+    Plot.ruleX([0]),
+    Plot.text(
+      companies,
+      Plot.groupY(
+        {x: "count", text: "count"},
+        {
+          y: "primary_modality",
+          textAnchor: "start",
+          dx: 6,
+          fill: "currentColor"
+        }
+      )
+    )
+  ]
+}))
+```
+
+<p class="section-label">§3 Applications × Categories</p>
+
+## Where the categories land
+
+<p class="caption">
+  A heatmap of how the form-factor categories cross-tabulate with
+  application domains. Darker cells mean more companies. The
+  Medical/Therapeutic × Therapeutics corner is the drug-delivery and
+  neurostim cluster; the Consumer/Wellness × Wearable corner is the
+  wellness-wearable world.
+</p>
+
+```js
+const applicationOrder = [
+  "Medical/Therapeutic",
+  "Medical/Diagnostic",
+  "Medical/Device",
+  "Consumer/Wellness",
+  "Software/Analytics",
+  "Research Tools",
+  "Other"
+];
+```
+
+```js
+display(Plot.plot({
+  width,
+  height: 320,
+  marginLeft: 100,
+  marginBottom: 50,
+  padding: 0.02,
+  x: {label: "Application →", domain: applicationOrder},
+  y: {label: "Modality ↑", domain: modalityOrder.slice().reverse()},
+  color: {
+    type: "linear",
+    scheme: "blues",
+    legend: true,
+    label: "Companies"
+  },
+  marks: [
+    Plot.cell(
+      companies,
+      Plot.group(
+        {fill: "count"},
+        {
+          x: "application",
+          y: "primary_modality",
+          tip: true
+        }
+      )
+    ),
+    Plot.text(
+      companies,
+      Plot.group(
+        {text: "count"},
+        {
+          x: "application",
+          y: "primary_modality",
+          fill: "black",
+          stroke: "white",
+          strokeWidth: 3
+        }
+      )
+    )
+  ]
+}))
+```
+
+<p class="section-label">§4 Geography</p>
+
+## Top countries by company count
+
+<p class="caption">
+  The top 15 countries — unsurprisingly USA-dominated, with Europe
+  fragmented across many smaller hubs. Bar color shows the region
+  the country belongs to.
+</p>
+
+```js
+const countryCounts = d3.rollups(
+  companies.filter(d => d.country),
+  v => v.length,
+  d => d.country
+).sort((a, b) => d3.descending(a[1], b[1])).slice(0, 15);
+
+const topCountries = countryCounts.map(([country, count]) => ({
+  country,
+  count,
+  region: companies.find(d => d.country === country)?.region || "Other"
+}));
+```
+
+```js
+display(Plot.plot({
+  width,
+  height: 400,
+  marginLeft: 120,
+  marginRight: 40,
+  x: {label: "Companies →", grid: true},
+  y: {label: null, domain: topCountries.map(d => d.country)},
+  color: {
+    domain: regionOrder,
+    range: regionOrder.map(r => regionColors[r] || "#94a3b8"),
+    legend: true,
+    label: "Region"
+  },
+  marks: [
+    Plot.barX(topCountries, {
+      x: "count",
+      y: "country",
+      fill: "region",
+      tip: true
+    }),
+    Plot.ruleX([0]),
+    Plot.text(topCountries, {
+      x: "count",
+      y: "country",
+      text: d => d.count,
+      textAnchor: "start",
+      dx: 6,
+      fill: "currentColor"
+    })
+  ]
+}))
+```
+
+<div class="about-block">
+
+### About the data
+
+This dashboard is built from a single, open CSV:
+[`data/processed/neurotech_enriched.csv`](https://github.com/PershinIlya/NeurotechBoard/blob/main/data/processed/neurotech_enriched.csv)
+in the [NeurotechBoard repository](https://github.com/PershinIlya/NeurotechBoard).
+
+**Source:** companies scraped from [reccy.dev](https://app.reccy.dev/companies),
+snapshot 2026-04-09. 393 rows after dedup.
+
+**Enrichment:** founding years are web-verified with H/M/L confidence tiers
+and per-row source URLs ([methodology](https://github.com/PershinIlya/NeurotechBoard/blob/main/docs/methodology.md)).
+Modality and application fields are derived heuristically from reccy's
+industry tags and should be treated as a starting point, not ground truth.
+
+**Lifecycle tracking** runs an automated domain-check pass over all 393
+company websites, classifying them into `active` / `dormant` / `dead_domain` /
+`unknown` tiers. A live website is a floor, not a ceiling — it doesn't
+guarantee the company is still operating, just that something answers.
+
+**Known limitations:** see the
+[discrepancies log](https://github.com/PershinIlya/NeurotechBoard/blob/main/docs/reccy_discrepancies.md).
+Reccy has country mismatches, duplicate rows, and occasionally scrapes a
+parked-domain title as the company name. We keep reccy's values as-is and
+log deltas rather than silently correcting.
+
+This is a personal pet project, released under a permissive license.
+Contributions, corrections, and pull requests welcome.
+
+</div>

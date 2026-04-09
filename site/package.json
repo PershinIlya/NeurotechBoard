@@ -1,0 +1,19 @@
+{
+  "name": "neurotechboard-site",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "observable preview",
+    "build": "observable build",
+    "deploy": "observable deploy",
+    "clean": "observable clean",
+    "observable": "observable"
+  },
+  "dependencies": {
+    "@observablehq/framework": "^1.13.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
