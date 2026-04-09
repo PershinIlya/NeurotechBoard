@@ -247,14 +247,18 @@ display(Plot.plot({
   One horizontal line per company, sorted top-to-bottom by founding year
   (oldest at the bottom, newest at the top). The line runs from the
   year the company was founded to the date of the last lifecycle check
-  (2026-04-09). Color shows the form-factor category. Hover any line
-  to see the company, year, and status. The "fan" shape opening to the
-  right is the modern neurotech wave — notice how sparse everything
-  before ~2014 looks, and how dense the last decade is.
+  (2026-04-09). <strong>Color</strong> shows the form-factor category;
+  <strong>line thickness</strong> encodes the most recent funding stage —
+  thin wisps are pre-seed / seed / grant territory, thick strokes are
+  companies that reached Series C+, private equity, or public markets.
+  Hover any line to see the company, year, category, and funding stage.
+  Red × marks dead domains; gray ○ marks dormant sites. The "fan" shape
+  opening to the right is the modern neurotech wave — notice how sparse
+  everything before ~2014 looks, and how dense the last decade is.
 </p>
 
 ```js
-// ---- Pre-compute sorted lifeline data ----
+// ---- Pre-compute sorted lifeline data with funding tiers ----
 // Each company becomes one row. Sort ascending by founding year so the
 // oldest entries anchor the bottom of the chart. Companies missing a
 // founding year are dropped (can't draw a line without a start).
@@ -265,14 +269,58 @@ display(Plot.plot({
 // line still extends to 2026 because we don't know WHEN the domain died,
 // only that it was dead by the check date — we add a visual marker at
 // the end instead.
+//
+// `funding_tier` maps reccy's last_funding_stage (~25 values) down to
+// 0-5 ordinal buckets, from "unknown" up through "post-IPO / acquired".
+// Rendered as stroke width in the chart so mature companies visually
+// pop out of the noise of seed-stage wisps.
 const LIFELINE_END = 2026.25; // mid-Q2 2026 ≈ check date
+
+// 0=unknown, 1=pre-seed/seed, 2=A/venture, 3=B/C/PE, 4=D-F, 5=IPO/acquired
+function fundingTier(stage) {
+  if (!stage) return 0;
+  const s = stage.toLowerCase().trim();
+  if (s === "undisclosed" || s === "non equity assistance" || s === "series unknown") return 0;
+  if (s.includes("post-ipo") || s === "ipo" || s === "acquisition" || s === "secondary market") return 5;
+  if (s.includes("series f") || s.includes("series e") || s.includes("series d")) return 4;
+  if (s.includes("series c") || s.includes("series b") || s === "private equity") return 3;
+  if (s.includes("series a") || s === "venture round" || s === "corporate round") return 2;
+  if (
+    s === "seed" || s === "pre-seed" || s === "pre seed" ||
+    s === "grant" || s === "convertible note" || s === "debt financing" ||
+    s === "equity crowdfunding" || s === "conventional debt"
+  ) return 1;
+  return 0;
+}
+
+// Stroke width per tier. Baseline at 1.1 so "unknown" is still visible;
+// top tier at 2.8 so an IPO line reads as ~2.5x thicker than a seed line
+// without overwhelming neighbors at ~2px row spacing.
+const TIER_STROKE_WIDTH = [0.7, 1.1, 1.5, 2.0, 2.4, 2.8];
+
+// Human-readable tier name for the tooltip
+const TIER_LABEL = [
+  "Unknown / undisclosed",
+  "Seed / grant / crowdfunding",
+  "Series A / venture round",
+  "Series B–C / private equity",
+  "Series D–F",
+  "Post-IPO / acquired"
+];
+
 const lifelineData = companies
   .filter(d => d.founding_year)
-  .map(d => ({
-    ...d,
-    founding_year: +d.founding_year,
-    end_year: LIFELINE_END,
-  }))
+  .map(d => {
+    const tier = fundingTier(d.last_funding_stage);
+    return {
+      ...d,
+      founding_year: +d.founding_year,
+      end_year: LIFELINE_END,
+      funding_tier: tier,
+      funding_tier_label: TIER_LABEL[tier],
+      stroke_width: TIER_STROKE_WIDTH[tier]
+    };
+  })
   .sort((a, b) => d3.ascending(a.founding_year, b.founding_year))
   .map((d, i) => ({...d, rank: i}));
 
@@ -316,21 +364,26 @@ display(Plot.plot({
       strokeDasharray: "3,4",
       strokeWidth: 1
     }),
-    // One horizontal line per company, founding_year → end_year
+    // One horizontal line per company, founding_year → end_year.
+    // Stroke width varies by funding_tier so mature companies visibly
+    // thicken out of the seed-stage noise floor.
     Plot.link(lifelineData, {
       x1: "founding_year",
       x2: "end_year",
       y1: "rank",
       y2: "rank",
       stroke: "primary_modality",
-      strokeWidth: 1.6,
+      strokeWidth: d => d.stroke_width,
       strokeOpacity: 0.85,
+      strokeLinecap: "round",
       tip: true,
       channels: {
         Company: "name",
         Founded: "founding_year",
         Category: "primary_modality",
         Country: "country",
+        "Funding stage": "last_funding_stage",
+        "Funding tier": "funding_tier_label",
         Status: "lifecycle_status"
       }
     }),

@@ -99,7 +99,7 @@ FOUNDING = {
     'ant neuro': (2000, 'M'),
     '3brain ag': (2011, 'M'),
     'magstim': (1985, 'H'),
-    'cirtecmed': (1993, 'M'),
+    'cirtecmed': (1987, 'H'),  # Cirtec Medical, Brooklyn Park MN, per company website
     'route 92 medical': (2014, 'M'),
     'darmiyan': (2015, 'M'),
     'spark biomedical inc': (2018, 'M'),
@@ -200,8 +200,8 @@ FOUNDING = {
     'mad science group inc.': (1985, 'M'),
     'cadenceneuro': (2018, 'L'),
     'valencia technologies': (2011, 'M'),
-    'glneurotech': (1994, 'L'),
-    'great lakes neurotechnologies': (1994, 'L'),
+    'glneurotech': (2011, 'H'),  # = great lakes neurotechnologies, reccy dup row
+    'great lakes neurotechnologies': (2011, 'H'),  # spin-off from Cleveland Medical Devices
     'highland instruments highland instruments': (2007, 'L'),
     'histosonics': (2009, 'M'),
     'bexorg, inc.': (2019, 'L'),
@@ -293,7 +293,7 @@ FOUNDING = {
     'gowerlabs': (2013, 'H'),
     '格式塔科技 (gestala)': (2026, 'H'),
     'dusq': (2023, 'H'),  # sleep-science, India (formerly InnerGize) — reccy has wrong country
-    'dixi medical': (1988, 'H'),
+    'dixi medical': (1970, 'H'),  # per company About page: "pioneering neurotechnologies since 1970"
     'diagnostic biochips, inc.': (2013, 'H'),
     'inflammasense': (2021, 'M'),
     'boomerang medical, inc.': (2021, 'H'),
@@ -406,7 +406,7 @@ FOUNDING = {
     'nervonik, inc.': (2020, 'H'),
     'neurosom': (2021, 'M'),
     'neuraworx': (2021, 'M'),
-    'humannity medtec': (1985, 'H'),  # rebrand of Alfred Mann Foundation; using parent year
+    'humannity medtec': (1985, 'L'),  # rebrand of Alfred Mann Foundation (1985) — actual rebrand year unknown, downgraded to L
     'cordance medical': (2018, 'M'),
     'sharper sense': (2020, 'H'),
     'neurobionics': (2023, 'H'),
@@ -605,6 +605,9 @@ SOURCES = {
     'neurosom': 'https://www.neurosom.net/',
     'neuraworx': 'https://www.neuraworx.com/',
     'humannity medtec': 'https://www.humannitymedtec.org/',
+    'cirtecmed': 'https://www.cirtecmed.com/about-cirtec-medical',
+    'glneurotech': 'https://www.glneurotech.com/blog/2011/03/23/press-release-cleveland-medical-devices-inc-spins-off-great-lakes-neurotechnologies/',
+    'great lakes neurotechnologies': 'https://www.glneurotech.com/blog/2011/03/23/press-release-cleveland-medical-devices-inc-spins-off-great-lakes-neurotechnologies/',
     'cordance medical': 'https://cordancemedical.com/',
     'sharper sense': 'https://www.sharpersense.com/',
     'neurobionics': 'https://neurobionics.io/',

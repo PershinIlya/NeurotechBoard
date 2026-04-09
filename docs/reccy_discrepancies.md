@@ -2,6 +2,30 @@
 
 Cases where web research contradicts the reccy.dev listing. We **keep reccy's values** in the CSV as-is (reccy is the authoritative source), but track the disagreement here so we can revisit during v0.2.0+.
 
+## Wrong-entity scrapes
+
+### Mad Science Group Inc. — not neurotech at all, it's a kids' STEM franchise
+
+- **reccy says:** Mad Science Group Inc., Canada, categorized as neurotech
+- **Web finds:** Mad Science Group is a Quebec-based children's STEM education franchise (after-school programs, birthday parties, summer camps), founded ~1985. No connection to neurotech.
+- **Likely confusion:** There is a separate US neurotech company called **Madison Scientific (MadSci)** (madsci.com) that makes hydrocephalus shunts — reccy may have confused the two, or picked up the wrong "Mad Science" when crawling.
+- **Decision:** keep the row (we trust reccy's inclusion list), keep founding_year = 1985 (correct for the Canadian STEM company), but flag here that this entity almost certainly does not belong in a neurotech dataset. Candidate for removal in v0.3.0 when we do a pass of "is this actually neurotech?" cleanups.
+
+## Duplicate rows
+
+### Glneurotech == Great Lakes NeuroTechnologies
+
+- **reccy says:** two separate rows — `Glneurotech` and `Great Lakes NeuroTechnologies`, both Ohio/USA, both with `glneurotech.com`.
+- **Web finds:** same company. "GLneurotech" is just the short domain form of "Great Lakes NeuroTechnologies Inc." Founded 2011 as a spin-off from Cleveland Medical Devices Inc.
+- **Source:** https://www.glneurotech.com/blog/2011/03/23/press-release-cleveland-medical-devices-inc-spins-off-great-lakes-neurotechnologies/
+- **Decision:** both rows get founding_year = 2011 (H). Previous v0.1.x values (1994 L) were wrong — 1994 was the founding of the *parent* Cleveland Medical Devices, not the independent spin-off. Both rows are candidates for dedup in v0.3.0.
+
+## huMannity Medtec — confidence downgrade (2026-04-09)
+
+- **v0.1.3 initial value:** `(1985, 'H')` — used the Alfred Mann Foundation year because huMannity Medtec is a rebrand of that foundation.
+- **Issue:** 1985 is the *parent foundation's* founding, not the rebrand year. The rebrand happened much later (unknown exact date), and claiming 1985 as founding_year with H confidence is misleading. The 2014 lifelines chart in v0.2.0+ made this visible — the row anchored all the way in 1985, looking like a legacy player, which it isn't.
+- **v0.2.1 fix:** downgraded to `(1985, 'L')` — year kept because Alfred Mann Foundation IS the parent, but confidence downgraded to reflect that this is really a proxy for "unknown rebrand year, at least this old". Proper fix would be to find the actual rebrand year and use that with H confidence, or drop the year entirely. Deferred.
+
 ## Country / entity mismatches
 
 ### Neuromark — listed as USA, actually Ireland (Neurent Medical)
