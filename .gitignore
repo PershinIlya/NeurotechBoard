@@ -26,3 +26,7 @@ env/
 
 # Jupyter
 .ipynb_checkpoints/
+
+# Claude Code local settings and worktrees (personal, not shared)
+.claude/settings.local.json
+.claude/worktrees/

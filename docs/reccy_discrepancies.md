@@ -46,12 +46,58 @@ Cases where web research contradicts the reccy.dev listing. We **keep reccy's va
 - **Web finds:** NYC-based practice (no reliable founding year found)
 - **Decision:** country kept as Canada per reccy, founding_year SKIP.
 
+### Cerevia — listed as France, actually USA (Maryland)
+
+- **reccy says:** Cerevia, France
+- **Web finds:** Cerevia Neurosciences, Rockville MD — a Weinberg Medical Physics spinout, founded 2025. (The French "Cérévia" is an unrelated agricultural cooperative.)
+- **Source:** https://cerevia.care/
+- **Decision:** country kept as France per reccy, founding_year = 2025 (H).
+
+### Brain Technologies, Inc. — listed as USA, actually Israel (Brain.Space)
+
+- **reccy says:** Brain Technologies, Inc., USA
+- **Web finds:** Brain.Space, Israel (founded 2018), neuro-wellness wearable.
+- **Source:** https://www.brain.space/
+- **Decision:** country kept as USA per reccy, founding_year = 2018 (M).
+
+### Nuro Inc — Canadian neurotech, NOT the self-driving Nuro
+
+- **reccy says:** Nuro Inc, Canada
+- **Web finds:** NURO Corp, Waterloo Canada (founded 2016) — BCI / neurotech company, distinct from the much-better-known Nuro self-driving robotics company (USA, 2016). Easy to confuse.
+- **Source:** https://www.crunchbase.com/organization/nuro-corp
+- **Decision:** founding_year = 2016 (H). No country mismatch, just a name-collision worth flagging.
+
+### nmtc1 == NeuroOne Medical (duplicate row in reccy)
+
+- **reccy says:** two separate rows — `NeuroOne Medical` and `Nmtc1`, both Eden Prairie MN, both website nmtc1.com.
+- **Web finds:** Same company. NMTC1 is the ticker. NeuroOne Medical Technologies Corp, founded 2009 (H).
+- **Decision:** both rows get founding_year = 2009. Candidate for dedup in v0.2.0.
+
+### huMannity Medtec — uses parent foundation year (1985)
+
+- **reccy says:** huMannity Medtec, USA
+- **Web finds:** Rebrand of Alfred Mann Foundation (founded 1985). The current rebranded entity's first-mention date is not publicly documented.
+- **Source:** https://www.humannitymedtec.org/
+- **Decision:** founding_year = 1985 (H), but flagged here because this is a parent-foundation date, not a "current entity" date. Compare to Bioness/Bioventus pattern.
+
 ### Dusq — listed as neurotech, actually sustainable clothing
 
 - **reccy says:** Dusq, neurotech company in Noord-Holland
 - **Web finds:** Dusq is a sustainable baby clothing / lifestyle brand, not neurotech at all.
 - **Source:** https://dusq.nl/en/about/
 - **Decision:** founding_year set to 2018 (M) per their About page, but this row should probably be removed from the dataset entirely in v0.2.0. Logged here as an entity-type mismatch, not just a field mismatch.
+
+## v0.1.3 lookup-key bug class
+
+A whole class of dict-key bugs surfaced during round 2 enrichment: when the raw company name contains a non-ASCII letter, Python's `str.lower()` produces lowercase **including the diacritic** — but the hardcoded FOUNDING dict keys had been written with ASCII letters or wrong-cased macron letters. The lookup `.lower()` of the raw name silently failed to find the key, and the row stayed empty even though we "had" data.
+
+| Row | Raw name | Wrong key | Correct key |
+|---|---|---|---|
+| Oura Ring | `ŌURA` | `ŌURA` (uppercase) | `ōura` |
+| Bía Neuroscience | `Bía Neuroscience` | `bia neuroscience` (no accent) | `bía neuroscience` |
+| huMannity Medtec | `huMannity Medtec` | `huMannity medtec` (camelcase) | `humannity medtec` |
+
+All three were fixed in v0.1.3. Lesson: when adding entries by hand, always lowercase the raw name in Python first (`name.lower()`) and paste *that* as the key.
 
 ## v0.1.0 quality fixes (post-release)
 
