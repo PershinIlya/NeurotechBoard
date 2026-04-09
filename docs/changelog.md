@@ -2,6 +2,29 @@
 
 All notable changes to the NeurotechBoard dataset are documented here. Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Dataset follows semver loosely (see README).
 
+## [0.1.2] — 2026-04-09
+
+Second enrichment round. 75 new web-verified founding years added across three parallel research batches of 30 companies each.
+
+### Added
+- 75 web-verified founding_year entries. Notable additions include:
+  - Very new entities: Epia Neuro (2026), Gestala (2026), Temple/weartemple (2026), Lotus Neuro (2025 Insightec spinout), Karavela (2025), Syndeio Biosciences (2025), Clee Medical (2024), Hom Neuro (2024).
+  - Mid-era: Monteris (1999), EvOn Medics (2013), DIXI Medical (1988), AlphaOmega (1993), Bioness (2004), NeuroNexus (2004), Stratus Neuro (2006), Eyetronic (2007), Holberg EEG (2009), Evoke Neuroscience (2009).
+- 15 entries marked SKIP (no reliable source found): NeuroMind AGI, Egra, Neurawear, Insellar GmbH, Horizon Neuro, Kalmoa, TryHealium, Grey Matter Neuropsychology, FluentPlay, Fluent, Deegtal, StimCardio, Synapse TBI, Brain Training International, Spinally.com (parked domain).
+- Expanded `docs/reccy_discrepancies.md` with 6 new entries from this round:
+  - **Manava** — listed Switzerland, actually Milan, Italy
+  - **Mave** — no country listed, actually Bengaluru, India
+  - **Journey-frame** — listed USA, actually Cambridge, UK (parent Phantom Technology)
+  - **EnterTech** — listed USA, actually Hangzhou, China
+  - **Grey Matter Neuropsychology of New York** — listed Canada, actually NYC, USA
+  - **Dusq** — listed as neurotech but is actually a sustainable baby clothing brand (probable reccy false positive, candidate for removal in v0.2.0)
+
+### Metrics
+- **Founding year coverage:** 285/393 = 72.5% (+19.1 pp vs v0.1.1)
+- **Provenance breakdown:** 186 `training_knowledge`, 99 URL-sourced, 108 empty
+- First year in the dataset expanded: now 1949–2026 (previously max 2025)
+- Country coverage, regions, top countries unchanged from v0.1.1
+
 ## [0.1.1] — 2026-04-09
 
 Patch release adding provenance tracking to founding years and first web-verified batch.
