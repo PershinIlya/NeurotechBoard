@@ -1,0 +1,3974 @@
+{
+  "checked_at": "2026-04-09T13:23:07Z",
+  "results": {
+    "3brain ag": {
+      "confidence": "M",
+      "elapsed_ms": 326,
+      "final_url": "https://www.3brain.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "High-Density Microelectrode Array (HD-MEA) | 3Brain",
+      "url_input": "3brain.com"
+    },
+    "ability neuro inc.": {
+      "confidence": "M",
+      "elapsed_ms": 926,
+      "final_url": "https://abilityneuro.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "ABILITY Neurotech - Speak. Move. Live. Renewing Ability with Revolutionary Brain-Computer Interface (BCI)",
+      "url_input": "abilityneuro.com"
+    },
+    "acoustiic": {
+      "confidence": "M",
+      "elapsed_ms": 806,
+      "final_url": "https://acoustiic.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Acoustiic &#8211; Paradigm Shifting Healthcare",
+      "url_input": "acoustiic.com"
+    },
+    "affectablesleep": {
+      "confidence": "M",
+      "elapsed_ms": 334,
+      "final_url": "https://www.affectablesleep.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Unlock Sleep&#x27;s Hidden Power with UltraSleep™",
+      "url_input": "affectablesleep.com"
+    },
+    "afference": {
+      "confidence": "M",
+      "elapsed_ms": 354,
+      "final_url": "https://www.afference.io/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Afference | Reimagining How Humans Connect",
+      "url_input": "afference.io"
+    },
+    "ai-stroke": {
+      "confidence": "M",
+      "elapsed_ms": 755,
+      "final_url": "https://www.ai-stroke.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "",
+      "url_input": "ai-stroke.com"
+    },
+    "aleva neuro": {
+      "confidence": "M",
+      "elapsed_ms": 2936,
+      "final_url": "https://aleva-neuro.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Aleva Neuro",
+      "url_input": "aleva-neuro.com"
+    },
+    "alljoined": {
+      "confidence": "M",
+      "elapsed_ms": 154,
+      "final_url": "https://alljoined.com",
+      "flags": [],
+      "http_status": 308,
+      "status": "active",
+      "title": "",
+      "url_input": "alljoined.com"
+    },
+    "alphaomega": {
+      "confidence": "M",
+      "elapsed_ms": 2450,
+      "final_url": "https://www.alphaomega-eng.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "AlphaOmega | Home page",
+      "url_input": "alphaomega-eng.com"
+    },
+    "alto neuroscience inc": {
+      "confidence": "M",
+      "elapsed_ms": 1056,
+      "final_url": "https://altoneuroscience.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Leading Innovation in Psychiatric Treatment | Alto Neuroscience",
+      "url_input": "altoneuroscience.com"
+    },
+    "ampa": {
+      "confidence": "M",
+      "elapsed_ms": 344,
+      "final_url": "https://www.ampahealth.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Ampa",
+      "url_input": "ampahealth.com"
+    },
+    "ant neuro": {
+      "confidence": "M",
+      "elapsed_ms": 761,
+      "final_url": "https://www.ant-neuro.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "ANT Neuro | EEG Systems, EEG Caps &amp; High‑Density EEG , Neuronavigation",
+      "url_input": "ant-neuro.com"
+    },
+    "arctop inc.": {
+      "confidence": "L",
+      "elapsed_ms": 95,
+      "final_url": "https://arctop.com",
+      "flags": [
+        "http_403",
+        "bot_blocked"
+      ],
+      "http_status": 403,
+      "status": "active",
+      "title": "",
+      "url_input": "arctop.com"
+    },
+    "atlas": {
+      "confidence": "M",
+      "elapsed_ms": 72,
+      "final_url": "https://atlaswearable.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Atlas",
+      "url_input": "atlaswearable.com"
+    },
+    "attune neurosciences": {
+      "confidence": "M",
+      "elapsed_ms": 128,
+      "final_url": "https://attuneneuro.com",
+      "flags": [],
+      "http_status": 308,
+      "status": "active",
+      "title": "",
+      "url_input": "attuneneuro.com"
+    },
+    "audicin": {
+      "confidence": "M",
+      "elapsed_ms": 82,
+      "final_url": "https://audicin.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Audicin – Binaural Beats for a Sound Body",
+      "url_input": "audicin.com"
+    },
+    "aural analytics": {
+      "confidence": "M",
+      "elapsed_ms": 810,
+      "final_url": "https://auralanalytics.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Aural Analytics | Clinical-Grade Speech Analytics",
+      "url_input": "auralanalytics.com"
+    },
+    "aurenar": {
+      "confidence": "M",
+      "elapsed_ms": 735,
+      "final_url": "https://www.aurenar.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Aurenar",
+      "url_input": "aurenar.com"
+    },
+    "aurimod": {
+      "confidence": "M",
+      "elapsed_ms": 474,
+      "final_url": "https://aurimod.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "AURIMOD | Schmerzlinderung ohne Medikamente",
+      "url_input": "aurimod.com"
+    },
+    "australis scientific": {
+      "confidence": "M",
+      "elapsed_ms": 807,
+      "final_url": "https://australisscientific.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Australis Scientific",
+      "url_input": "australisscientific.com"
+    },
+    "avivomed": {
+      "confidence": "M",
+      "elapsed_ms": 773,
+      "final_url": "https://avivomed.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Avivomed |",
+      "url_input": "avivomed.com"
+    },
+    "avrwell": {
+      "confidence": "M",
+      "elapsed_ms": 727,
+      "final_url": "https://www.avrwell.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "VR Rehabilitation Software for Clinics | XR Therapy Apps | AVRwell",
+      "url_input": "avrwell.com"
+    },
+    "axion": {
+      "confidence": "M",
+      "elapsed_ms": 269,
+      "final_url": "https://axionclick.com",
+      "flags": [],
+      "http_status": 308,
+      "status": "active",
+      "title": "",
+      "url_input": "axionclick.com"
+    },
+    "axo": {
+      "confidence": "M",
+      "elapsed_ms": 74,
+      "final_url": "https://axoneurotech.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Axo | Home",
+      "url_input": "axoneurotech.com"
+    },
+    "axoft": {
+      "confidence": "M",
+      "elapsed_ms": 983,
+      "final_url": "https://axoft.us",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Axoft | Home",
+      "url_input": "axoft.us"
+    },
+    "axon interfaces": {
+      "confidence": "M",
+      "elapsed_ms": 711,
+      "final_url": "https://www.axoninterfaces.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "",
+      "url_input": "axoninterfaces.com"
+    },
+    "beacon biosignals": {
+      "confidence": "M",
+      "elapsed_ms": 272,
+      "final_url": "https://beacon.bio",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Beacon Biosignals",
+      "url_input": "beacon.bio"
+    },
+    "bexorg, inc.": {
+      "confidence": "M",
+      "elapsed_ms": 355,
+      "final_url": "https://bexorg.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Decode the Brain. Reinvent Drug Discovery.",
+      "url_input": "bexorg.com"
+    },
+    "biocurrent": {
+      "confidence": "M",
+      "elapsed_ms": 306,
+      "final_url": "https://biocurrent.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Biocurrent® - EEG-Guided Electro-Medical Device Clinical Trial",
+      "url_input": "biocurrent.com"
+    },
+    "bioness medical": {
+      "confidence": "",
+      "elapsed_ms": 0,
+      "final_url": null,
+      "flags": [
+        "malformed_website"
+      ],
+      "http_status": null,
+      "status": "unknown",
+      "title": null,
+      "url_input": "bioness medical"
+    },
+    "bios": {
+      "confidence": "M",
+      "elapsed_ms": 1431,
+      "final_url": "https://www.bios.health/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "",
+      "url_input": "bios.health"
+    },
+    "bioserenity": {
+      "confidence": "M",
+      "elapsed_ms": 366,
+      "final_url": "https://bioserenity.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "BIOSerenity - Connected and Integrated Neurology",
+      "url_input": "bioserenity.com"
+    },
+    "biotronik neuro": {
+      "confidence": "M",
+      "elapsed_ms": 922,
+      "final_url": "https://www.biotronik.com/en-int",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "BIOTRONIK | Biotronik",
+      "url_input": "biotronik.com"
+    },
+    "bioventus": {
+      "confidence": "M",
+      "elapsed_ms": 538,
+      "final_url": "https://www.bioventus.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Bioventus - Innovations For Active Healing",
+      "url_input": "bioventus.com"
+    },
+    "bitbrain": {
+      "confidence": "M",
+      "elapsed_ms": 672,
+      "final_url": "https://www.bitbrain.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Advanced Neurotechnology",
+      "url_input": "bitbrain.com"
+    },
+    "blackrock neurotech": {
+      "confidence": "M",
+      "elapsed_ms": 1068,
+      "final_url": "https://blackrockneurotech.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Blackrock Neurotech | Empowered by Thought",
+      "url_input": "blackrockneurotech.com"
+    },
+    "bluearbortech": {
+      "confidence": "M",
+      "elapsed_ms": 3263,
+      "final_url": "https://bluearbortech.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Home - Blue Arbor Technologies",
+      "url_input": "bluearbortech.com"
+    },
+    "bluewind medical": {
+      "confidence": "M",
+      "elapsed_ms": 574,
+      "final_url": "https://bluewindmedical.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "BlueWind Medical | Revi for Urge Urinary Incontinence",
+      "url_input": "bluewindmedical.com"
+    },
+    "boomerang medical, inc.": {
+      "confidence": "M",
+      "elapsed_ms": 1425,
+      "final_url": "https://www.boomerangmedical.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "",
+      "url_input": "boomerangmedical.com"
+    },
+    "boston scientific corporation": {
+      "confidence": "M",
+      "elapsed_ms": 1483,
+      "final_url": "https://www.bostonscientific.com/en-US/home.html",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Advancing Science for Life - US  \n       - Boston Scientific",
+      "url_input": "bostonscientific.com"
+    },
+    "bottneuro ag": {
+      "confidence": "M",
+      "elapsed_ms": 667,
+      "final_url": "https://bottneuro.ch",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Bottneuro | Precision Medicine for Brain Health",
+      "url_input": "bottneuro.ch"
+    },
+    "brain technologies, inc.": {
+      "confidence": "M",
+      "elapsed_ms": 1219,
+      "final_url": "https://www.brain.space/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "brain.space",
+      "url_input": "brain.space"
+    },
+    "brain training international": {
+      "confidence": "M",
+      "elapsed_ms": 311,
+      "final_url": "https://braintraininginternational.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Welcome | Brain Training International",
+      "url_input": "braintraininginternational.com"
+    },
+    "brain.q technologies inc.": {
+      "confidence": "M",
+      "elapsed_ms": 102,
+      "final_url": "https://brainqtech.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "AI-Powered Noninvasive Solution for Stroke Recovery - BRAIN.Q",
+      "url_input": "brainqtech.com"
+    },
+    "brain4": {
+      "confidence": "M",
+      "elapsed_ms": 2220,
+      "final_url": "https://brain4.care",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "home | brain4care",
+      "url_input": "brain4.care"
+    },
+    "brainbit": {
+      "confidence": "M",
+      "elapsed_ms": 1154,
+      "final_url": "https://brainbit.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "BrainBit | EEG, EMG &amp; ECG Devices and Software + SDKs for Neuro/Biofeedback &amp; R&amp;D",
+      "url_input": "brainbit.com"
+    },
+    "brainchip": {
+      "confidence": "M",
+      "elapsed_ms": 66,
+      "final_url": "https://brainchip.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Home - BrainChip",
+      "url_input": "brainchip.com"
+    },
+    "brainco": {
+      "confidence": "M",
+      "elapsed_ms": 579,
+      "final_url": "https://brainco.tech",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "BrainCo - Train Your Brain for Success",
+      "url_input": "brainco.tech"
+    },
+    "braingrade": {
+      "confidence": "M",
+      "elapsed_ms": 312,
+      "final_url": "https://braingrade.io",
+      "flags": [
+        "http_404"
+      ],
+      "http_status": 404,
+      "status": "dormant",
+      "title": "",
+      "url_input": "braingrade.io"
+    },
+    "brainify.ai": {
+      "confidence": "M",
+      "elapsed_ms": 359,
+      "final_url": "https://brainify.ai",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Brainify.AI",
+      "url_input": "brainify.ai"
+    },
+    "brainlink by macrotellect": {
+      "confidence": "M",
+      "elapsed_ms": 1093,
+      "final_url": "https://o.macrotellect.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "BrainLink by Macrotellect | Healthy Brainwaves for Everyone-brainwave headset/EEG device/EEG headband",
+      "url_input": "o.macrotellect.com"
+    },
+    "brainomix limited": {
+      "confidence": "M",
+      "elapsed_ms": 651,
+      "final_url": "https://www.brainomix.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "AI-Powered Imaging Biomarkers to Transform Stroke and Lung Care",
+      "url_input": "brainomix.com"
+    },
+    "brainpatch®": {
+      "confidence": "M",
+      "elapsed_ms": 549,
+      "final_url": "https://brainpatch.ai",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "BrainPatch® | Non-invasive Brain Enhancement for Modern Life | Neurotechnology Solutions",
+      "url_input": "brainpatch.ai"
+    },
+    "brainsway": {
+      "confidence": "M",
+      "elapsed_ms": 1244,
+      "final_url": "https://www.brainsway.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "BrainsWay Deep TMS - Innovative, Noninvasive Treatment",
+      "url_input": "brainsway.com"
+    },
+    "brill neurotech": {
+      "confidence": "M",
+      "elapsed_ms": 69,
+      "final_url": "https://brillneurotech.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Brill Neurotech",
+      "url_input": "brillneurotech.com"
+    },
+    "bía neuroscience": {
+      "confidence": "M",
+      "elapsed_ms": 815,
+      "final_url": "https://getbia.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Bía Sleep Mask | Bía — Unlock the power of a restful sleep",
+      "url_input": "getbia.com"
+    },
+    "cadenceneuro": {
+      "confidence": "M",
+      "elapsed_ms": 1059,
+      "final_url": "https://cadenceneuro.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Home - Cadence Neuroscience",
+      "url_input": "cadenceneuro.com"
+    },
+    "cala health inc.": {
+      "confidence": "M",
+      "elapsed_ms": 143,
+      "final_url": "https://calahealth.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Cala kIQ - Cala kIQ",
+      "url_input": "calahealth.com"
+    },
+    "canaery": {
+      "confidence": "M",
+      "elapsed_ms": 682,
+      "final_url": "https://www.canaery.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Canaery",
+      "url_input": "canaery.com"
+    },
+    "cefaly technology": {
+      "confidence": "M",
+      "elapsed_ms": 1159,
+      "final_url": "https://www.cefaly.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Migraine Treatment Device: Clinically Proven, Drug-Free & FDA Cleared",
+      "url_input": "cefaly.com"
+    },
+    "cerevia": {
+      "confidence": "M",
+      "elapsed_ms": 950,
+      "final_url": "https://cerevia.care",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Main - Cerevia",
+      "url_input": "cerevia.care"
+    },
+    "ceribell": {
+      "confidence": "M",
+      "elapsed_ms": 518,
+      "final_url": "https://ceribell.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Ceribell | Home",
+      "url_input": "ceribell.com"
+    },
+    "cionic": {
+      "confidence": "M",
+      "elapsed_ms": 526,
+      "final_url": "https://www.cionic.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Cionic | Bionic Clothing for Mobility &amp; Independence",
+      "url_input": "cionic.com"
+    },
+    "cirtecmed": {
+      "confidence": "M",
+      "elapsed_ms": 324,
+      "final_url": "https://www.cirtecmed.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Home | Cirtec Medical",
+      "url_input": "cirtecmed.com"
+    },
+    "clearpoint neuro": {
+      "confidence": "M",
+      "elapsed_ms": 93,
+      "final_url": "https://www.clearpointneuro.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Home - ClearPoint Neuro",
+      "url_input": "clearpointneuro.com"
+    },
+    "clee medical": {
+      "confidence": "M",
+      "elapsed_ms": 552,
+      "final_url": "https://www.cleemedical.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Clee Medical SA",
+      "url_input": "cleemedical.com"
+    },
+    "cns fund": {
+      "confidence": "M",
+      "elapsed_ms": 679,
+      "final_url": "https://cnsfund.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Corundum Neuroscience - Propelling Breakthroughs in Neuroscience From Lab to Life",
+      "url_input": "cnsfund.com"
+    },
+    "cognision": {
+      "confidence": "M",
+      "elapsed_ms": 1233,
+      "final_url": "https://www.cognision.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Home | Cognision",
+      "url_input": "cognision.com"
+    },
+    "cognito therapeutics": {
+      "confidence": "M",
+      "elapsed_ms": 337,
+      "final_url": "https://www.cognitotx.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Cognito Therapeutics",
+      "url_input": "cognitotx.com"
+    },
+    "cognixion®": {
+      "confidence": "M",
+      "elapsed_ms": 862,
+      "final_url": "https://www.cognixion.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Cognixion®",
+      "url_input": "cognixion.com"
+    },
+    "cogwear": {
+      "confidence": "M",
+      "elapsed_ms": 724,
+      "final_url": "https://www.cogweartech.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Cogwear",
+      "url_input": "cogweartech.com"
+    },
+    "coherence": {
+      "confidence": "M",
+      "elapsed_ms": 356,
+      "final_url": "https://www.coherenceneuro.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Coherence | Reprogramming Cancer from Within with Therapeutic Neurotechnology",
+      "url_input": "coherenceneuro.com"
+    },
+    "comind": {
+      "confidence": "M",
+      "elapsed_ms": 287,
+      "final_url": "https://comind.io",
+      "flags": [],
+      "http_status": 308,
+      "status": "active",
+      "title": "",
+      "url_input": "comind.io"
+    },
+    "comphya": {
+      "confidence": "M",
+      "elapsed_ms": 307,
+      "final_url": "https://comphya.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Comphya | Implantable Neuromodulation for Post-Prostatectomy Nerve Support",
+      "url_input": "comphya.com"
+    },
+    "connectome": {
+      "confidence": "M",
+      "elapsed_ms": 284,
+      "final_url": "https://connectome.health",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Connectome",
+      "url_input": "connectome.health"
+    },
+    "constellation": {
+      "confidence": "M",
+      "elapsed_ms": 890,
+      "final_url": "https://constellationlab.io",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Constellation",
+      "url_input": "constellationlab.io"
+    },
+    "cordance medical": {
+      "confidence": "M",
+      "elapsed_ms": 1193,
+      "final_url": "https://cordancemedical.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Cordance Medical &#187; Improving outcomes for patients with brain diseases",
+      "url_input": "cordancemedical.com"
+    },
+    "cortec-neuro": {
+      "confidence": "M",
+      "elapsed_ms": 393,
+      "final_url": "https://cortec-neuro.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Medical Device manufacturer | neuromodulation | active implants",
+      "url_input": "cortec-neuro.com"
+    },
+    "curonix": {
+      "confidence": "M",
+      "elapsed_ms": 1476,
+      "final_url": "https://curonix.com/intl/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Curonix - Home",
+      "url_input": "curonix.com"
+    },
+    "darmiyan": {
+      "confidence": "M",
+      "elapsed_ms": 365,
+      "final_url": "https://darmiyan.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Darmiyan",
+      "url_input": "darmiyan.com"
+    },
+    "deegtal": {
+      "confidence": "H",
+      "elapsed_ms": 1,
+      "final_url": null,
+      "flags": [
+        "nxdomain"
+      ],
+      "http_status": null,
+      "status": "dead_domain",
+      "title": null,
+      "url_input": "deegtal.com"
+    },
+    "diagnostic biochips, inc.": {
+      "confidence": "M",
+      "elapsed_ms": 129,
+      "final_url": "https://diagnosticbiochips.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "SomaFocus",
+      "url_input": "diagnosticbiochips.com"
+    },
+    "digilens": {
+      "confidence": "M",
+      "elapsed_ms": 2141,
+      "final_url": "https://www.digilens.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Home - DigiLens Inc.",
+      "url_input": "digilens.com"
+    },
+    "dixi medical": {
+      "confidence": "M",
+      "elapsed_ms": 82,
+      "final_url": "https://diximedical.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "DIXI medical | Precision SEEG Electrodes for Epilepsy Care",
+      "url_input": "diximedical.com"
+    },
+    "dreem": {
+      "confidence": "M",
+      "elapsed_ms": 1755,
+      "final_url": "https://dreemhealth.com:443/en",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "A virtual sleep clinic that helps you feel like yourself again | Dreem Health - Digital sleep clinic",
+      "url_input": "dreem.com"
+    },
+    "dusq": {
+      "confidence": "M",
+      "elapsed_ms": 277,
+      "final_url": "https://dusq.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Dusq",
+      "url_input": "dusq.com"
+    },
+    "e184": {
+      "confidence": "M",
+      "elapsed_ms": 85,
+      "final_url": "https://e184.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "e184",
+      "url_input": "e184.com"
+    },
+    "egra": {
+      "confidence": "M",
+      "elapsed_ms": 624,
+      "final_url": "https://www.egra.ai/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Egra",
+      "url_input": "egra.ai"
+    },
+    "eight sleep": {
+      "confidence": "M",
+      "elapsed_ms": 341,
+      "final_url": "https://eightsleep.com",
+      "flags": [],
+      "http_status": 308,
+      "status": "active",
+      "title": "",
+      "url_input": "eightsleep.com"
+    },
+    "electrocore": {
+      "confidence": "M",
+      "elapsed_ms": 740,
+      "final_url": "https://www.electrocore.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "electroCore | Pioneers of Tech. Stimulators of Life.",
+      "url_input": "electrocore.com"
+    },
+    "elemind": {
+      "confidence": "M",
+      "elapsed_ms": 211,
+      "final_url": "https://elemindtech.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "",
+      "url_input": "elemindtech.com"
+    },
+    "emotiv": {
+      "confidence": "M",
+      "elapsed_ms": 469,
+      "final_url": "https://emotiv.com",
+      "flags": [],
+      "http_status": 308,
+      "status": "active",
+      "title": "",
+      "url_input": "emotiv.com"
+    },
+    "empatica": {
+      "confidence": "M",
+      "elapsed_ms": 712,
+      "final_url": "https://www.empatica.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "",
+      "url_input": "empatica.com"
+    },
+    "emteq labs": {
+      "confidence": "M",
+      "elapsed_ms": 72,
+      "final_url": "https://emteqlabs.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "emteq labs | Measure what matters",
+      "url_input": "emteqlabs.com"
+    },
+    "emvision": {
+      "confidence": "M",
+      "elapsed_ms": 1711,
+      "final_url": "https://emvision.com.au",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "EMVision | Portable Brain Scanner | Stroke Diagnosis and Monitoring",
+      "url_input": "emvision.com.au"
+    },
+    "enchannel medical": {
+      "confidence": "M",
+      "elapsed_ms": 701,
+      "final_url": "https://enchannelmedical.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "",
+      "url_input": "enchannelmedical.com"
+    },
+    "encora therapeutics": {
+      "confidence": "M",
+      "elapsed_ms": 395,
+      "final_url": "https://encoratherapeutics.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "",
+      "url_input": "encoratherapeutics.com"
+    },
+    "eneura": {
+      "confidence": "M",
+      "elapsed_ms": 928,
+      "final_url": "https://eneura.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "sTMS Migraine Therapy from eNeura &#124; Therapy clinically proven to stop migraine pain",
+      "url_input": "eneura.com"
+    },
+    "enspire dbs therapy, inc.": {
+      "confidence": "M",
+      "elapsed_ms": 916,
+      "final_url": "https://enspiredbs.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Revitalizing Stroke Recovery &#124; Enspire DBS Therapy, Inc.",
+      "url_input": "enspiredbs.com"
+    },
+    "enterra medical, inc.": {
+      "confidence": "M",
+      "elapsed_ms": 1041,
+      "final_url": "https://www.enterramedical.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Enterra® Therapy for chronic nausea and vomiting due to gastroparesis | Enterra Medical, Inc.",
+      "url_input": "enterramedical.com"
+    },
+    "entertech, inc": {
+      "confidence": "M",
+      "elapsed_ms": 1735,
+      "final_url": "https://entertech.cn/en/health.html",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Health",
+      "url_input": "entertech.cn/en/health.html"
+    },
+    "envoy medical, inc.": {
+      "confidence": "H",
+      "elapsed_ms": 2,
+      "final_url": null,
+      "flags": [
+        "nxdomain"
+      ],
+      "http_status": null,
+      "status": "dead_domain",
+      "title": null,
+      "url_input": "envoymedical.com"
+    },
+    "epia neuro": {
+      "confidence": "M",
+      "elapsed_ms": 78,
+      "final_url": "https://epianeuro.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Epia Neuro",
+      "url_input": "epianeuro.com"
+    },
+    "epiminder": {
+      "confidence": "M",
+      "elapsed_ms": 359,
+      "final_url": "https://epiminder.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Epiminder - Redefining Epilepsy Monitoring",
+      "url_input": "epiminder.com"
+    },
+    "epineuron": {
+      "confidence": "M",
+      "elapsed_ms": 744,
+      "final_url": "https://www.epineurontech.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "",
+      "url_input": "epineurontech.com"
+    },
+    "epitel": {
+      "confidence": "M",
+      "elapsed_ms": 749,
+      "final_url": "https://www.epitel.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "",
+      "url_input": "epitel.com"
+    },
+    "epiwatch®": {
+      "confidence": "M",
+      "elapsed_ms": 168,
+      "final_url": null,
+      "flags": [
+        "ssl_error"
+      ],
+      "http_status": null,
+      "status": "dormant",
+      "title": null,
+      "url_input": "epiwatch.com"
+    },
+    "esper": {
+      "confidence": "M",
+      "elapsed_ms": 289,
+      "final_url": "https://esperbionics.com",
+      "flags": [],
+      "http_status": 308,
+      "status": "active",
+      "title": "",
+      "url_input": "esperbionics.com"
+    },
+    "essilorluxottica": {
+      "confidence": "M",
+      "elapsed_ms": 1261,
+      "final_url": "https://www.essilorluxottica.com/en/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Home",
+      "url_input": "essilorluxottica.com"
+    },
+    "evoke neuroscience": {
+      "confidence": "M",
+      "elapsed_ms": 283,
+      "final_url": "https://evokeneuroscience.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Homepage - Evoke Neuroscience by Firefly Neuro",
+      "url_input": "evokeneuroscience.com"
+    },
+    "evon medics": {
+      "confidence": "M",
+      "elapsed_ms": 3063,
+      "final_url": "https://evonmedics.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "EvON Medics - Medical Research and Device Company",
+      "url_input": "evonmedics.com"
+    },
+    "evrenvns": {
+      "confidence": "M",
+      "elapsed_ms": 1448,
+      "final_url": "https://www.evrenvns.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "",
+      "url_input": "evrenvns.com"
+    },
+    "eyetronic": {
+      "confidence": "M",
+      "elapsed_ms": 1429,
+      "final_url": "https://eyetronic-therapie.de",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Eyetronic - Restoring Vision",
+      "url_input": "eyetronic-therapie.de"
+    },
+    "fareon, inc.": {
+      "confidence": "M",
+      "elapsed_ms": 717,
+      "final_url": "https://www.fareon.co/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Fareon, Inc.",
+      "url_input": "fareon.co"
+    },
+    "fasikl": {
+      "confidence": "M",
+      "elapsed_ms": 1333,
+      "final_url": "https://www.fasikl.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "",
+      "url_input": "fasikl.com"
+    },
+    "firefly neuroscience, inc.": {
+      "confidence": "M",
+      "elapsed_ms": 735,
+      "final_url": "https://fireflyneuro.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Brain Network Analytics (BNA™) | Firefly Neuroscience",
+      "url_input": "fireflyneuro.com"
+    },
+    "fisher wallace laboratories, inc.": {
+      "confidence": "M",
+      "elapsed_ms": 340,
+      "final_url": "https://www.fisherwallace.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "",
+      "url_input": "fisherwallace.com"
+    },
+    "flow neuroscience": {
+      "confidence": "M",
+      "elapsed_ms": 1013,
+      "final_url": "https://www.flowneuroscience.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Medication-Free Depression Treatment at Home | Flow Neuroscience\n            \n             - Flow Neuroscience",
+      "url_input": "flowneuroscience.com"
+    },
+    "fluent": {
+      "confidence": "M",
+      "elapsed_ms": 367,
+      "final_url": "https://fluentbci.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Fluent &#8211; Speak Your Mind",
+      "url_input": "fluentbci.com"
+    },
+    "fluentplay technologies": {
+      "confidence": "M",
+      "elapsed_ms": 295,
+      "final_url": "https://fluentplaytech.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "FluentPlay Technologies — Explore Games & Science",
+      "url_input": "fluentplaytech.com"
+    },
+    "focuscalm": {
+      "confidence": "M",
+      "elapsed_ms": 515,
+      "final_url": "https://focuscalm.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "FocusCalm | EEG Headband Technology",
+      "url_input": "focuscalm.com"
+    },
+    "frenz™ by earable™ neuroscience": {
+      "confidence": "M",
+      "elapsed_ms": 647,
+      "final_url": "https://frenzband.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "FRENZ™ by Earable™ Neuroscience\r&ndash; FRENZ™ by Earable Neuroscience",
+      "url_input": "earable.ai"
+    },
+    "g.tec neurotechnology gmbh": {
+      "confidence": "M",
+      "elapsed_ms": 2894,
+      "final_url": "https://www.gtec.at/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "g.tec medical engineering | Brain-Computer Interfaces &amp; Neurotechnology",
+      "url_input": "gtec.at"
+    },
+    "galvani bioelectronics": {
+      "confidence": "M",
+      "elapsed_ms": 707,
+      "final_url": "https://galvani.bio/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Galvani Bioelectronics &#8211; Transforming lives through precision neuromodulation",
+      "url_input": "galvanibioelectronics.com"
+    },
+    "galvanize": {
+      "confidence": "M",
+      "elapsed_ms": 91,
+      "final_url": "https://galvanizetx.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Galvanize",
+      "url_input": "galvanizetx.com"
+    },
+    "getenophone": {
+      "confidence": "M",
+      "elapsed_ms": 269,
+      "final_url": "https://getenophone.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Enophone by eno — Brain-Sensing Headphones",
+      "url_input": "getenophone.com"
+    },
+    "glneurotech": {
+      "confidence": "M",
+      "elapsed_ms": 5862,
+      "final_url": "https://www.glneurotech.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Great Lakes NeuroTechnologies",
+      "url_input": "glneurotech.com"
+    },
+    "gowerlabs": {
+      "confidence": "M",
+      "elapsed_ms": 731,
+      "final_url": "https://www.gowerlabs.co.uk/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Gowerlabs",
+      "url_input": "gowerlabs.co.uk"
+    },
+    "graymatters health": {
+      "confidence": "M",
+      "elapsed_ms": 756,
+      "final_url": "https://www.graymatters-health.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "",
+      "url_input": "graymatters-health.com"
+    },
+    "great lakes neurotechnologies": {
+      "confidence": "M",
+      "elapsed_ms": 5915,
+      "final_url": "https://www.glneurotech.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Great Lakes NeuroTechnologies",
+      "url_input": "glneurotech.com"
+    },
+    "grey matter neuropsychology of new york": {
+      "confidence": "M",
+      "elapsed_ms": 849,
+      "final_url": "https://www.greymatterneuro.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Grey Matter Neuropsychology of New York",
+      "url_input": "greymatterneuro.com"
+    },
+    "harmoneyes": {
+      "confidence": "M",
+      "elapsed_ms": 327,
+      "final_url": "https://harmoneyes.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Unleash the Power of Eye-Tracking &amp; AI - HarmonEyes",
+      "url_input": "harmoneyes.com"
+    },
+    "healios.org": {
+      "confidence": "M",
+      "elapsed_ms": 309,
+      "final_url": "https://healios.org.uk",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Home - Healios",
+      "url_input": "healios.org.uk"
+    },
+    "highland instruments highland instruments": {
+      "confidence": "M",
+      "elapsed_ms": 752,
+      "final_url": "https://www.highlandinstruments.us/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Highland Instruments  Highland Instruments",
+      "url_input": "highlandinstruments.com"
+    },
+    "hinge health, inc.": {
+      "confidence": "M",
+      "elapsed_ms": 1086,
+      "final_url": "https://www.hingehealth.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "",
+      "url_input": "hingehealth.com"
+    },
+    "histosonics": {
+      "confidence": "M",
+      "elapsed_ms": 298,
+      "final_url": "https://histosonics.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "HistoSonics | Leader in Histotripsy",
+      "url_input": "histosonics.com"
+    },
+    "holbergeeg": {
+      "confidence": "M",
+      "elapsed_ms": 740,
+      "final_url": "https://www.holbergeeg.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "",
+      "url_input": "holbergeeg.com"
+    },
+    "homneuro": {
+      "confidence": "M",
+      "elapsed_ms": 349,
+      "final_url": "https://www.homneuro.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "hōm neuro | In-Home EEG Monitoring for Epilepsy &amp; Seizure Diagnosis",
+      "url_input": "homneuro.com"
+    },
+    "horizon neuro": {
+      "confidence": "M",
+      "elapsed_ms": 268,
+      "final_url": "https://horizon-neuro.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Horizon Intelligence Labs",
+      "url_input": "horizon-neuro.com"
+    },
+    "humannity medtec": {
+      "confidence": "M",
+      "elapsed_ms": 326,
+      "final_url": "https://www.humannitymedtec.org/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "huMannity Medtec",
+      "url_input": "humannitymedtec.org"
+    },
+    "hyperfine, inc. and the swoop® portable mr imaging® system": {
+      "confidence": "M",
+      "elapsed_ms": 2043,
+      "final_url": "https://www.hyperfinemri.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Hyperfine, Inc. and the Swoop® Portable MR Imaging® System",
+      "url_input": "hyperfine.io"
+    },
+    "icometrix": {
+      "confidence": "M",
+      "elapsed_ms": 767,
+      "final_url": "https://www.icometrix.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "",
+      "url_input": "icometrix.com"
+    },
+    "iconeus": {
+      "confidence": "M",
+      "elapsed_ms": 424,
+      "final_url": "https://iconeus.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "",
+      "url_input": "iconeus.com"
+    },
+    "idun technologies": {
+      "confidence": "M",
+      "elapsed_ms": 147,
+      "final_url": "https://iduntechnologies.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Buy IDUN Guardian 4 Starter | Exclusive Offer",
+      "url_input": "iduntechnologies.com"
+    },
+    "imotions": {
+      "confidence": "M",
+      "elapsed_ms": 468,
+      "final_url": "https://imotions.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "iMotions | Powering Human Insights - Biometric Research",
+      "url_input": "imotions.com"
+    },
+    "inbrain-neuroelectronics": {
+      "confidence": "M",
+      "elapsed_ms": 655,
+      "final_url": "https://inbrain-neuroelectronics.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Mission - inbrain-neuroelectronics",
+      "url_input": "inbrain-neuroelectronics.com"
+    },
+    "inflammasense": {
+      "confidence": "M",
+      "elapsed_ms": 1053,
+      "final_url": "https://inflammasense.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Inflammasense - InflammaSense",
+      "url_input": "inflammasense.com"
+    },
+    "inner cosmos": {
+      "confidence": "M",
+      "elapsed_ms": 603,
+      "final_url": "https://innercosmos.ai",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Inner Cosmos – Home Page - Inner Cosmos",
+      "url_input": "innercosmos.ai"
+    },
+    "insellar gmbh": {
+      "confidence": "M",
+      "elapsed_ms": 605,
+      "final_url": "https://insellar.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Insellar GmbH",
+      "url_input": "insellar.com"
+    },
+    "insightec ltd.": {
+      "confidence": "M",
+      "elapsed_ms": 1883,
+      "final_url": "https://insightec.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Therapeutic Power of Focused Ultrasound Treatment | Insightec",
+      "url_input": "insightec.com"
+    },
+    "inspire medical systems": {
+      "confidence": "M",
+      "elapsed_ms": 601,
+      "final_url": "https://inspiresleep.com",
+      "flags": [],
+      "http_status": 308,
+      "status": "active",
+      "title": "",
+      "url_input": "inspiresleep.com"
+    },
+    "intheon": {
+      "confidence": "M",
+      "elapsed_ms": 1057,
+      "final_url": "https://intheon.io",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Home - Intheon",
+      "url_input": "intheon.io"
+    },
+    "iota biosciences, inc.": {
+      "confidence": "M",
+      "elapsed_ms": 608,
+      "final_url": "https://iota.bio",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Home page - iota Biosciences",
+      "url_input": "iota.bio"
+    },
+    "join.synchneuro": {
+      "confidence": "M",
+      "elapsed_ms": 128,
+      "final_url": "https://join.synchneuro.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "",
+      "url_input": "join.synchneuro.com"
+    },
+    "journey-frame": {
+      "confidence": "M",
+      "elapsed_ms": 744,
+      "final_url": "https://www.journey-frame.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "",
+      "url_input": "journey-frame.com"
+    },
+    "juniper biomedical": {
+      "confidence": "M",
+      "elapsed_ms": 187,
+      "final_url": "https://www.juniperbiomedical.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Revolutionizing Pelvic Health Therapy | Juniper Biomedical",
+      "url_input": "juniperbiomedical.com"
+    },
+    "kalmoa": {
+      "confidence": "M",
+      "elapsed_ms": 1557,
+      "final_url": "https://kalmoa.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Home | Kalmoa",
+      "url_input": "kalmoa.com"
+    },
+    "kandu": {
+      "confidence": "M",
+      "elapsed_ms": 1027,
+      "final_url": "https://kandu.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "",
+      "url_input": "kandu.com"
+    },
+    "karavela": {
+      "confidence": "M",
+      "elapsed_ms": 683,
+      "final_url": "https://karavela.ai",
+      "flags": [],
+      "http_status": 308,
+      "status": "active",
+      "title": "",
+      "url_input": "karavela.ai"
+    },
+    "kernel": {
+      "confidence": "M",
+      "elapsed_ms": 1177,
+      "final_url": "https://www.kernel.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "",
+      "url_input": "kernel.com"
+    },
+    "keywise": {
+      "confidence": "M",
+      "elapsed_ms": 939,
+      "final_url": "https://keywise.tech",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "KeyWise | Fitness tracker for the brain.",
+      "url_input": "keywise.tech"
+    },
+    "linkedin": {
+      "confidence": "M",
+      "elapsed_ms": 1136,
+      "final_url": "https://www.linkedin.com/company/weartemple",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Temple | LinkedIn",
+      "url_input": "linkedin.com/company/weartemple"
+    },
+    "livanova plc": {
+      "confidence": "M",
+      "elapsed_ms": 991,
+      "final_url": "https://www.livanova.com/en-us",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Neuromodulation and Cardiopulmonary Medical Devices | LivaNova",
+      "url_input": "livanova.com"
+    },
+    "longeviti": {
+      "confidence": "M",
+      "elapsed_ms": 1046,
+      "final_url": "https://longeviti.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Commercialized Implantable Neurosurgical Devices | Longeviti",
+      "url_input": "longeviti.com"
+    },
+    "looxid labs": {
+      "confidence": "M",
+      "elapsed_ms": 2044,
+      "final_url": "https://looxidlabs.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "LooxidLabs | 룩시드랩스",
+      "url_input": "looxidlabs.com"
+    },
+    "lotus neuro": {
+      "confidence": "M",
+      "elapsed_ms": 744,
+      "final_url": "https://www.lotusneuro.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Lotus Neuro",
+      "url_input": "lotusneuro.com"
+    },
+    "lumithera": {
+      "confidence": "M",
+      "elapsed_ms": 2347,
+      "final_url": "https://lumithera.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "LumiThera",
+      "url_input": "lumithera.com"
+    },
+    "lumosity": {
+      "confidence": "M",
+      "elapsed_ms": 1226,
+      "final_url": "https://www.lumosity.com/en/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Lumosity - Brain Training Games | Exercise Your Mind",
+      "url_input": "lumosity.com"
+    },
+    "lungpacer": {
+      "confidence": "M",
+      "elapsed_ms": 274,
+      "final_url": "https://lungpacer.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Lungpacer® | Temporary Transvenous Diaphragm Neurostimulation",
+      "url_input": "lungpacer.com"
+    },
+    "lyeons neurotech": {
+      "confidence": "M",
+      "elapsed_ms": 358,
+      "final_url": "https://lyeons.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "LYEONS Neurotech &#8211; Innovation in Brain Health",
+      "url_input": "lyeons.com"
+    },
+    "machine medicine": {
+      "confidence": "M",
+      "elapsed_ms": 732,
+      "final_url": "https://machinemedicine.io/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "",
+      "url_input": "machinemedicine.com"
+    },
+    "machinemd": {
+      "confidence": "M",
+      "elapsed_ms": 201,
+      "final_url": "https://www.machinemd.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "machineMD | Home",
+      "url_input": "machinemd.com"
+    },
+    "mad science group inc.": {
+      "confidence": "M",
+      "elapsed_ms": 944,
+      "final_url": "https://madsci.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Madison Scientific | Developing Solutions for hydrocephalus patients",
+      "url_input": "madsci.com"
+    },
+    "magnetic tides": {
+      "confidence": "M",
+      "elapsed_ms": 310,
+      "final_url": "https://magnetictides.com",
+      "flags": [],
+      "http_status": 308,
+      "status": "active",
+      "title": "",
+      "url_input": "magnetictides.com"
+    },
+    "magnusmed": {
+      "confidence": "M",
+      "elapsed_ms": 1189,
+      "final_url": "https://www.magnusmedical.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "SAINT Depression Therapy | Magnus Medical",
+      "url_input": "magnusmed.com"
+    },
+    "magstim": {
+      "confidence": "M",
+      "elapsed_ms": 8054,
+      "final_url": "https://www.magstim.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Homepage - Magstim",
+      "url_input": "magstim.com"
+    },
+    "mainstay medical": {
+      "confidence": "M",
+      "elapsed_ms": 174,
+      "final_url": null,
+      "flags": [
+        "ssl_error"
+      ],
+      "http_status": null,
+      "status": "dormant",
+      "title": null,
+      "url_input": "mainstaymedical.com"
+    },
+    "manava": {
+      "confidence": "M",
+      "elapsed_ms": 1997,
+      "final_url": "https://manava.plus",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Home page - Manava Plus",
+      "url_input": "manava.plus"
+    },
+    "marbles health": {
+      "confidence": "M",
+      "elapsed_ms": 329,
+      "final_url": "https://marbles.health",
+      "flags": [],
+      "http_status": 308,
+      "status": "active",
+      "title": "",
+      "url_input": "marbles.health"
+    },
+    "mave": {
+      "confidence": "M",
+      "elapsed_ms": 650,
+      "final_url": "https://www.mavehealth.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Mave | Train your brain for modern life",
+      "url_input": "mavehealth.com"
+    },
+    "medrhythms, inc.": {
+      "confidence": "M",
+      "elapsed_ms": 293,
+      "final_url": "https://medrhythms.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Next-Generation Neurotherapeutics to Support Walking | MedRhythms",
+      "url_input": "medrhythms.com"
+    },
+    "medtronic": {
+      "confidence": "M",
+      "elapsed_ms": 2036,
+      "final_url": "https://www.medtronic.com/",
+      "flags": [
+        "needed_browser_ua"
+      ],
+      "http_status": 200,
+      "status": "active",
+      "title": "Incorrect Browser",
+      "url_input": "medtronic.com"
+    },
+    "melo": {
+      "confidence": "M",
+      "elapsed_ms": 725,
+      "final_url": "https://www.melo.health/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Melo | Make earlier sense of complex behaviours",
+      "url_input": "melo.health"
+    },
+    "mendi.io": {
+      "confidence": "M",
+      "elapsed_ms": 497,
+      "final_url": "https://www.mendi.io/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "",
+      "url_input": "mendi.io"
+    },
+    "merge labs": {
+      "confidence": "M",
+      "elapsed_ms": 842,
+      "final_url": "https://merge.io/blog",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Merge Labs",
+      "url_input": "merge.io"
+    },
+    "mesmerise group": {
+      "confidence": "M",
+      "elapsed_ms": 885,
+      "final_url": "https://www.mesmerisegroup.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Mesmerise Group",
+      "url_input": "mesmerisegroup.com"
+    },
+    "meta platforms, inc.": {
+      "confidence": "M",
+      "elapsed_ms": 2592,
+      "final_url": "https://www.meta.com/",
+      "flags": [
+        "path_lost_root_ok"
+      ],
+      "http_status": 200,
+      "status": "active",
+      "title": "",
+      "url_input": "meta.com/reality-labs"
+    },
+    "metaphysiks": {
+      "confidence": "M",
+      "elapsed_ms": 125,
+      "final_url": "https://metaphysiks-a5c3912fa7a4d7098770cb99b90.webflow.io/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Metaphysiks: Humanising digital reality with Neuro-Haptic Tech",
+      "url_input": "metaphysiks.ch"
+    },
+    "methinks ai stroke solutions": {
+      "confidence": "M",
+      "elapsed_ms": 337,
+      "final_url": "https://www.methinks.ai/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Methinks AI Stroke Solutions",
+      "url_input": "methinks.ai"
+    },
+    "mindaffect": {
+      "confidence": "M",
+      "elapsed_ms": 755,
+      "final_url": "https://www.mindaffect.nl/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "",
+      "url_input": "mindaffect.nl"
+    },
+    "mindmaze therapeutics": {
+      "confidence": "M",
+      "elapsed_ms": 821,
+      "final_url": "https://mindmazetherapeutics.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Home - MindMaze Therapeutics",
+      "url_input": "mindmazetherapeutics.com"
+    },
+    "mindrove": {
+      "confidence": "M",
+      "elapsed_ms": 781,
+      "final_url": "https://mindrove.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Neural interfaces | EEG headsets and EMG armbands",
+      "url_input": "mindrove.com"
+    },
+    "mintneuro": {
+      "confidence": "M",
+      "elapsed_ms": 416,
+      "final_url": "https://mintneuro.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "mintneuro",
+      "url_input": "mintneuro.com"
+    },
+    "mjn-neuro": {
+      "confidence": "M",
+      "elapsed_ms": 836,
+      "final_url": "https://mjn.cat",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "mjn-neuro &#8211; Un auricular que evalúa el riesgo de crisis de epilepsia",
+      "url_input": "mjn.cat"
+    },
+    "moberg analytics": {
+      "confidence": "M",
+      "elapsed_ms": 2657,
+      "final_url": "https://moberganalytics.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Advanced Clinical Intelligence for Critical Care | Moberg Analytics",
+      "url_input": "moberganalytics.com"
+    },
+    "mobia": {
+      "confidence": "M",
+      "elapsed_ms": 727,
+      "final_url": "https://www.mobia.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "",
+      "url_input": "mobia.com"
+    },
+    "mobio interactive": {
+      "confidence": "M",
+      "elapsed_ms": 2726,
+      "final_url": "https://www.mobiointeractive.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Mobio Interactive",
+      "url_input": "mobiointeractive.com"
+    },
+    "modality.ai": {
+      "confidence": "M",
+      "elapsed_ms": 693,
+      "final_url": "https://modality.ai",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "",
+      "url_input": "modality.ai"
+    },
+    "monteris": {
+      "confidence": "M",
+      "elapsed_ms": 1301,
+      "final_url": "https://www.monteris.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Monteris",
+      "url_input": "monteris.com"
+    },
+    "motif neurotech": {
+      "confidence": "M",
+      "elapsed_ms": 73,
+      "final_url": "https://motifneuro.tech",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Motif Neurotech — Therapeutic Brain Computer Interface For Mental Health",
+      "url_input": "motifneuro.tech"
+    },
+    "muse by interaxon": {
+      "confidence": "M",
+      "elapsed_ms": 198,
+      "final_url": "https://musehealth.ai",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Muse Health",
+      "url_input": "musehealth.ai"
+    },
+    "mxwbio": {
+      "confidence": "M",
+      "elapsed_ms": 1023,
+      "final_url": "https://www.mxwbio.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "MaxWell Biosystems | High Resolution MEA Technology",
+      "url_input": "mxwbio.com"
+    },
+    "mynd immersive": {
+      "confidence": "M",
+      "elapsed_ms": 89,
+      "final_url": "https://www.myndimmersive.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "",
+      "url_input": "myndimmersive.com"
+    },
+    "myndspan": {
+      "confidence": "M",
+      "elapsed_ms": 75,
+      "final_url": "https://myndspan.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "MYndspan | Brain Health Scans",
+      "url_input": "myndspan.com"
+    },
+    "nalu medical": {
+      "confidence": "M",
+      "elapsed_ms": 422,
+      "final_url": "https://nalumed.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Nalu Medical | Long-Term Solution for Chronic Nerve Pain",
+      "url_input": "nalumed.com"
+    },
+    "naox": {
+      "confidence": "M",
+      "elapsed_ms": 1447,
+      "final_url": "https://www.naox.tech/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "",
+      "url_input": "naox.tech"
+    },
+    "naqi logix": {
+      "confidence": "M",
+      "elapsed_ms": 727,
+      "final_url": "https://www.naqilogix.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "",
+      "url_input": "naqilogix.com"
+    },
+    "natus medical incorporated": {
+      "confidence": "M",
+      "elapsed_ms": 154,
+      "final_url": "https://natus.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Natus Medical Incorporated - Natus",
+      "url_input": "natus.com"
+    },
+    "neo-bionica": {
+      "confidence": "M",
+      "elapsed_ms": 295,
+      "final_url": "https://neo-bionica.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Neo-Bionica | Implantable Neurotechnology Design &amp; Manufacturing",
+      "url_input": "neo-bionica.com"
+    },
+    "nerivio": {
+      "confidence": "M",
+      "elapsed_ms": 316,
+      "final_url": "https://www.nerivio.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "#1 Prescribed Drug-Free Treatment For Migraine - Nerivio®",
+      "url_input": "nerivio.com"
+    },
+    "nervonik, inc.": {
+      "confidence": "M",
+      "elapsed_ms": 68,
+      "final_url": "https://nervonik.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Home Page - Nervonik",
+      "url_input": "nervonik.com"
+    },
+    "neumarker": {
+      "confidence": "M",
+      "elapsed_ms": 427,
+      "final_url": "https://neumarker.ai",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Neumarker &#8211; AI-empowered Brain Biomarker for Precision Neuromedicine",
+      "url_input": "neumarker.ai"
+    },
+    "neurable": {
+      "confidence": "M",
+      "elapsed_ms": 336,
+      "final_url": "https://www.neurable.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Neurable | The Mind. Unlocked. | Work Smarter, Not Longer",
+      "url_input": "neurable.com"
+    },
+    "neuraled": {
+      "confidence": "M",
+      "elapsed_ms": 547,
+      "final_url": "https://neuraled.co/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "NeuraLed - Advanced Brain Photobiomodulation Technology",
+      "url_input": "https://neuraled.co/"
+    },
+    "neuralight": {
+      "confidence": "M",
+      "elapsed_ms": 319,
+      "final_url": "https://www.neuralight.ai/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "NeuraLight",
+      "url_input": "neuralight.ai"
+    },
+    "neuralink": {
+      "confidence": "M",
+      "elapsed_ms": 336,
+      "final_url": "https://neuralink.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Neuralink — Pioneering Brain Computer Interfaces",
+      "url_input": "neuralink.com"
+    },
+    "neuraura biotech inc": {
+      "confidence": "M",
+      "elapsed_ms": 747,
+      "final_url": "https://www.neuraura.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "",
+      "url_input": "neuraura.com"
+    },
+    "neurawear": {
+      "confidence": "M",
+      "elapsed_ms": 467,
+      "final_url": "https://neurawear.co",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Neurawear",
+      "url_input": "neurawear.co"
+    },
+    "neuraworx": {
+      "confidence": "M",
+      "elapsed_ms": 755,
+      "final_url": "https://www.neuraworx.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "",
+      "url_input": "neuraworx.com"
+    },
+    "neuraxis": {
+      "confidence": "M",
+      "elapsed_ms": 1621,
+      "final_url": "https://neuraxis.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "",
+      "url_input": "neuraxis.com"
+    },
+    "neurinnov": {
+      "confidence": "M",
+      "elapsed_ms": 365,
+      "final_url": "https://neurinnov.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Neurinnov - Innovation in Neurostimulation - Neurinnov",
+      "url_input": "neurinnov.com"
+    },
+    "neuro rehab vr": {
+      "confidence": "M",
+      "elapsed_ms": 458,
+      "final_url": "https://neurorehabvr.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Virtual Reality for Rehab Specialists - Neuro Rehab",
+      "url_input": "neurorehabvr.com"
+    },
+    "neuro-stellar": {
+      "confidence": "M",
+      "elapsed_ms": 794,
+      "final_url": "https://www.neuro-stellar.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "",
+      "url_input": "neuro-stellar.com"
+    },
+    "neurobell": {
+      "confidence": "M",
+      "elapsed_ms": 761,
+      "final_url": "https://www.neurobell.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "",
+      "url_input": "neurobell.com"
+    },
+    "neurobionics": {
+      "confidence": "M",
+      "elapsed_ms": 1086,
+      "final_url": "https://neurobionics.io",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "",
+      "url_input": "neurobionics.io"
+    },
+    "neurode": {
+      "confidence": "M",
+      "elapsed_ms": 72,
+      "final_url": "https://neurodelabs.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Neurode",
+      "url_input": "neurodelabs.com"
+    },
+    "neurodiscovery ai": {
+      "confidence": "M",
+      "elapsed_ms": 348,
+      "final_url": "https://neurodiscovery.ai",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "NeuroDiscovery AI - RWD, RWE &amp; Patient Recruitment for Clinical Trials",
+      "url_input": "neurodiscovery.ai"
+    },
+    "neuroelectrics": {
+      "confidence": "M",
+      "elapsed_ms": 728,
+      "final_url": "https://www.neuroelectrics.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "",
+      "url_input": "neuroelectrics.com"
+    },
+    "neuroem": {
+      "confidence": "M",
+      "elapsed_ms": 722,
+      "final_url": "https://www.neuroem.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "NeuroEM",
+      "url_input": "neuroem.com"
+    },
+    "neurofenix": {
+      "confidence": "M",
+      "elapsed_ms": 336,
+      "final_url": "https://www.neurofenix.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Neurofenix: At-Home Stroke Therapy with a dedicated virtual therapist",
+      "url_input": "neurofenix.com"
+    },
+    "neurolief": {
+      "confidence": "M",
+      "elapsed_ms": 1338,
+      "final_url": "https://neurolief.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Neurolief - Shaping the Future of Mental HealthCare",
+      "url_input": "neurolief.com"
+    },
+    "neurolight": {
+      "confidence": "M",
+      "elapsed_ms": 57,
+      "final_url": "https://neurolight.co",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "",
+      "url_input": "neurolight.co"
+    },
+    "neurology care platform": {
+      "confidence": "M",
+      "elapsed_ms": 457,
+      "final_url": "https://neu.health",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Neu Health",
+      "url_input": "neu.health"
+    },
+    "neurolutions": {
+      "confidence": "M",
+      "elapsed_ms": 1880,
+      "final_url": "https://www.neurolutions.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "",
+      "url_input": "neurolutions.com"
+    },
+    "neuromark": {
+      "confidence": "M",
+      "elapsed_ms": 72,
+      "final_url": "https://neuromark.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Neurent Medical | NEUROMARK for Chronic Rhinitis",
+      "url_input": "neuromark.com"
+    },
+    "neuromind": {
+      "confidence": "M",
+      "elapsed_ms": 732,
+      "final_url": "https://www.neuromind.fr/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Neuromind | VR Neurofeedback Powered by EEG Biomarkers",
+      "url_input": "neuromind.fr"
+    },
+    "neuromind agi": {
+      "confidence": "M",
+      "elapsed_ms": 701,
+      "final_url": "https://www.neuromindagi.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "NeuroMind AGI — The AI Platform for Cognitive Defense",
+      "url_input": "neuromindagi.com"
+    },
+    "neuromod devices ltd.": {
+      "confidence": "M",
+      "elapsed_ms": 1058,
+      "final_url": "https://neuromod.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Neuromod Home - Neuromod",
+      "url_input": "neuromod.com"
+    },
+    "neuronexus": {
+      "confidence": "M",
+      "elapsed_ms": 1923,
+      "final_url": "https://neuronexus.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Electrophysiology solutions | NeuroNexus",
+      "url_input": "neuronexus.com"
+    },
+    "neuronic": {
+      "confidence": "M",
+      "elapsed_ms": 334,
+      "final_url": "https://www.neuronic.online/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Discover How Light Therapy Enhances Brain Health | Neuronic",
+      "url_input": "neuronic.online"
+    },
+    "neuronoff": {
+      "confidence": "M",
+      "elapsed_ms": 723,
+      "final_url": "https://www.neuronoff.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Relief Simplified | Neuronoff",
+      "url_input": "neuronoff.com"
+    },
+    "neuronostics": {
+      "confidence": "M",
+      "elapsed_ms": 734,
+      "final_url": "https://www.neuronostics.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Unlock the full potential of EEG for epilepsy diagnosis with BioEP",
+      "url_input": "neuronostics.com"
+    },
+    "neuroone medical": {
+      "confidence": "M",
+      "elapsed_ms": 341,
+      "final_url": "https://nmtc1.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Home | NeuroOne",
+      "url_input": "nmtc1.com"
+    },
+    "neuropace": {
+      "confidence": "L",
+      "elapsed_ms": 1579,
+      "final_url": "https://neuropace.com",
+      "flags": [
+        "http_403",
+        "bot_blocked"
+      ],
+      "http_status": 403,
+      "status": "active",
+      "title": "",
+      "url_input": "neuropace.com"
+    },
+    "neuros medical": {
+      "confidence": "M",
+      "elapsed_ms": 1217,
+      "final_url": "https://www.neurosmedical.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "",
+      "url_input": "neurosmedical.com"
+    },
+    "neuroservo": {
+      "confidence": "M",
+      "elapsed_ms": 750,
+      "final_url": "https://www.neuroservo.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "NeuroServo",
+      "url_input": "neuroservo.com"
+    },
+    "neurosigma": {
+      "confidence": "M",
+      "elapsed_ms": 758,
+      "final_url": "https://www.neurosigma.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "",
+      "url_input": "neurosigma.com"
+    },
+    "neurosity": {
+      "confidence": "M",
+      "elapsed_ms": 570,
+      "final_url": "https://neurosity.co",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "",
+      "url_input": "neurosity.co"
+    },
+    "neurosky": {
+      "confidence": "M",
+      "elapsed_ms": 405,
+      "final_url": "https://neurosky.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "NeuroSky | EEG &amp; ECG Wearable Biosensors &amp; Brainwave Technology",
+      "url_input": "neurosky.com"
+    },
+    "neurosoft-bio": {
+      "confidence": "M",
+      "elapsed_ms": 770,
+      "final_url": "https://www.neurosoft-bio.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Neurosoft Bioelectronics",
+      "url_input": "neurosoft-bio.com"
+    },
+    "neurosom": {
+      "confidence": "M",
+      "elapsed_ms": 740,
+      "final_url": "https://www.neurosom.net/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Neurosom",
+      "url_input": "neurosom.net"
+    },
+    "neurostar": {
+      "confidence": "M",
+      "elapsed_ms": 3655,
+      "final_url": "https://neurostar.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "TMS Treatment For Depression | Advanced Therapy | NeuroStar TMS",
+      "url_input": "neurostar.com"
+    },
+    "neurosteer": {
+      "confidence": "M",
+      "elapsed_ms": 1440,
+      "final_url": "https://www.neurosteer.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "",
+      "url_input": "neurosteer.com"
+    },
+    "neurosync": {
+      "confidence": "M",
+      "elapsed_ms": 1621,
+      "final_url": "https://www.neurosync.health/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Home - NeuroSync",
+      "url_input": "neurosync.health"
+    },
+    "neurotrack cognitive function test": {
+      "confidence": "M",
+      "elapsed_ms": 217,
+      "final_url": "https://neurotrack.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Neurotrack Cognitive Function Test: Assess for MCI, Dementia, Alzheimer's",
+      "url_input": "neurotrack.com"
+    },
+    "neurotype inc.": {
+      "confidence": "M",
+      "elapsed_ms": 734,
+      "final_url": "https://www.neurotype.io/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Neurofeedback for Addiction Recovery",
+      "url_input": "neurotype.io"
+    },
+    "neurovalens": {
+      "confidence": "M",
+      "elapsed_ms": 812,
+      "final_url": "https://neurovalens.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Insomnia Relief with Neurostimulator Device – Modius Sleep",
+      "url_input": "neurovalens.com"
+    },
+    "neuroverse": {
+      "confidence": "M",
+      "elapsed_ms": 779,
+      "final_url": "https://www.neuroverseinc.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Neuroverse",
+      "url_input": "neuroverseinc.com"
+    },
+    "neuroview technology": {
+      "confidence": "M",
+      "elapsed_ms": 1145,
+      "final_url": "https://neuroviewtech.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Neuroview Technology",
+      "url_input": "neuroviewtech.com"
+    },
+    "neurovirt": {
+      "confidence": "M",
+      "elapsed_ms": 762,
+      "final_url": "https://neurovirt.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "",
+      "url_input": "neurovirt.com"
+    },
+    "neurox": {
+      "confidence": "M",
+      "elapsed_ms": 278,
+      "final_url": "https://neurox.co.uk",
+      "flags": [],
+      "http_status": 308,
+      "status": "active",
+      "title": "",
+      "url_input": "neurox.co.uk"
+    },
+    "neuspera medical": {
+      "confidence": "M",
+      "elapsed_ms": 660,
+      "final_url": "https://neuspera.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Neuspera Medical | Implantable Medical Device Technology | OAB",
+      "url_input": "neuspera.com"
+    },
+    "newronika": {
+      "confidence": "M",
+      "elapsed_ms": 66,
+      "final_url": "https://newronika.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Newronika | Adaptive Deep Brain Stimulation Technology",
+      "url_input": "newronika.com"
+    },
+    "newrotex": {
+      "confidence": "M",
+      "elapsed_ms": 488,
+      "final_url": "https://newrotex.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Newrotex",
+      "url_input": "newrotex.com"
+    },
+    "nexalin technology": {
+      "confidence": "M",
+      "elapsed_ms": 780,
+      "final_url": "https://nexalin.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Nexalin Technology | The Leader In NeuroHealth",
+      "url_input": "nexalin.com"
+    },
+    "nexstim": {
+      "confidence": "M",
+      "elapsed_ms": 879,
+      "final_url": "https://www.nexstim.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Nexstim - Home",
+      "url_input": "nexstim.com"
+    },
+    "nextsense": {
+      "confidence": "M",
+      "elapsed_ms": 192,
+      "final_url": "https://nextsense.io",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "NextSense - Sleep Deeply, Live Fully",
+      "url_input": "nextsense.io"
+    },
+    "nia therapeutics, inc.": {
+      "confidence": "M",
+      "elapsed_ms": 84,
+      "final_url": "https://niatherapeutics.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Nia TX | Smart Neurostimulation System for Memory Recovery",
+      "url_input": "niatherapeutics.com"
+    },
+    "nimbus": {
+      "confidence": "M",
+      "elapsed_ms": 1081,
+      "final_url": "https://nimbusbci.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Nimbus | The AI Engine for Brain-Computer Interfaces",
+      "url_input": "nimbusbci.com"
+    },
+    "nmtc1": {
+      "confidence": "M",
+      "elapsed_ms": 304,
+      "final_url": "https://nmtc1.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Home | NeuroOne",
+      "url_input": "nmtc1.com"
+    },
+    "nocira": {
+      "confidence": "M",
+      "elapsed_ms": 951,
+      "final_url": "https://www.nocira.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Nocira",
+      "url_input": "nocira.com"
+    },
+    "noctrix health": {
+      "confidence": "M",
+      "elapsed_ms": 884,
+      "final_url": "https://noctrixhealth.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Noctrix Health",
+      "url_input": "noctrixhealth.com"
+    },
+    "nubrain- thoughts to text, image and speech decoding": {
+      "confidence": "M",
+      "elapsed_ms": 310,
+      "final_url": "https://nubrain.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "nubrain- Thoughts to text, image and speech decoding",
+      "url_input": "nubrain.com"
+    },
+    "nudge": {
+      "confidence": "M",
+      "elapsed_ms": 71,
+      "final_url": "https://nudge.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Nudge",
+      "url_input": "nudge.com"
+    },
+    "nueyne": {
+      "confidence": "M",
+      "elapsed_ms": 8039,
+      "final_url": "https://www.nueyne.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "뉴아인",
+      "url_input": "nueyne.com"
+    },
+    "nuro inc": {
+      "confidence": "M",
+      "elapsed_ms": 313,
+      "final_url": "https://nuro.world",
+      "flags": [],
+      "http_status": 308,
+      "status": "active",
+      "title": "",
+      "url_input": "nuro.world"
+    },
+    "nyx-tech": {
+      "confidence": "M",
+      "elapsed_ms": 731,
+      "final_url": "https://www.nyx-tech.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "",
+      "url_input": "nyx-tech.com"
+    },
+    "nyxoah": {
+      "confidence": "M",
+      "elapsed_ms": 374,
+      "final_url": "https://nyxoah.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "| Nyxoah",
+      "url_input": "nyxoah.com"
+    },
+    "ohmbody": {
+      "confidence": "M",
+      "elapsed_ms": 727,
+      "final_url": "https://www.ohmbody.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "",
+      "url_input": "ohmbody.com"
+    },
+    "omnipemf": {
+      "confidence": "M",
+      "elapsed_ms": 246,
+      "final_url": "https://omnipemf.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Optimize your health with PEMF technology | Omnipemf",
+      "url_input": "omnipemf.com"
+    },
+    "omniscient neurotechnology": {
+      "confidence": "M",
+      "elapsed_ms": 452,
+      "final_url": "https://www.o8t.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Hyperpersonalized Brain Care | Omniscient Neurotechnology",
+      "url_input": "o8t.com"
+    },
+    "onward medical n.v.": {
+      "confidence": "M",
+      "elapsed_ms": 1600,
+      "final_url": "https://www.onwd.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "",
+      "url_input": "onwd.com"
+    },
+    "openbci": {
+      "confidence": "M",
+      "elapsed_ms": 472,
+      "final_url": "https://openbci.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "OpenBCI",
+      "url_input": "openbci.com"
+    },
+    "openwater": {
+      "confidence": "M",
+      "elapsed_ms": 207,
+      "final_url": "https://www.openwater.health/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Wearable Health Solutions | Open-Motion and Open-LIFU | Openwater",
+      "url_input": "openwater.health"
+    },
+    "optoceutics": {
+      "confidence": "M",
+      "elapsed_ms": 2037,
+      "final_url": "https://optoceutics.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "OptoCeutics | EVY",
+      "url_input": "optoceutics.com"
+    },
+    "optohive": {
+      "confidence": "M",
+      "elapsed_ms": 794,
+      "final_url": "https://optohive.io/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Wearable Brain Imaging Technology",
+      "url_input": "optohive.com"
+    },
+    "paradromics, inc.": {
+      "confidence": "M",
+      "elapsed_ms": 392,
+      "final_url": "https://www.paradromics.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Brain-Computer Interface (BCI) for Neurological Conditions | Paradromics",
+      "url_input": "paradromics.com"
+    },
+    "phagenesis limited": {
+      "confidence": "M",
+      "elapsed_ms": 892,
+      "final_url": "https://www.phagenesis.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Phagenyx® by Phagenesis",
+      "url_input": "phagenesis.com"
+    },
+    "phantom neuro": {
+      "confidence": "M",
+      "elapsed_ms": 289,
+      "final_url": "https://phantomneuro.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Phantom Neuro · Redefining Human Capability",
+      "url_input": "phantomneuro.com"
+    },
+    "pigpug health": {
+      "confidence": "M",
+      "elapsed_ms": 1126,
+      "final_url": "https://pigpug.co",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "PIGPUG HEALTH &#8211; Neurofeedback and AI-based drug-free Brain training system for kids with ADHD (ASD) and mental health professionals",
+      "url_input": "pigpug.co"
+    },
+    "pixium vision": {
+      "confidence": "M",
+      "elapsed_ms": 1160,
+      "final_url": "https://science.xyz/company/pixium/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Pixium | Science Corporation",
+      "url_input": "pixium-vision.com"
+    },
+    "positrigo": {
+      "confidence": "M",
+      "elapsed_ms": 1277,
+      "final_url": "https://www.positrigo.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Positrigo - Imaging Everyone",
+      "url_input": "positrigo.com"
+    },
+    "precision neuroscience": {
+      "confidence": "M",
+      "elapsed_ms": 629,
+      "final_url": "https://www.precisionneuro.io/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Precision",
+      "url_input": "precisionneuro.io"
+    },
+    "presidio medical": {
+      "confidence": "M",
+      "elapsed_ms": 565,
+      "final_url": "https://presidiomedical.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Home - Presidio Medical",
+      "url_input": "presidiomedical.com"
+    },
+    "psyonic": {
+      "confidence": "M",
+      "elapsed_ms": 746,
+      "final_url": "https://www.psyonic.io/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "PSYONIC",
+      "url_input": "psyonic.io"
+    },
+    "pulsetto": {
+      "confidence": "M",
+      "elapsed_ms": 191,
+      "final_url": "https://pulsetto.tech",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Vagus Nerve Stimulation Device for Safe &amp; Effective Therapy - Pulsetto",
+      "url_input": "pulsetto.tech"
+    },
+    "reccy": {
+      "confidence": "M",
+      "elapsed_ms": 650,
+      "final_url": "https://www.reccy.dev/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "reccy | Specialized platforms for specialized industries",
+      "url_input": "reccy.dev"
+    },
+    "resonant link medical": {
+      "confidence": "M",
+      "elapsed_ms": 778,
+      "final_url": "https://www.resonant-link.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Power Medical Devices, Electric Vehicles, and Phones | Resonant Link",
+      "url_input": "resonant-link.com"
+    },
+    "restera": {
+      "confidence": "M",
+      "elapsed_ms": 762,
+      "final_url": "https://www.resterasleep.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Restera",
+      "url_input": "resterasleep.com"
+    },
+    "route 92 medical": {
+      "confidence": "M",
+      "elapsed_ms": 1522,
+      "final_url": "https://www.route92medical.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "",
+      "url_input": "route92medical.com"
+    },
+    "rune labs": {
+      "confidence": "M",
+      "elapsed_ms": 73,
+      "final_url": "https://runelabs.io",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Rune Labs",
+      "url_input": "runelabs.io"
+    },
+    "ruten": {
+      "confidence": "M",
+      "elapsed_ms": 629,
+      "final_url": "https://www.ruten-neuro.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "RUTEN | Disease-targeted BMIs, on the fastest path to the clinic",
+      "url_input": "ruten-neuro.com"
+    },
+    "saluda medical": {
+      "confidence": "M",
+      "elapsed_ms": 2005,
+      "final_url": "https://www.saludamedical.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Homepage - Saluda Medical US",
+      "url_input": "saludamedical.com"
+    },
+    "salvia bioelectronics b.v.": {
+      "confidence": "M",
+      "elapsed_ms": 336,
+      "final_url": "https://www.salviabioelectronics.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "A bioelectronic solution for people with migraine and cluster headache | Salvia BioElectronics",
+      "url_input": "salviabioelectronics.com"
+    },
+    "samphire neuroscience": {
+      "confidence": "M",
+      "elapsed_ms": 958,
+      "final_url": "https://www.samphireneuro.com/en-us",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Samphire Neuroscience - Women&#x27;s Health &amp; Neuroscience Solutions | Samphire Neuroscience",
+      "url_input": "samphireneuro.com"
+    },
+    "sanmai technologies": {
+      "confidence": "M",
+      "elapsed_ms": 404,
+      "final_url": "https://sanmai.tech",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Sanmai Technologies",
+      "url_input": "sanmai.tech"
+    },
+    "science corp": {
+      "confidence": "M",
+      "elapsed_ms": 324,
+      "final_url": "https://science.xyz",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Science | Science Corporation",
+      "url_input": "science.xyz"
+    },
+    "secondwave systems": {
+      "confidence": "M",
+      "elapsed_ms": 751,
+      "final_url": "https://www.secondwaveus.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "SecondWave Systems",
+      "url_input": "secondwaveus.com"
+    },
+    "sens.ai": {
+      "confidence": "M",
+      "elapsed_ms": 386,
+      "final_url": "https://sens.ai",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "",
+      "url_input": "sens.ai"
+    },
+    "senseneuro": {
+      "confidence": "M",
+      "elapsed_ms": 1100,
+      "final_url": "https://senseneuro.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Home - Sense Neuro Diagnostics",
+      "url_input": "senseneuro.com"
+    },
+    "sevaro health, inc": {
+      "confidence": "M",
+      "elapsed_ms": 387,
+      "final_url": "https://sevaro.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "",
+      "url_input": "sevaro.com"
+    },
+    "sharper sense": {
+      "confidence": "M",
+      "elapsed_ms": 743,
+      "final_url": "https://www.sharpersense.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Sharper Sense",
+      "url_input": "sharpersense.com"
+    },
+    "sinapticatx": {
+      "confidence": "M",
+      "elapsed_ms": 67,
+      "final_url": "https://sinapticatx.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Sinaptica Therapeutics™",
+      "url_input": "sinapticatx.com"
+    },
+    "smartlens inc": {
+      "confidence": "M",
+      "elapsed_ms": 60,
+      "final_url": "https://smartlens.health",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Smartlens Health | The New Frontier in Ophthalmic Care",
+      "url_input": "smartlens.health"
+    },
+    "somnair sleep": {
+      "confidence": "M",
+      "elapsed_ms": 770,
+      "final_url": "https://www.somnairsleep.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "",
+      "url_input": "somnairsleep.com"
+    },
+    "sona": {
+      "confidence": "M",
+      "elapsed_ms": 606,
+      "final_url": "https://sona.help",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Sona | The World’s First Adaptive Wearable, Tailored to You &ndash; MindSpire",
+      "url_input": "sona.help"
+    },
+    "sooma medical": {
+      "confidence": "M",
+      "elapsed_ms": 478,
+      "final_url": "https://soomamedical.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Brain stimulation for depression and chronic pain | Sooma tDCS™ - Sooma",
+      "url_input": "soomamedical.com"
+    },
+    "sora neuroscience": {
+      "confidence": "M",
+      "elapsed_ms": 442,
+      "final_url": "https://soraneuroscience.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Sora Neuroscience",
+      "url_input": "soraneuroscience.com"
+    },
+    "spark biomedical inc": {
+      "confidence": "M",
+      "elapsed_ms": 71,
+      "final_url": "https://sparkbiomedical.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Spark Biomedical Transcutaneous Auricular Neurostimulation for Opioid Withdrawal Relief",
+      "url_input": "sparkbiomedical.com"
+    },
+    "spinally.com is for sale": {
+      "confidence": "H",
+      "elapsed_ms": 811,
+      "final_url": "https://www.hugedomains.com/domain_profile.cfm?d=spinally.com",
+      "flags": [
+        "parked"
+      ],
+      "http_status": 200,
+      "status": "dead_domain",
+      "title": "Spinally.com is for sale | HugeDomains",
+      "url_input": "spinally.com"
+    },
+    "spinex": {
+      "confidence": "M",
+      "elapsed_ms": 505,
+      "final_url": "https://spinex.co",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "SpineX",
+      "url_input": "spinex.co"
+    },
+    "spiro medical": {
+      "confidence": "M",
+      "elapsed_ms": 1790,
+      "final_url": "https://www.spiro-medical.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Spiro Neuromodulation System | Asthma, Chronic Cough, COPD | Spiro Medical",
+      "url_input": "spiro-medical.com"
+    },
+    "spr therapeutics": {
+      "confidence": "L",
+      "elapsed_ms": 652,
+      "final_url": "https://sprtherapeutics.com",
+      "flags": [
+        "http_403",
+        "bot_blocked"
+      ],
+      "http_status": 403,
+      "status": "active",
+      "title": "",
+      "url_input": "sprtherapeutics.com"
+    },
+    "spryte medical": {
+      "confidence": "M",
+      "elapsed_ms": 749,
+      "final_url": "https://sprytemedical.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Spryte Medical | Advancing Cerebrovascular Care",
+      "url_input": "sprytemedical.com"
+    },
+    "starlab": {
+      "confidence": "M",
+      "elapsed_ms": 752,
+      "final_url": "https://www.starlab.es/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "",
+      "url_input": "starlab.es"
+    },
+    "steadiwear inc.": {
+      "confidence": "M",
+      "elapsed_ms": 211,
+      "final_url": "https://steadiwear.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Essential Tremor Glove | Hand Tremor Device | Steadiwear",
+      "url_input": "steadiwear.com"
+    },
+    "stealth bci company": {
+      "confidence": "",
+      "elapsed_ms": 0,
+      "final_url": null,
+      "flags": [
+        "no_website"
+      ],
+      "http_status": null,
+      "status": "unknown",
+      "title": null,
+      "url_input": ""
+    },
+    "stimaire": {
+      "confidence": "M",
+      "elapsed_ms": 364,
+      "final_url": "https://stimaire.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "",
+      "url_input": "stimaire.com"
+    },
+    "stimcardio": {
+      "confidence": "M",
+      "elapsed_ms": 662,
+      "final_url": "https://www.stimcardio.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "StimCardio | Advanced Cardiac Stimulation Technology",
+      "url_input": "stimcardio.com"
+    },
+    "stimdia": {
+      "confidence": "M",
+      "elapsed_ms": 1501,
+      "final_url": "https://stimdia.com",
+      "flags": [
+        "http_503"
+      ],
+      "http_status": 503,
+      "status": "dormant",
+      "title": "",
+      "url_input": "stimdia.com"
+    },
+    "stimvia": {
+      "confidence": "M",
+      "elapsed_ms": 871,
+      "final_url": "https://www.stimvia.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Stimvia - Stimvia",
+      "url_input": "stimvia.com"
+    },
+    "stratus neuro": {
+      "confidence": "M",
+      "elapsed_ms": 339,
+      "final_url": "https://www.stratusneuro.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "EEG Solutions Provider | Stratus",
+      "url_input": "stratusneuro.com"
+    },
+    "subsense": {
+      "confidence": "M",
+      "elapsed_ms": 730,
+      "final_url": "https://subsense-bci.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Subsense — brain power unleashed",
+      "url_input": "subsense-bci.com"
+    },
+    "supermind platforms, inc": {
+      "confidence": "M",
+      "elapsed_ms": 952,
+      "final_url": "https://supermind.us",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Home - Supermind",
+      "url_input": "supermind.us"
+    },
+    "surf therapeutics": {
+      "confidence": "M",
+      "elapsed_ms": 272,
+      "final_url": "https://surftherapeutics.com",
+      "flags": [],
+      "http_status": 308,
+      "status": "active",
+      "title": "",
+      "url_input": "surftherapeutics.com"
+    },
+    "synapse tbi": {
+      "confidence": "M",
+      "elapsed_ms": 1083,
+      "final_url": "https://synapsetbi.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Synapse TBI – Traumatic Brain Injury Testing",
+      "url_input": "synapsetbi.com"
+    },
+    "synaptrix-labs": {
+      "confidence": "M",
+      "elapsed_ms": 763,
+      "final_url": "https://www.synaptrix-labs.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "",
+      "url_input": "synaptrix-labs.com"
+    },
+    "synchron": {
+      "confidence": "M",
+      "elapsed_ms": 8411,
+      "final_url": "https://synchron.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Synchron | The brain-computer interface device powering autonomy",
+      "url_input": "synchron.com"
+    },
+    "syndeio biosciences": {
+      "confidence": "M",
+      "elapsed_ms": 1104,
+      "final_url": "https://www.syndeio.bio/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Syndeio Biosciences",
+      "url_input": "syndeio.com"
+    },
+    "synerfuse": {
+      "confidence": "M",
+      "elapsed_ms": 732,
+      "final_url": "https://www.synerfuse.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Synerfuse | Integrated Solution to Chronic Back Pain",
+      "url_input": "synerfuse.com"
+    },
+    "synergiamedical.com": {
+      "confidence": "M",
+      "elapsed_ms": 685,
+      "final_url": "https://synergiamedical.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "",
+      "url_input": "synergiamedical.com"
+    },
+    "syntropic medical": {
+      "confidence": "M",
+      "elapsed_ms": 368,
+      "final_url": "https://syntropicmedical.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Syntropic Medical® | Neuroplasticity Therapy for Depression",
+      "url_input": "syntropicmedical.com"
+    },
+    "take-pause": {
+      "confidence": "M",
+      "elapsed_ms": 945,
+      "final_url": "https://take-pause.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Home - Take Pause",
+      "url_input": "take-pause.com"
+    },
+    "terumo neuro": {
+      "confidence": "M",
+      "elapsed_ms": 307,
+      "final_url": "https://terumoneuro.com",
+      "flags": [],
+      "http_status": 308,
+      "status": "active",
+      "title": "",
+      "url_input": "terumoneuro.com"
+    },
+    "theta neurotech": {
+      "confidence": "M",
+      "elapsed_ms": 906,
+      "final_url": "https://www.thetaneurotech.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Theta Neurotech | Wearable Seizure Prediction Technology",
+      "url_input": "thetaneurotech.com"
+    },
+    "thynk": {
+      "confidence": "M",
+      "elapsed_ms": 662,
+      "final_url": "https://thynk.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "THYNK | Homepage",
+      "url_input": "thynk.com"
+    },
+    "tibtimeisbrain": {
+      "confidence": "M",
+      "elapsed_ms": 4321,
+      "final_url": "https://www.tibtimeisbrain.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Home - TIB - Time is brain",
+      "url_input": "tibtimeisbrain.com"
+    },
+    "tiposi": {
+      "confidence": "M",
+      "elapsed_ms": 797,
+      "final_url": "https://tiposi.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Tiposi",
+      "url_input": "tiposi.com"
+    },
+    "tneurodx": {
+      "confidence": "M",
+      "elapsed_ms": 6601,
+      "final_url": "https://tneurodx.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Home - T-NeuroDx",
+      "url_input": "tneurodx.com"
+    },
+    "trainfes": {
+      "confidence": "M",
+      "elapsed_ms": 1777,
+      "final_url": "https://www.trainfes.cl/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Home Pacientes - TRAINFES",
+      "url_input": "trainfes.cl"
+    },
+    "tripp inc.": {
+      "confidence": "M",
+      "elapsed_ms": 1361,
+      "final_url": "https://www.tripp.com:443/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Your Mind. Elevated - TRIPP",
+      "url_input": "trippinc.com"
+    },
+    "tryhealium": {
+      "confidence": "M",
+      "elapsed_ms": 124,
+      "final_url": "https://tryhealium.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Healium for Organizations",
+      "url_input": "tryhealium.com"
+    },
+    "turingmedical": {
+      "confidence": "M",
+      "elapsed_ms": 1047,
+      "final_url": "https://turingmedical.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Homepage - Turing Medical",
+      "url_input": "turingmedical.com"
+    },
+    "ubiquityvx": {
+      "confidence": "M",
+      "elapsed_ms": 867,
+      "final_url": "https://uvx1.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "The Netflix of Interactive Health, Wellness, and Performance",
+      "url_input": "ubiquityvx.com"
+    },
+    "ucat inc.": {
+      "confidence": "H",
+      "elapsed_ms": 1,
+      "final_url": null,
+      "flags": [
+        "nxdomain"
+      ],
+      "http_status": null,
+      "status": "dead_domain",
+      "title": null,
+      "url_input": "ucat.ai"
+    },
+    "uneeg medical": {
+      "confidence": "M",
+      "elapsed_ms": 643,
+      "final_url": "https://www.uneeg.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "UNEEG medical ultra long-term EEG monitoring",
+      "url_input": "uneeg.com"
+    },
+    "universal-brain": {
+      "confidence": "M",
+      "elapsed_ms": 969,
+      "final_url": "https://www.universal-brain.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Universal Brain",
+      "url_input": "universal-brain.com"
+    },
+    "uromems sas": {
+      "confidence": "M",
+      "elapsed_ms": 899,
+      "final_url": "https://www.uromems.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "UroMems Implantable Solutions",
+      "url_input": "uromems.com"
+    },
+    "valencia technologies": {
+      "confidence": "M",
+      "elapsed_ms": 1031,
+      "final_url": "https://valenciatechnologies.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Valencia Technologies &#8211; Valencia",
+      "url_input": "valenciatechnologies.com"
+    },
+    "velentium medical": {
+      "confidence": "M",
+      "elapsed_ms": 600,
+      "final_url": "https://velentiummedical.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Velentium Medical | Medical Device Design &amp; Contract Manufacturing",
+      "url_input": "velentium.com"
+    },
+    "vielight": {
+      "confidence": "M",
+      "elapsed_ms": 2108,
+      "final_url": "https://www.vielight.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "",
+      "url_input": "vielight.com"
+    },
+    "viewmind": {
+      "confidence": "M",
+      "elapsed_ms": 1069,
+      "final_url": "https://www.viewmind.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Home - VIEWMIND",
+      "url_input": "viewmind.com"
+    },
+    "virtuleap": {
+      "confidence": "M",
+      "elapsed_ms": 600,
+      "final_url": "https://virtuleap.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "",
+      "url_input": "virtuleap.com"
+    },
+    "vistim labs inc.": {
+      "confidence": "M",
+      "elapsed_ms": 531,
+      "final_url": "https://vistimlabs.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Brain Monitoring with Vistim Labs' In-Clinic Ceregram",
+      "url_input": "vistimlabs.com"
+    },
+    "vital connect": {
+      "confidence": "M",
+      "elapsed_ms": 491,
+      "final_url": "https://vitalconnect.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Home - VitalConnect",
+      "url_input": "vitalconnect.com"
+    },
+    "vital start health inc.": {
+      "confidence": "M",
+      "elapsed_ms": 742,
+      "final_url": "https://vitalstarthealth.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Maternity Wellness Virtual Reality - Vital Start Health",
+      "url_input": "vitalstarthealth.com"
+    },
+    "viv labs": {
+      "confidence": "M",
+      "elapsed_ms": 4789,
+      "final_url": "https://vivatronix.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "VIVATRONIX",
+      "url_input": "vivatronix.com"
+    },
+    "vivatronix": {
+      "confidence": "M",
+      "elapsed_ms": 2534,
+      "final_url": "https://vivatronix.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "VIVATRONIX",
+      "url_input": "vivatronix.com"
+    },
+    "vonova": {
+      "confidence": "M",
+      "elapsed_ms": 290,
+      "final_url": "https://vonova.io",
+      "flags": [],
+      "http_status": 308,
+      "status": "active",
+      "title": "",
+      "url_input": "vonova.io"
+    },
+    "vthera": {
+      "confidence": "M",
+      "elapsed_ms": 1506,
+      "final_url": "https://www.vthera.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "",
+      "url_input": "vthera.com"
+    },
+    "wave neuroscience": {
+      "confidence": "M",
+      "elapsed_ms": 334,
+      "final_url": "https://www.waveneuro.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Wave Neuroscience | Unlocking precision neuroanalytics",
+      "url_input": "waveneuro.com"
+    },
+    "wavepaths": {
+      "confidence": "M",
+      "elapsed_ms": 63,
+      "final_url": "https://wavepaths.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Wavepaths: Music for Psychedelic Therapy",
+      "url_input": "wavepaths.com"
+    },
+    "waya health": {
+      "confidence": "M",
+      "elapsed_ms": 1224,
+      "final_url": "https://wayahealth.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "WAYA Health | Healing Reality. Virtually.",
+      "url_input": "wayahealth.com"
+    },
+    "we are brain imaging specialists imeka™": {
+      "confidence": "M",
+      "elapsed_ms": 670,
+      "final_url": "https://imeka.ca",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "We are brain imaging specialists Imeka™",
+      "url_input": "imeka.ca"
+    },
+    "wearable devices": {
+      "confidence": "M",
+      "elapsed_ms": 780,
+      "final_url": "https://www.wearabledevices.co.il/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "",
+      "url_input": "wearabledevices.co.il"
+    },
+    "wearable devices ltd": {
+      "confidence": "M",
+      "elapsed_ms": 686,
+      "final_url": "https://wearable-devices.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "",
+      "url_input": "wearable-devices.com"
+    },
+    "wise neuro": {
+      "confidence": "L",
+      "elapsed_ms": 109,
+      "final_url": "https://wiseneuro.com",
+      "flags": [
+        "http_403",
+        "bot_blocked"
+      ],
+      "http_status": 403,
+      "status": "active",
+      "title": "",
+      "url_input": "wiseneuro.com"
+    },
+    "wisear": {
+      "confidence": "M",
+      "elapsed_ms": 834,
+      "final_url": "https://www.wisear.io/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Wisear - Let Your Mind Be In Control",
+      "url_input": "wisear.io"
+    },
+    "xanastim": {
+      "confidence": "M",
+      "elapsed_ms": 2508,
+      "final_url": "https://www.xanastim.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Xanastim | xanastim",
+      "url_input": "xanastim.com"
+    },
+    "xii medical": {
+      "confidence": "M",
+      "elapsed_ms": 1669,
+      "final_url": "https://xiimedical.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Home - XII Medical",
+      "url_input": "xiimedical.com"
+    },
+    "xpanceo": {
+      "confidence": "M",
+      "elapsed_ms": 816,
+      "final_url": "https://xpanceo.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "XPANCEO",
+      "url_input": "xpanceo.com"
+    },
+    "xrhealth": {
+      "confidence": "M",
+      "elapsed_ms": 2519,
+      "final_url": "https://www.xr.health/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "",
+      "url_input": "xr.health"
+    },
+    "xsensio": {
+      "confidence": "M",
+      "elapsed_ms": 1102,
+      "final_url": "https://xsensio.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Xsensio | Lab-on-Skin™​ Sensing Platform &#8211; Lab-on-Skin™​ Sensing Platform",
+      "url_input": "xsensio.com"
+    },
+    "xylo bio": {
+      "confidence": "H",
+      "elapsed_ms": 1,
+      "final_url": null,
+      "flags": [
+        "nxdomain"
+      ],
+      "http_status": null,
+      "status": "dead_domain",
+      "title": null,
+      "url_input": "xylobio.com"
+    },
+    "yneuro": {
+      "confidence": "M",
+      "elapsed_ms": 379,
+      "final_url": "http://yneuro.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "",
+      "url_input": "yneuro.com"
+    },
+    "zander labs": {
+      "confidence": "M",
+      "elapsed_ms": 413,
+      "final_url": "https://www.zanderlabs.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Zander Labs: Unlocking the brain, leading the future",
+      "url_input": "zanderlabs.com"
+    },
+    "zeta": {
+      "confidence": "M",
+      "elapsed_ms": 339,
+      "final_url": "https://www.zetasurgical.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "ZETA | Next—gen neuronavigation",
+      "url_input": "zetasurgical.com"
+    },
+    "zeto-inc": {
+      "confidence": "M",
+      "elapsed_ms": 953,
+      "final_url": "https://zeto-inc.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "EEG Portable Headset: FDA-approved EEG device | Zeto Inc.",
+      "url_input": "zeto-inc.com"
+    },
+    "zyphra": {
+      "confidence": "M",
+      "elapsed_ms": 321,
+      "final_url": "https://www.zyphra.com/",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Zyphra",
+      "url_input": "zyphra.com"
+    },
+    "ōura": {
+      "confidence": "M",
+      "elapsed_ms": 594,
+      "final_url": "https://ouraring.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "Oura Ring. Smart Ring for Fitness, Stress, Sleep &amp; Health.",
+      "url_input": "ouraring.com"
+    },
+    "株式会社lifescapes": {
+      "confidence": "M",
+      "elapsed_ms": 1515,
+      "final_url": "https://lifescapes.jp",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "株式会社LIFESCAPES",
+      "url_input": "lifescapes.jp"
+    },
+    "格式塔科技 (gestala)": {
+      "confidence": "M",
+      "elapsed_ms": 1747,
+      "final_url": "https://gestala.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "格式塔科技 (Gestala) - 超声波脑机接口 | Ultrasound BCI &amp; Neuromodulation",
+      "url_input": "gestala.com"
+    },
+    "格式塔科技 (gestala) 2": {
+      "confidence": "M",
+      "elapsed_ms": 1540,
+      "final_url": "https://gestala.com",
+      "flags": [],
+      "http_status": 200,
+      "status": "active",
+      "title": "格式塔科技 (Gestala) - 超声波脑机接口 | Ultrasound BCI &amp; Neuromodulation",
+      "url_input": "gestala.com"
+    }
+  },
+  "script_version": "0.2.0"
+}

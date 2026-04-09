@@ -5,12 +5,14 @@ Parses raw_dump.txt (pipe-delimited), enriches with founding years from knowledg
 derives country, primary sector, modality, invasiveness, and writes a CSV.
 """
 import csv
+import json
 import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 RAW = ROOT / 'data' / 'raw' / 'reccy_dump_2026-04-09.txt'
 OUT_CSV = ROOT / 'data' / 'processed' / 'neurotech_enriched.csv'
+DOMAIN_CHECKS_PATH = ROOT / 'data' / 'processed' / 'domain_checks.json'
 
 # -------- Founding year knowledge base --------
 # Key: lowercased canonical-ish name token. Values from training knowledge + well-known sources.
@@ -612,6 +614,23 @@ SOURCES = {
     'bía neuroscience': 'https://getbia.com/',
 }
 
+# -------- Lifecycle tracking (v0.2.0) --------
+# Manual lifecycle overrides. Key = lowercased raw name.
+# Values: (status, as_of_date, confidence, source_url).
+#
+# These override whatever data/processed/domain_checks.json says. Use for
+# acquisitions, mergers, dissolutions, pivots, renames — anything the step-1
+# domain-checker can't detect from HTTP alone. See docs/methodology.md →
+# "Lifecycle tracking" for the status taxonomy.
+#
+# Empty at v0.2.0 release; populated in later releases from Crunchbase passes
+# and manual top-50 research.
+LIFECYCLE_OVERRIDES = {
+    # Example (not yet populated):
+    # 'bioness medical': ('acquired', '2021-05-27', 'H',
+    #     'https://www.prnewswire.com/news-releases/bioventus-to-acquire-bioness-...'),
+}
+
 # -------- Country derivation --------
 COUNTRY_MAP = {
     'CA': 'USA', 'NY': 'USA', 'MA': 'USA', 'TX': 'USA', 'FL': 'USA', 'IL': 'USA',
@@ -773,6 +792,37 @@ def lookup_founding(name: str) -> tuple:
     return (year, conf, source)
 
 
+def load_domain_checks() -> dict:
+    """Load the auto domain-check results. Returns a dict with two keys:
+    {'checked_at': str, 'results': dict}. Empty values if the file is missing.
+    """
+    if not DOMAIN_CHECKS_PATH.exists():
+        return {'checked_at': '', 'results': {}}
+    with DOMAIN_CHECKS_PATH.open() as f:
+        payload = json.load(f)
+    return {
+        'checked_at': payload.get('checked_at', ''),
+        'results': payload.get('results', {}),
+    }
+
+
+def lookup_lifecycle(name: str, domain_checks: dict) -> tuple:
+    """Return (status, as_of, confidence, source).
+
+    Precedence: LIFECYCLE_OVERRIDES > domain_checks.json > default unknown.
+    """
+    n = name.lower().strip()
+    if n in LIFECYCLE_OVERRIDES:
+        return LIFECYCLE_OVERRIDES[n]
+    results = domain_checks.get('results', {})
+    if n in results:
+        dc = results[n]
+        as_of = (domain_checks.get('checked_at') or '')[:10]  # YYYY-MM-DD
+        return (dc.get('status', 'unknown'), as_of,
+                dc.get('confidence', ''), 'auto:domain_check')
+    return ('unknown', '', '', '')
+
+
 def parse_raw(path: Path) -> list:
     rows = []
     with path.open() as f:
@@ -798,7 +848,7 @@ def parse_raw(path: Path) -> list:
     return rows
 
 
-def build(rows: list) -> list:
+def build(rows: list, domain_checks: dict) -> list:
     out = []
     for r in rows:
         country = derive_country(r['location'])
@@ -812,6 +862,9 @@ def build(rows: list) -> list:
         if year:
             decade = f'{(year // 10) * 10}s'
             half = f'{year}-H1'  # default — we don't have month granularity
+        lc_status, lc_as_of, lc_conf, lc_source = lookup_lifecycle(
+            r['name'], domain_checks
+        )
         out.append({
             'name': r['name'],
             'website': r['website'],
@@ -830,6 +883,10 @@ def build(rows: list) -> list:
             'founding_year_source': source,
             'decade': decade,
             'half_year': half,
+            'lifecycle_status': lc_status,
+            'lifecycle_as_of': lc_as_of,
+            'lifecycle_confidence': lc_conf,
+            'lifecycle_source': lc_source,
         })
     return out
 
@@ -837,7 +894,13 @@ def build(rows: list) -> list:
 def main():
     rows = parse_raw(RAW)
     print(f'Parsed {len(rows)} rows')
-    enriched = build(rows)
+    domain_checks = load_domain_checks()
+    if domain_checks['checked_at']:
+        print(f'Loaded domain checks from {domain_checks["checked_at"]} '
+              f'({len(domain_checks["results"])} rows)')
+    else:
+        print('WARN: no domain_checks.json found — lifecycle will be all unknown')
+    enriched = build(rows, domain_checks)
 
     # dedupe by name keeping first
     seen = set()
@@ -868,6 +931,13 @@ def main():
     print('Top countries:', cc.most_common(10))
     rc = Counter(r['region'] for r in dedup if r['region'])
     print('By region:', dict(rc))
+    # Lifecycle breakdown (v0.2.0)
+    lc = Counter(r['lifecycle_status'] for r in dedup)
+    print('Lifecycle:', dict(lc))
+    lcc = Counter(
+        r['lifecycle_confidence'] for r in dedup if r['lifecycle_confidence']
+    )
+    print('Lifecycle confidence:', dict(lcc))
     # Year histogram (known)
     yc = Counter(r['founding_year'] for r in dedup if r['founding_year'])
     print('Years present:', sorted(yc.keys()))
