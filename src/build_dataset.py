@@ -20,6 +20,7 @@ FOUNDING = {
     'neuralink': (2016, 'H'),
     'synchron': (2016, 'H'),
     'paradromics': (2015, 'H'),
+    'paradromics, inc.': (2015, 'H'),
     'blackrock neurotech': (2008, 'H'),
     'precision neuroscience': (2021, 'H'),
     'science corp': (2021, 'H'),
@@ -135,6 +136,7 @@ FOUNDING = {
     'stimdia': (2014, 'L'),
     'neurosteer': (2012, 'M'),
     'lifescapes': (2019, 'L'),
+    '株式会社lifescapes': (2019, 'L'),
     'looxid labs': (2015, 'M'),
     'bios': (2015, 'M'),
     'medrhythms, inc.': (2016, 'M'),
@@ -218,6 +220,62 @@ FOUNDING = {
     'lungpacer': (2009, 'M'),
     'senseneuro': (2021, 'L'),
     'reccy': (2024, 'M'),
+    # ---- Web-researched batch 1 (2026-04-09) ----
+    'optohive': (2023, 'H'),
+    'omnipemf': (2016, 'H'),
+    'nueyne': (2017, 'H'),
+    'nimbus': (2024, 'M'),
+    'nexalin technology': (2010, 'H'),
+    'newrotex': (2019, 'H'),
+    'neuroview technology': (2016, 'H'),
+    'neuroverse': (2012, 'H'),
+    'neurosync': (2022, 'M'),
+    'neuro-stellar': (2021, 'H'),
+    'neuroservo': (2015, 'H'),
+    'neuroone medical': (2009, 'H'),
+    'neuro rehab vr': (2017, 'M'),
+    'neuronostics': (2018, 'H'),
+    'neuronoff': (2017, 'M'),
+    'neurofenix': (2016, 'H'),
+    'neurode': (2021, 'H'),
+    'neurobell': (2023, 'H'),
+    'neuromind': (2022, 'M'),
+    'neurinnov': (2018, 'H'),
+    'neuromark': (2015, 'H'),  # actually Neurent Medical (IE), see reccy_discrepancies.md
+    'neurology care platform': (2022, 'H'),
+    'affectablesleep': (2020, 'L'),
+    'neumarker': (2022, 'H'),
+}
+
+# Source attribution for founding_year. Entries not in this dict default to
+# 'training_knowledge' — the v0.1.0 hardcoded dict was populated from model
+# training knowledge, not web-verified. New web-researched entries carry their
+# actual source URL(s) here.
+SOURCES = {
+    'optohive': 'https://www.cbinsights.com/company/optohive',
+    'omnipemf': 'https://www.cbinsights.com/company/omnipemf',
+    'nueyne': 'https://www.crunchbase.com/organization/nueyne',
+    'nimbus': 'https://www.linkedin.com/company/nimbusbci',
+    'nexalin technology': 'https://www.crunchbase.com/organization/nexalin-technology',
+    'newrotex': 'https://find-and-update.company-information.service.gov.uk/company/11798939',
+    'neuroview technology': 'https://www.crunchbase.com/organization/neuroview-technology',
+    'neuroverse': 'https://www.crunchbase.com/organization/neuroverse',
+    'neurosync': 'https://www.neurosync.health/about/',
+    'neuro-stellar': 'https://tracxn.com/d/legal-entities/india/neurostellar-private-limited/',
+    'neuroservo': 'https://www.crunchbase.com/organization/neuroservo',
+    'neuroone medical': 'https://www.crunchbase.com/organization/neuroone-medical-technologies-corp',
+    'neuro rehab vr': 'https://www.crunchbase.com/organization/neuro-rehab-vr',
+    'neuronostics': 'https://www.neuronostics.com/history/',
+    'neuronoff': 'https://www.cbinsights.com/company/neuronoff',
+    'neurofenix': 'https://www.crunchbase.com/organization/neurofenix',
+    'neurode': 'https://www.crunchbase.com/organization/neurode',
+    'neurobell': 'https://www.enterprise-ireland.com/en/news/mark-o-sullivan-neurobell-announced-as-founder-of-the-year-2025',
+    'neuromind': 'https://www.neuromind.fr/',
+    'neurinnov': 'https://neurinnov.com/about-neurinnov/',
+    'neuromark': 'https://www.crunchbase.com/organization/neurent-medical',
+    'neurology care platform': 'https://www.cbinsights.com/company/neu-health',
+    'affectablesleep': 'https://www.affectablesleep.com/about',
+    'neumarker': 'https://www.cbinsights.com/company/neumarker',
 }
 
 # -------- Country derivation --------
@@ -364,14 +422,19 @@ def normalize_headcount(hc: str) -> str:
 
 
 def lookup_founding(name: str) -> tuple:
+    """Return (year, confidence, source). source defaults to 'training_knowledge'
+    for entries in FOUNDING without an explicit SOURCES entry.
+
+    Exact key match only. Partial/substring matching used to cause false hits
+    (e.g. 'NeuroMind AGI' matching 'neuromind'); legitimate name variants must
+    be added as explicit keys.
+    """
     n = name.lower().strip()
-    if n in FOUNDING:
-        return FOUNDING[n]
-    # Try partial matches
-    for k, v in FOUNDING.items():
-        if k in n or n in k:
-            return v
-    return (None, '')
+    if n not in FOUNDING:
+        return (None, '', '')
+    year, conf = FOUNDING[n]
+    source = SOURCES.get(n, 'training_knowledge')
+    return (year, conf, source)
 
 
 def parse_raw(path: Path) -> list:
@@ -407,7 +470,7 @@ def build(rows: list) -> list:
         modality = derive_modality(r['industries_list'])
         application = derive_application(r['industries_list'])
         invasiveness = derive_invasiveness(r['industries_list'], r['name'])
-        year, conf = lookup_founding(r['name'])
+        year, conf, source = lookup_founding(r['name'])
         half = ''
         decade = ''
         if year:
@@ -428,6 +491,7 @@ def build(rows: list) -> list:
             'live_jobs': r['live_jobs'],
             'founding_year': year if year else '',
             'founding_confidence': conf,
+            'founding_year_source': source,
             'decade': decade,
             'half_year': half,
         })

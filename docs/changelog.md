@@ -2,6 +2,31 @@
 
 All notable changes to the NeurotechBoard dataset are documented here. Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Dataset follows semver loosely (see README).
 
+## [0.1.1] — 2026-04-09
+
+Patch release adding provenance tracking to founding years and first web-verified batch.
+
+### Added
+- New CSV column `founding_year_source`:
+  - `'training_knowledge'` for legacy entries populated from model training knowledge.
+  - Explicit URL (Crunchbase, company About page, Companies House, etc.) for web-verified entries.
+- `SOURCES` dict in `src/build_dataset.py` holding per-company source URLs for web-verified founding years.
+- 24 new founding-year entries from pilot web research batch (Optohive, Nexalin, Newrotex, Neurobell, Neurode, Neurofenix, Neurofenix, Neurinnov, Neumarker, neu Health, etc.).
+- `docs/reccy_discrepancies.md` — log of cases where web research contradicts reccy listings (first entry: Neuromark is actually Neurent Medical, Ireland).
+
+### Fixed
+- Removed buggy substring-match fallback in `lookup_founding`. The fallback was producing false hits:
+  - `Syndeio Biosciences` was being matched to `bios` (unrelated company, year 2015)
+  - `Axo` was being matched to `muse by interaxon` (year 2007)
+  - After pilot, `NeuroMind AGI` started matching `neuromind` (France, year 2022)
+  - These 3 rows are now correctly empty pending real research.
+- Added explicit keys `paradromics, inc.` and `株式会社lifescapes` to preserve the 2 legitimate partial matches that the fallback previously handled.
+
+### Metrics
+- **Founding year coverage:** 210/393 = 53.4% (+6.5 percentage points vs v0.1.0 headline; actual net: +22 verified − 2 false positives removed − 3 false positives removed post-pilot = +24 corrections over the 188 baseline)
+- **Provenance breakdown:** 186 `training_knowledge`, 24 URL-sourced, 183 empty
+- Country coverage, regions, and all other metrics unchanged from v0.1.0.
+
 ## [0.1.0] — 2026-04-09
 
 Initial release. First pass at building an independent neurotech company timeline dataset.
