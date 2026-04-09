@@ -1,0 +1,9 @@
+# Human-readable diffs for CSV files via daff (optional)
+# To enable: `pip install daff` then `git config diff.daff.command "daff diff --git"`
+*.csv diff=daff
+
+# Ensure LF line endings for text files
+*.py text eol=lf
+*.md text eol=lf
+*.csv text eol=lf
+*.txt text eol=lf
