@@ -2,6 +2,27 @@
 
 All notable changes to the NeurotechBoard dataset are documented here. Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Dataset follows semver loosely (see README).
 
+## [0.1.3] — 2026-04-09
+
+Third enrichment round. 90 new web-verified founding years across three parallel batches (~30 each), plus two unicode lookup-key bugs fixed.
+
+### Added
+- 90 web-verified founding_year entries spanning the late-alphabet companies (T-Z + early A) and remaining gaps. Notable additions:
+  - Older entities: huMannity Medtec (1985, rebrand of Alfred Mann Foundation), Neuros Medical (2008), Neurosigma (2008), Cognision (2003), Vital Connect (2011), Velentium Medical (2012), Sooma Medical (2013), Atlas Wearables (2013), NeuroEM (2013), Wearable Devices Ltd (2014), Aural Analytics (2015), AURIMOD (2015), Arctop (2016), Openwater (2016), Nuro Corp (2016), Epineuron (2016), Tripp (2016).
+  - Recent entities: Vivatronix (2025, India), Ability Neurotech (2025, Wyss Geneva spinoff), Axo Neurotech (2025), Cerevia Neurosciences (2025), Ohmbody (2025), Lyeons Neurotech (2024), NeuroX UK (2024), Nudge (2024), Avrwell (2024), Neurodiscovery AI (2023), Neurobionics (2023), Mintneuro (2023), Biotronik Neuro (2023), Ruten (2023), CNS Fund (2023), Aurenar (2023).
+- New SOURCES URLs for all 90 entries plus a backfill for `bía neuroscience` (now web-verified at 2021/M).
+
+### Fixed
+- **ŌURA lookup bug** — the dict key was `'ŌURA'` (uppercase macron-O), but `lookup_founding` lowercases the input, and `'ŌURA'.lower() == 'ōura'` (lowercase macron). The key never matched. Renamed to `'ōura'`. The duplicate `'oura'` (plain Latin) entry remains as a no-op safety net.
+- **Bía Neuroscience lookup bug** — same class of bug. Key was `'bia neuroscience'` (no accent) but raw name `'Bía Neuroscience'.lower() == 'bía neuroscience'`. Renamed and updated value from `(2019, 'L')` (training-knowledge guess) to `(2021, 'M')` (web-verified).
+- **huMannity Medtec lookup bug** — third instance of the same class. Key was `'huMannity medtec'` (camelcase) but lookup was case-folded. Removed and re-added as `'humannity medtec'` with the agent's web-verified value `(1985, 'H')`. (1985 is the parent Alfred Mann Foundation founding year — see discrepancies.)
+
+### Metrics
+- **Founding year coverage:** 375/393 = 95.4% (+22.9 pp vs v0.1.2)
+- **Provenance breakdown:** 188 `training_knowledge`, 187 URL-sourced, 18 empty
+- Country coverage, regions, top countries unchanged from v0.1.2.
+- Remaining 18 empty rows: SKIPs (no reliable source), parked-domain entities, stealth companies, plus Spiro Medical and the unnamed "Stealth BCI Company" row.
+
 ## [0.1.2] — 2026-04-09
 
 Second enrichment round. 75 new web-verified founding years added across three parallel research batches of 30 companies each.
