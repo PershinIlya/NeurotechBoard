@@ -2,11 +2,12 @@
 
 Tracking the emergence and trajectory of neurotech companies over time. Source data pulled from [reccy.dev](https://app.reccy.dev/companies), enriched with founding years, geography, modality, and application taxonomy.
 
-## Current state (v0.1.0)
+## Current state (v0.1.1)
 
 - **393 companies** extracted from reccy.dev (out of 395 listed; 2 lost to dedup).
-- **Founding year coverage: 47.8%** (188/393) — from training knowledge only, not yet web-enriched.
+- **Founding year coverage: 53.4%** (210/393). 186 from training knowledge, 24 web-verified in pilot batch.
 - **Country coverage: 94.4%** (371/393).
+- New column `founding_year_source`: `'training_knowledge'` for legacy entries, explicit URL for web-verified entries.
 - Derived fields: modality, application, invasiveness, region, decade, half_year.
 
 ## Repo layout

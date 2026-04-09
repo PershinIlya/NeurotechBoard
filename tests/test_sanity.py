@@ -44,7 +44,7 @@ def test_required_columns():
         'name', 'website', 'location', 'country', 'region', 'industries',
         'primary_modality', 'application', 'invasiveness', 'headcount_bucket',
         'last_funding_stage', 'live_jobs', 'founding_year',
-        'founding_confidence', 'decade', 'half_year',
+        'founding_confidence', 'founding_year_source', 'decade', 'half_year',
     }
     assert required.issubset(set(rows[0].keys())), \
         f"Missing columns: {required - set(rows[0].keys())}"
@@ -108,6 +108,21 @@ def test_founding_confidence_values():
     for r in rows:
         assert r['founding_confidence'] in valid, \
             f"{r['name']}: bad confidence {r['founding_confidence']!r}"
+
+
+def test_founding_year_source_invariants():
+    """founding_year_source must be empty iff founding_year is empty.
+    When set, must be 'training_knowledge' or an http(s) URL."""
+    rows = load_rows()
+    for r in rows:
+        year = r['founding_year']
+        src = r['founding_year_source']
+        if not year:
+            assert not src, f"{r['name']}: has source {src!r} but no year"
+            continue
+        assert src, f"{r['name']}: year {year} but no source"
+        assert src == 'training_knowledge' or src.startswith(('http://', 'https://')), \
+            f"{r['name']}: bad source {src!r}"
 
 
 def test_half_year_format():
