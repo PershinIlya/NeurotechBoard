@@ -132,6 +132,52 @@ const nDead = lifecycleCounts.get("dead_domain") || 0;
   </div>
 </div>
 
+```js
+// ---- Shared chart constants (regions, categories, applications) ----
+const regionOrder = ["North America", "Europe", "Asia", "MENA", "Oceania", "LATAM", "Other"];
+const regionColors = {
+  "North America": "#4f46e5",
+  "Europe":        "#06b6d4",
+  "Asia":          "#10b981",
+  "MENA":          "#f59e0b",
+  "Oceania":       "#ec4899",
+  "LATAM":         "#8b5cf6",
+  "Other":         "#94a3b8",
+  "":              "#cbd5e1"
+};
+
+const modalityOrder = [
+  "Wearable",
+  "Medical Device",
+  "Therapeutics",
+  "Diagnostics",
+  "Software/AI",
+  "Research Tools",
+  "Hardware",
+  "Other"
+];
+const modalityColors = {
+  "Wearable":       "#2563eb",
+  "Medical Device": "#0891b2",
+  "Therapeutics":   "#7c3aed",
+  "Diagnostics":    "#ea580c",
+  "Software/AI":    "#059669",
+  "Research Tools": "#10b981",
+  "Hardware":       "#dc2626",
+  "Other":          "#64748b",
+};
+
+const applicationOrder = [
+  "Medical/Therapeutic",
+  "Medical/Diagnostic",
+  "Medical/Device",
+  "Consumer/Wellness",
+  "Software/Analytics",
+  "Research Tools",
+  "Other"
+];
+```
+
 <p class="section-label">§1 Timeline</p>
 
 ## When neurotech companies were founded
@@ -145,18 +191,6 @@ const nDead = lifecycleCounts.get("dead_domain") || 0;
 ```js
 // Filter to rows with a known year and clip outliers to 1990+ for the main chart
 const timelineData = companies.filter(d => d.founding_year && d.founding_year >= 1990);
-
-const regionOrder = ["North America", "Europe", "Asia", "MENA", "Oceania", "LATAM", "Other"];
-const regionColors = {
-  "North America": "#4f46e5",
-  "Europe":        "#06b6d4",
-  "Asia":          "#10b981",
-  "MENA":          "#f59e0b",
-  "Oceania":       "#ec4899",
-  "LATAM":         "#8b5cf6",
-  "Other":         "#94a3b8",
-  "":              "#cbd5e1"
-};
 ```
 
 ```js
@@ -205,7 +239,125 @@ display(Plot.plot({
 }))
 ```
 
-<p class="section-label">§2 Modalities</p>
+<p class="section-label">§2 Lifelines</p>
+
+## Every company as its own line
+
+<p class="caption">
+  One horizontal line per company, sorted top-to-bottom by founding year
+  (oldest at the bottom, newest at the top). The line runs from the
+  year the company was founded to the date of the last lifecycle check
+  (2026-04-09). Color shows the form-factor category. Hover any line
+  to see the company, year, and status. The "fan" shape opening to the
+  right is the modern neurotech wave — notice how sparse everything
+  before ~2014 looks, and how dense the last decade is.
+</p>
+
+```js
+// ---- Pre-compute sorted lifeline data ----
+// Each company becomes one row. Sort ascending by founding year so the
+// oldest entries anchor the bottom of the chart. Companies missing a
+// founding year are dropped (can't draw a line without a start).
+//
+// `end_year` is fixed at the date of the last lifecycle verification
+// (domain-check pass, 2026-04-09). For active companies this is honest
+// ("last time we checked, they were alive"). For dead_domain rows the
+// line still extends to 2026 because we don't know WHEN the domain died,
+// only that it was dead by the check date — we add a visual marker at
+// the end instead.
+const LIFELINE_END = 2026.25; // mid-Q2 2026 ≈ check date
+const lifelineData = companies
+  .filter(d => d.founding_year)
+  .map(d => ({
+    ...d,
+    founding_year: +d.founding_year,
+    end_year: LIFELINE_END,
+  }))
+  .sort((a, b) => d3.ascending(a.founding_year, b.founding_year))
+  .map((d, i) => ({...d, rank: i}));
+
+const lifelineDead = lifelineData.filter(
+  d => d.lifecycle_status === "dead_domain"
+);
+const lifelineDormant = lifelineData.filter(
+  d => d.lifecycle_status === "dormant"
+);
+```
+
+```js
+display(Plot.plot({
+  width,
+  height: 820,
+  marginLeft: 20,
+  marginRight: 30,
+  marginTop: 10,
+  marginBottom: 40,
+  x: {
+    label: "Year →",
+    tickFormat: "d",
+    grid: true,
+    labelAnchor: "right"
+  },
+  y: {
+    axis: null,
+    label: null,
+    domain: [-1, lifelineData.length]
+  },
+  color: {
+    legend: true,
+    domain: modalityOrder,
+    range: modalityOrder.map(m => modalityColors[m] || "#64748b"),
+    label: "Category"
+  },
+  marks: [
+    // Vertical rule at 2014 — the inflection point of the modern wave
+    Plot.ruleX([2014], {
+      stroke: "#94a3b8",
+      strokeDasharray: "3,4",
+      strokeWidth: 1
+    }),
+    // One horizontal line per company, founding_year → end_year
+    Plot.link(lifelineData, {
+      x1: "founding_year",
+      x2: "end_year",
+      y1: "rank",
+      y2: "rank",
+      stroke: "primary_modality",
+      strokeWidth: 1.6,
+      strokeOpacity: 0.85,
+      tip: true,
+      channels: {
+        Company: "name",
+        Founded: "founding_year",
+        Category: "primary_modality",
+        Country: "country",
+        Status: "lifecycle_status"
+      }
+    }),
+    // Red × at the end of dead_domain lines
+    Plot.dot(lifelineDead, {
+      x: "end_year",
+      y: "rank",
+      symbol: "times",
+      stroke: "#dc2626",
+      strokeWidth: 2,
+      r: 3.5
+    }),
+    // Gray circle at the end of dormant lines
+    Plot.dot(lifelineDormant, {
+      x: "end_year",
+      y: "rank",
+      symbol: "circle",
+      fill: "#94a3b8",
+      stroke: "#475569",
+      strokeWidth: 1,
+      r: 3
+    })
+  ]
+}))
+```
+
+<p class="section-label">§3 Categories</p>
 
 ## What tech the industry is built on
 
@@ -215,29 +367,6 @@ display(Plot.plot({
   research tools, hardware, and long-tail others. It's a form-factor axis,
   not a technology axis. Hover for exact counts.
 </p>
-
-```js
-const modalityOrder = [
-  "Wearable",
-  "Medical Device",
-  "Therapeutics",
-  "Diagnostics",
-  "Software/AI",
-  "Research Tools",
-  "Hardware",
-  "Other"
-];
-const modalityColors = {
-  "Wearable":       "#2563eb",
-  "Medical Device": "#0891b2",
-  "Therapeutics":   "#7c3aed",
-  "Diagnostics":    "#ea580c",
-  "Software/AI":    "#059669",
-  "Research Tools": "#10b981",
-  "Hardware":       "#dc2626",
-  "Other":          "#64748b",
-};
-```
 
 ```js
 display(Plot.plot({
@@ -281,7 +410,7 @@ display(Plot.plot({
 }))
 ```
 
-<p class="section-label">§3 Applications × Categories</p>
+<p class="section-label">§4 Applications × Categories</p>
 
 ## Where the categories land
 
@@ -292,18 +421,6 @@ display(Plot.plot({
   neurostim cluster; the Consumer/Wellness × Wearable corner is the
   wellness-wearable world.
 </p>
-
-```js
-const applicationOrder = [
-  "Medical/Therapeutic",
-  "Medical/Diagnostic",
-  "Medical/Device",
-  "Consumer/Wellness",
-  "Software/Analytics",
-  "Research Tools",
-  "Other"
-];
-```
 
 ```js
 display(Plot.plot({
@@ -349,7 +466,7 @@ display(Plot.plot({
 }))
 ```
 
-<p class="section-label">§4 Geography</p>
+<p class="section-label">§5 Geography</p>
 
 ## Top countries by company count
 
