@@ -2,6 +2,72 @@
 
 All notable changes to the NeurotechBoard dataset are documented here. Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Dataset follows semver loosely (see README).
 
+## [0.2.0] — 2026-04-09
+
+Schema change: introduces **lifecycle tracking** for all 393 companies, plus the first automated pass that populates it. This is the "are they still alive?" question — distinct from the "when were they born?" question that `founding_year` answers. See `docs/methodology.md` → "Lifecycle tracking" for the full design rationale.
+
+### Added
+
+**Four new CSV columns** (appended after `half_year`):
+
+- `lifecycle_status` — enum: `active`, `dormant`, `dead_domain`, `acquired`, `merged`, `dissolved`, `pivoted`, `renamed`, `unknown`
+- `lifecycle_as_of` — date of the most recent verifiable activity signal (YYYY-MM-DD)
+- `lifecycle_confidence` — H / M / L / empty, same semantics as `founding_confidence`
+- `lifecycle_source` — `auto:domain_check`, an explicit URL, or empty
+
+**`src/check_domains.py`** — a stdlib-only concurrent domain checker that probes all 393 websites via DNS + HTTP, classifies each response, and writes `data/processed/domain_checks.json`. Finishes the full pass in under a minute. Handles:
+
+- NXDOMAIN, SSL handshake errors, timeouts, connection refused
+- CDN bot-blocking (Cloudflare / Akamai 401/403) via a browser-UA retry
+- Parked domain detection (body markers: "for sale", "sedoparking", "afternic", "dan.com", "hugedomains", etc.)
+- Path-only URLs with a root fallback (e.g. `meta.com/reality-labs` returns 404 on the path but 200 on `meta.com` → classified `active` with a `path_lost_root_ok` flag)
+- Malformed `website` fields from reccy (values that aren't URLs at all) → honest `unknown` instead of false `dead_domain`
+
+Script interface:
+```
+python3 src/check_domains.py              # full run, writes JSON
+python3 src/check_domains.py --dry-run    # full run, summary only
+python3 src/check_domains.py --only NAME  # probe one row for sanity-checking
+```
+
+**`data/processed/domain_checks.json`** — snapshot of the first full check run (2026-04-09T13:23Z). Git-tracked like the CSV; regenerate by re-running `check_domains.py`.
+
+**`LIFECYCLE_OVERRIDES`** dict in `build_dataset.py` — manual override layer that takes precedence over auto-check results. Empty at v0.2.0 release; populated in later passes with `acquired / merged / dissolved / pivoted / renamed` statuses that the auto-checker structurally cannot emit.
+
+**Three new sanity tests:**
+- `test_lifecycle_status_values` — status must be in the taxonomy
+- `test_lifecycle_invariants` — unknown→confidence empty; non-unknown→confidence H/M/L and source set
+- `test_lifecycle_as_of_format` — YYYY-MM-DD or empty
+
+### Metrics (first run, 2026-04-09)
+
+| Status | Count | Confidence |
+|---|---|---|
+| `active` | 382 | 378 M + 4 L (bot-blocked) |
+| `dead_domain` | 5 | all H |
+| `dormant` | 4 | all M |
+| `unknown` | 2 | — |
+
+**dead_domain hits** (all eyeballed and confirmed true positives):
+- Envoy Medical (envoymedical.com — domain exists for MX only, no A records)
+- Deegtal, Xylo Bio, Ucat Inc. — genuinely NXDOMAIN
+- "Spinally.com is for sale" — reccy scraped a parked-domain landing page's title as the company name; the parked marker correctly fired
+
+**Bot-blocked (active L)** — NeuroPace, SPR Therapeutics, Arctop, Wise Neuro. All confirmed operating via other channels but their CDNs reject probes even with browser UAs.
+
+**unknown** — "Stealth BCI Company" (no URL in reccy), "Bioness medical" (reccy stores the literal company name in the website column; flagged `malformed_website`).
+
+### Known limitations
+
+- `active` is a floor, not a ceiling. A live website ≠ a live company — some "active M" rows are probably dormant, acquired, or pivoted. High-confidence active status needs additional signals (recent funding, press, Crunchbase `Operating`) coming in v0.2.x.
+- The checker cannot distinguish a long stealth period from dormancy.
+- Acquired companies whose subsidiary pages are still live look "active" to us. Bioness should be `acquired (H) 2021-05-27` per the Bioventus acquisition, but until we populate `LIFECYCLE_OVERRIDES` manually it stays `unknown` (only because its reccy website field happens to be malformed — other acquired companies with live URLs currently show as `active M`).
+- `lifecycle_as_of` is the **check run date**, not the last-known-alive date. Future runs will overwrite it for rows whose status didn't change.
+
+### Roadmap
+
+v0.2.x will layer a Crunchbase pass over the 187 URLs already in `SOURCES` to harvest explicit `Operating / Closed / Acquired` statuses. v0.3.0 will add `successor_entity` and populate top-50 acquisitions/mergers by hand.
+
 ## [0.1.3] — 2026-04-09
 
 Third enrichment round. 90 new web-verified founding years across three parallel batches (~30 each), plus two unicode lookup-key bugs fixed.

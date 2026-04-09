@@ -45,6 +45,9 @@ def test_required_columns():
         'primary_modality', 'application', 'invasiveness', 'headcount_bucket',
         'last_funding_stage', 'live_jobs', 'founding_year',
         'founding_confidence', 'founding_year_source', 'decade', 'half_year',
+        # v0.2.0 lifecycle columns
+        'lifecycle_status', 'lifecycle_as_of', 'lifecycle_confidence',
+        'lifecycle_source',
     }
     assert required.issubset(set(rows[0].keys())), \
         f"Missing columns: {required - set(rows[0].keys())}"
@@ -123,6 +126,45 @@ def test_founding_year_source_invariants():
         assert src, f"{r['name']}: year {year} but no source"
         assert src == 'training_knowledge' or src.startswith(('http://', 'https://')), \
             f"{r['name']}: bad source {src!r}"
+
+
+def test_lifecycle_status_values():
+    """lifecycle_status must be in the fixed taxonomy."""
+    valid = {'active', 'dormant', 'dead_domain', 'acquired', 'merged',
+             'dissolved', 'pivoted', 'renamed', 'unknown'}
+    for r in load_rows():
+        assert r['lifecycle_status'] in valid, \
+            f"{r['name']}: bad lifecycle_status {r['lifecycle_status']!r}"
+
+
+def test_lifecycle_invariants():
+    """Rules:
+    - unknown status → confidence must be empty (we can't grade ignorance)
+    - unknown status → source may be empty (never checked) OR
+      'auto:domain_check' (checker ran but couldn't classify, e.g. no URL)
+    - non-unknown status → confidence must be H/M/L and source must be set
+    """
+    for r in load_rows():
+        status = r['lifecycle_status']
+        if status == 'unknown':
+            assert not r['lifecycle_confidence'], \
+                f"{r['name']}: unknown status but confidence {r['lifecycle_confidence']!r}"
+            assert r['lifecycle_source'] in ('', 'auto:domain_check'), \
+                f"{r['name']}: unknown with unexpected source {r['lifecycle_source']!r}"
+        else:
+            assert r['lifecycle_confidence'] in {'H', 'M', 'L'}, \
+                f"{r['name']}: bad confidence {r['lifecycle_confidence']!r}"
+            assert r['lifecycle_source'], \
+                f"{r['name']}: status {status} but no source"
+
+
+def test_lifecycle_as_of_format():
+    """lifecycle_as_of must be empty or match YYYY-MM-DD."""
+    import re
+    pattern = re.compile(r'^(\d{4}-\d{2}-\d{2})?$')
+    for r in load_rows():
+        assert pattern.match(r['lifecycle_as_of']), \
+            f"{r['name']}: bad lifecycle_as_of {r['lifecycle_as_of']!r}"
 
 
 def test_half_year_format():
