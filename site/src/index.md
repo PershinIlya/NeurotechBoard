@@ -447,6 +447,7 @@ for (const [name, rounds] of roundsByCompany) {
   const sorted = rounds.slice().sort((a, b) => d3.ascending(a.date, b.date));
   const startYear = +co.founding_year;
   const region = co.region || "Other";
+  const modality = co.primary_modality || "Other";
   const lifecycle = co.lifecycle_status || "unknown";
   const totalFunding = co.total_funding_usd ? +co.total_funding_usd : 0;
 
@@ -456,6 +457,7 @@ for (const [name, rounds] of roundsByCompany) {
   points.push({
     name,
     region,
+    modality,
     lifecycle,
     totalFunding,
     year: startYear,
@@ -473,6 +475,7 @@ for (const [name, rounds] of roundsByCompany) {
     points.push({
       name,
       region,
+      modality,
       lifecycle,
       totalFunding,
       year: yearFrac,
@@ -486,6 +489,7 @@ for (const [name, rounds] of roundsByCompany) {
   points.push({
     name,
     region,
+    modality,
     lifecycle,
     totalFunding,
     year: 2026.25,
@@ -506,11 +510,12 @@ for (const co of companies) {
   const startYear = +co.founding_year;
   const total = +co.total_funding_usd;
   const region = co.region || "Other";
+  const modality = co.primary_modality || "Other";
   const lifecycle = co.lifecycle_status || "unknown";
 
   fundingCurves.push(
-    {name: co.name, region, lifecycle, totalFunding: total, year: startYear, cumFunding: LOG_FLOOR, label: `${co.name} — founded ${startYear}`},
-    {name: co.name, region, lifecycle, totalFunding: total, year: 2026.25, cumFunding: Math.max(total, LOG_FLOOR), label: `${co.name} — $${(total / 1e6).toFixed(1)}M total`}
+    {name: co.name, region, modality, lifecycle, totalFunding: total, year: startYear, cumFunding: LOG_FLOOR, label: `${co.name} — founded ${startYear}`},
+    {name: co.name, region, modality, lifecycle, totalFunding: total, year: 2026.25, cumFunding: Math.max(total, LOG_FLOOR), label: `${co.name} — $${(total / 1e6).toFixed(1)}M total`}
   );
 }
 
@@ -523,6 +528,50 @@ const deadEndpoints = fundingEndpoints.filter(d => d.lifecycle === "dead_domain"
 const dormantEndpoints = fundingEndpoints.filter(d => d.lifecycle === "dormant");
 
 const nFundedCompanies = new Set(fundingCurves.map(d => d.name)).size;
+```
+
+```js
+// Category filter: "All" + each modality. Counts in labels.
+const modalityCounts = d3.rollup(
+  fundingEndpoints, v => v.length, d => d.modality
+);
+const filterOptions = [
+  `All (${nFundedCompanies})`,
+  ...modalityOrder
+    .filter(m => modalityCounts.has(m))
+    .map(m => `${m} (${modalityCounts.get(m)})`)
+];
+const fundingFilter = view(Inputs.radio(filterOptions, {
+  value: filterOptions[0],
+  label: "Category"
+}));
+```
+
+```js
+// Parse filter value back to modality name
+const selectedModality = fundingFilter.startsWith("All") ? null : fundingFilter.replace(/\s*\(\d+\)$/, "");
+
+// Split curves into foreground (highlighted) and background (dimmed)
+const fgCurves = selectedModality
+  ? fundingCurves.filter(d => d.modality === selectedModality)
+  : fundingCurves;
+const bgCurves = selectedModality
+  ? fundingCurves.filter(d => d.modality !== selectedModality)
+  : [];
+
+// Same split for endpoints (labels + markers)
+const fgEndpoints = selectedModality
+  ? fundingEndpoints.filter(d => d.modality === selectedModality)
+  : fundingEndpoints;
+const fgDead = selectedModality
+  ? deadEndpoints.filter(d => d.modality === selectedModality)
+  : deadEndpoints;
+const fgDormant = selectedModality
+  ? dormantEndpoints.filter(d => d.modality === selectedModality)
+  : dormantEndpoints;
+
+// Lower label threshold when filtering (show more names since less clutter)
+const labelThreshold = selectedModality ? 20e6 : 200e6;
 ```
 
 ```js
@@ -563,14 +612,27 @@ display(Plot.plot({
     Plot.ruleY([1e8], {stroke: "#e2e8f0", strokeDasharray: "2,4"}),
     Plot.ruleY([1e9], {stroke: "#e2e8f0", strokeDasharray: "2,4"}),
 
-    // One curve per company
-    Plot.line(fundingCurves, {
+    // Background (dimmed) curves — shown only when a category is selected
+    bgCurves.length > 0
+      ? Plot.line(bgCurves, {
+          x: "year",
+          y: "cumFunding",
+          z: "name",
+          stroke: "#d1d5db",
+          strokeWidth: 0.6,
+          strokeOpacity: 0.25,
+          curve: "monotone-x"
+        })
+      : null,
+
+    // Foreground (highlighted) curves
+    Plot.line(fgCurves, {
       x: "year",
       y: "cumFunding",
       z: "name",
       stroke: "region",
-      strokeWidth: 1.2,
-      strokeOpacity: 0.45,
+      strokeWidth: selectedModality ? 1.8 : 1.2,
+      strokeOpacity: selectedModality ? 0.7 : 0.45,
       curve: "monotone-x",
       tip: {
         format: {
@@ -581,20 +643,22 @@ display(Plot.plot({
       },
       channels: {
         Company: "name",
+        Category: "modality",
         Raised: d => `$${(d.cumFunding / 1e6).toFixed(1)}M`,
         Status: "lifecycle"
       }
     }),
 
-    // Highlight top companies with labels at their endpoint
+    // Labels on top companies
     Plot.text(
-      fundingEndpoints
-        .filter(d => d.totalFunding >= 200e6)
-        .sort((a, b) => d3.descending(a.totalFunding, b.totalFunding)),
+      fgEndpoints
+        .filter(d => d.totalFunding >= labelThreshold)
+        .sort((a, b) => d3.descending(a.totalFunding, b.totalFunding))
+        .slice(0, 15),
       {
         x: "year",
         y: "cumFunding",
-        text: d => d.name.length > 20 ? d.name.slice(0, 18) + "…" : d.name,
+        text: d => d.name.length > 22 ? d.name.slice(0, 20) + "…" : d.name,
         textAnchor: "end",
         dx: -6,
         fontSize: 9,
@@ -604,29 +668,33 @@ display(Plot.plot({
       }
     ),
 
-    // Dead domain markers
-    Plot.dot(deadEndpoints, {
-      x: "year",
-      y: "cumFunding",
-      symbol: "times",
-      stroke: "#dc2626",
-      strokeWidth: 2,
-      r: 4,
-      tip: true,
-      channels: {Company: "name"}
-    }),
+    // Dead domain markers (foreground only)
+    fgDead.length > 0
+      ? Plot.dot(fgDead, {
+          x: "year",
+          y: "cumFunding",
+          symbol: "times",
+          stroke: "#dc2626",
+          strokeWidth: 2,
+          r: 4,
+          tip: true,
+          channels: {Company: "name"}
+        })
+      : null,
 
-    // Dormant markers
-    Plot.dot(dormantEndpoints, {
-      x: "year",
-      y: "cumFunding",
-      symbol: "circle",
-      fill: "#94a3b8",
-      stroke: "#475569",
-      strokeWidth: 1,
-      r: 3
-    })
-  ]
+    // Dormant markers (foreground only)
+    fgDormant.length > 0
+      ? Plot.dot(fgDormant, {
+          x: "year",
+          y: "cumFunding",
+          symbol: "circle",
+          fill: "#94a3b8",
+          stroke: "#475569",
+          strokeWidth: 1,
+          r: 3
+        })
+      : null
+  ].filter(Boolean)
 }))
 ```
 
