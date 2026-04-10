@@ -552,17 +552,6 @@ const fundingFilter = view(Inputs.radio(filterOptions, {
 const selectedModality = fundingFilter.startsWith("All") ? null : fundingFilter.replace(/\s*\(\d+\)$/, "");
 ```
 
-<style>
-  /* Smooth transitions on all SVG paths inside the funding chart.
-     When JS toggles stroke-opacity / stroke-width, CSS animates it. */
-  #funding-chart-container path,
-  #funding-chart-container text.label-text {
-    transition: stroke-opacity 0.45s ease-in-out,
-                stroke-width 0.45s ease-in-out,
-                fill-opacity 0.45s ease-in-out,
-                opacity 0.45s ease-in-out;
-  }
-</style>
 
 ```js
 // ---- Render the chart ONCE with a single Plot.line for all curves ----
@@ -684,14 +673,18 @@ const fundingChart = Plot.plot({
 });
 
 // Tag each <path> in the line group with a data-modality attribute
-// so the animation cell can target them. Plot.line creates paths in
-// the same order as d3.group(data, z) iterates unique z values.
+// and add inline CSS transition so animations work on SVG elements.
+// Plot.line creates paths in the same order as d3.group(data, z).
 const lineGroup = fundingChart.querySelector('[aria-label="line"]');
 if (lineGroup) {
   const paths = lineGroup.querySelectorAll("path");
   paths.forEach((p, i) => {
     if (i < companyModalities.length) {
       p.setAttribute("data-modality", companyModalities[i]);
+      // Inline transition — CSS transitions on SVG require the property
+      // to be set via style (not attribute), AND the transition rule
+      // must be on the element. Inline is the only reliable way.
+      p.style.transition = "stroke-opacity 0.5s ease, stroke-width 0.5s ease";
     }
   });
 }
@@ -711,8 +704,8 @@ const chartContainer = display(html`<div id="funding-chart-container">${fundingC
   for (const path of paths) {
     const mod = path.getAttribute("data-modality");
     const isActive = selectedModality === null || mod === selectedModality;
-    const targetOpacity = selectedModality === null ? "0.45" : (isActive ? "0.7" : "0.04");
-    const targetWidth = selectedModality === null ? "1.2px" : (isActive ? "2px" : "0.4px");
+    const targetOpacity = selectedModality === null ? "0.45" : (isActive ? "0.75" : "0.12");
+    const targetWidth = selectedModality === null ? "1.2px" : (isActive ? "2.2px" : "0.7px");
     path.style.strokeOpacity = targetOpacity;
     path.style.strokeWidth = targetWidth;
   }
