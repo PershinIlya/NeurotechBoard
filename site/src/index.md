@@ -324,212 +324,7 @@ const s1Container = display(html`<div id="timeline-chart-container">${s1Chart}</
 })();
 ```
 
-<p class="section-label">§2 Lifelines</p>
-
-## Every company as its own line
-
-<p class="caption">
-  One horizontal line per company, sorted top-to-bottom by founding year
-  (oldest at the bottom, newest at the top). The line runs from the
-  year the company was founded to the date of the last lifecycle check
-  (2026-04-09). <strong>Color</strong> shows the form-factor category;
-  <strong>line thickness</strong> encodes the most recent funding stage —
-  thin wisps are pre-seed / seed / grant territory, thick strokes are
-  companies that reached Series C+, private equity, or public markets.
-  Hover any line to see the company, year, category, and funding stage.
-  Red × marks dead domains; gray ○ marks dormant sites. The "fan" shape
-  opening to the right is the modern neurotech wave — notice how sparse
-  everything before ~2014 looks, and how dense the last decade is.
-</p>
-
-```js
-// ---- Pre-compute sorted lifeline data with funding tiers ----
-// Each company becomes one row. Sort ascending by founding year so the
-// oldest entries anchor the bottom of the chart. Companies missing a
-// founding year are dropped (can't draw a line without a start).
-//
-// `end_year` is fixed at the date of the last lifecycle verification
-// (domain-check pass, 2026-04-09). For active companies this is honest
-// ("last time we checked, they were alive"). For dead_domain rows the
-// line still extends to 2026 because we don't know WHEN the domain died,
-// only that it was dead by the check date — we add a visual marker at
-// the end instead.
-//
-// `funding_tier` maps reccy's last_funding_stage (~25 values) down to
-// 0-5 ordinal buckets, from "unknown" up through "post-IPO / acquired".
-// Rendered as stroke width in the chart so mature companies visually
-// pop out of the noise of seed-stage wisps.
-const LIFELINE_END = 2026.25; // mid-Q2 2026 ≈ check date
-
-// 0=unknown, 1=pre-seed/seed, 2=A/venture, 3=B/C/PE, 4=D-F, 5=IPO/acquired
-function fundingTier(stage) {
-  if (!stage) return 0;
-  const s = stage.toLowerCase().trim();
-  if (s === "undisclosed" || s === "non equity assistance" || s === "series unknown") return 0;
-  if (s.includes("post-ipo") || s === "ipo" || s === "acquisition" || s === "secondary market") return 5;
-  if (s.includes("series f") || s.includes("series e") || s.includes("series d")) return 4;
-  if (s.includes("series c") || s.includes("series b") || s === "private equity") return 3;
-  if (s.includes("series a") || s === "venture round" || s === "corporate round") return 2;
-  if (
-    s === "seed" || s === "pre-seed" || s === "pre seed" ||
-    s === "grant" || s === "convertible note" || s === "debt financing" ||
-    s === "equity crowdfunding" || s === "conventional debt"
-  ) return 1;
-  return 0;
-}
-
-// Stroke width per tier. Baseline at 1.1 so "unknown" is still visible;
-// top tier at 2.8 so an IPO line reads as ~2.5x thicker than a seed line
-// without overwhelming neighbors at ~2px row spacing.
-const TIER_STROKE_WIDTH = [0.7, 1.1, 1.5, 2.0, 2.4, 2.8];
-
-// Human-readable tier name for the tooltip
-const TIER_LABEL = [
-  "Unknown / undisclosed",
-  "Seed / grant / crowdfunding",
-  "Series A / venture round",
-  "Series B–C / private equity",
-  "Series D–F",
-  "Post-IPO / acquired"
-];
-
-const lifelineData = companies
-  .filter(d => d.founding_year)
-  .map(d => {
-    const tier = fundingTier(d.last_funding_stage);
-    return {
-      ...d,
-      founding_year: +d.founding_year,
-      end_year: LIFELINE_END,
-      funding_tier: tier,
-      funding_tier_label: TIER_LABEL[tier],
-      stroke_width: TIER_STROKE_WIDTH[tier]
-    };
-  })
-  .sort((a, b) => d3.ascending(a.founding_year, b.founding_year))
-  .map((d, i) => ({...d, rank: i}));
-
-const lifelineDead = lifelineData.filter(
-  d => d.lifecycle_status === "dead_domain"
-);
-const lifelineDormant = lifelineData.filter(
-  d => d.lifecycle_status === "dormant"
-);
-```
-
-```js
-// §2 filter options
-const s2ModalityCounts = d3.rollup(lifelineData, v => v.length, d => d.primary_modality);
-const s2ModalityOptions = [
-  `All (${lifelineData.length})`,
-  ...modalityOrder.filter(m => s2ModalityCounts.has(m)).map(m => `${m} (${s2ModalityCounts.get(m)})`)
-];
-const s2StatusLabels = {"active": "Active", "dormant": "Dormant", "dead_domain": "Dead domain"};
-const s2StatusOptions = ["All", ...["active","dormant","dead_domain"].filter(s => lifelineData.some(d => d.lifecycle_status === s)).map(s => s2StatusLabels[s])];
-
-const s2Filters = view(Inputs.form(
-  {
-    modality: Inputs.radio(s2ModalityOptions, {value: s2ModalityOptions[0], label: "Category"}),
-    status:   Inputs.radio(s2StatusOptions,   {value: s2StatusOptions[0],   label: "Status"}),
-  },
-  {template: (inputs) => makeControlCard(inputs.modality, inputs.status)}
-));
-```
-
-```js
-// Parse §2 filter values and re-rank filtered data
-const s2Modality = s2Filters.modality.startsWith("All") ? null : s2Filters.modality.replace(/\s*\(\d+\)$/, "");
-const s2StatusKey = s2Filters.status === "All" ? null : Object.keys(s2StatusLabels).find(k => s2StatusLabels[k] === s2Filters.status);
-
-const s2Data = lifelineData
-  .filter(d => s2Modality === null || d.primary_modality === s2Modality)
-  .filter(d => s2StatusKey === null || d.lifecycle_status === s2StatusKey)
-  .sort((a, b) => d3.ascending(a.founding_year, b.founding_year))
-  .map((d, i) => ({...d, rank: i}));
-
-const s2Dead    = s2Data.filter(d => d.lifecycle_status === "dead_domain");
-const s2Dormant = s2Data.filter(d => d.lifecycle_status === "dormant");
-```
-
-```js
-display(Plot.plot({
-  width,
-  height: Math.max(300, s2Data.length * 2 + 50),
-  marginLeft: 20,
-  marginRight: 30,
-  marginTop: 10,
-  marginBottom: 40,
-  x: {
-    label: "Year →",
-    tickFormat: "d",
-    grid: true,
-    labelAnchor: "right"
-  },
-  y: {
-    axis: null,
-    label: null,
-    domain: [-1, s2Data.length]
-  },
-  color: {
-    legend: true,
-    domain: modalityOrder,
-    range: modalityOrder.map(m => modalityColors[m] || "#64748b"),
-    label: "Category"
-  },
-  marks: [
-    // Vertical rule at 2014 — the inflection point of the modern wave
-    Plot.ruleX([2014], {
-      stroke: "#94a3b8",
-      strokeDasharray: "3,4",
-      strokeWidth: 1
-    }),
-    // One horizontal line per company, founding_year → end_year.
-    // Stroke width varies by funding_tier so mature companies visibly
-    // thicken out of the seed-stage noise floor.
-    Plot.link(s2Data, {
-      x1: "founding_year",
-      x2: "end_year",
-      y1: "rank",
-      y2: "rank",
-      stroke: "primary_modality",
-      strokeWidth: d => d.stroke_width,
-      strokeOpacity: 0.85,
-      strokeLinecap: "round",
-      tip: true,
-      channels: {
-        Company: "name",
-        Founded: "founding_year",
-        Category: "primary_modality",
-        Country: "country",
-        "Funding stage": "last_funding_stage",
-        "Funding tier": "funding_tier_label",
-        Status: "lifecycle_status"
-      }
-    }),
-    // Red × at the end of dead_domain lines
-    Plot.dot(s2Dead, {
-      x: "end_year",
-      y: "rank",
-      symbol: "times",
-      stroke: "#dc2626",
-      strokeWidth: 2,
-      r: 3.5
-    }),
-    // Gray circle at the end of dormant lines
-    Plot.dot(s2Dormant, {
-      x: "end_year",
-      y: "rank",
-      symbol: "circle",
-      fill: "#94a3b8",
-      stroke: "#475569",
-      strokeWidth: 1,
-      r: 3
-    })
-  ]
-}))
-```
-
-<p class="section-label">§3 Funding trajectories</p>
+<p class="section-label">§2 Funding trajectories</p>
 
 ## How much capital each company has raised
 
@@ -910,7 +705,7 @@ const chartContainer = display(html`<div id="funding-chart-container">${fundingC
   Dashed lines mark $1M, $100M, and $1B thresholds.
 </p>
 
-<p class="section-label">§4 Categories</p>
+<p class="section-label">§3 Categories</p>
 
 ## What tech the industry is built on
 
@@ -963,7 +758,7 @@ display(Plot.plot({
 }))
 ```
 
-<p class="section-label">§5 Applications × Categories</p>
+<p class="section-label">§4 Applications × Categories</p>
 
 ## Where the categories land
 
@@ -1019,7 +814,7 @@ display(Plot.plot({
 }))
 ```
 
-<p class="section-label">§6 Geography</p>
+<p class="section-label">§5 Geography</p>
 
 ## Top countries by company count
 
@@ -1076,6 +871,191 @@ display(Plot.plot({
   ]
 }))
 ```
+
+<p class="section-label">§6 Competitive Matrix</p>
+
+## Modality × Region heatmap
+
+<p class="caption">
+  Where does each category concentrate geographically? Each cell shows how
+  many companies sit at that modality × region intersection. Dark cells =
+  crowded niches; empty cells = white-space opportunities (or data gaps).
+</p>
+
+```js
+display(Plot.plot({
+  width,
+  height: 380,
+  marginLeft: 110,
+  marginBottom: 80,
+  padding: 0.05,
+  x: {label: null, domain: regionOrder, tickRotate: -30},
+  y: {label: null, domain: modalityOrder},
+  color: {
+    type: "linear",
+    scheme: "YlGnBu",
+    legend: true,
+    label: "Companies"
+  },
+  marks: [
+    Plot.cell(
+      companies.filter(d => d.region && d.primary_modality),
+      Plot.group(
+        {fill: "count"},
+        {x: "region", y: "primary_modality", tip: true}
+      )
+    ),
+    Plot.text(
+      companies.filter(d => d.region && d.primary_modality),
+      Plot.group(
+        {text: "count"},
+        {
+          x: "region",
+          y: "primary_modality",
+          fill: "black",
+          stroke: "white",
+          strokeWidth: 3,
+          fontSize: 11
+        }
+      )
+    )
+  ]
+}))
+```
+
+<p class="section-label">§7 Growth by Modality</p>
+
+## Which categories are rising
+
+<p class="caption">
+  Companies founded per year, stacked by modality.
+  Wearables and therapeutics dominate the 2018–2024 surge; software/AI
+  is a steady but thinner stream. Clipped to 2000+ for readability.
+</p>
+
+```js
+// Pre-aggregate year × modality counts, filling gaps with 0 so the
+// smooth curve doesn't jump over missing years.
+const growthFiltered = companies.filter(d => d.founding_year && d.founding_year >= 2000);
+const growthYears = d3.range(2000, 2027);
+const growthCounts = d3.rollup(growthFiltered, v => v.length, d => d.founding_year, d => d.primary_modality || "Other");
+const growthData = growthYears.flatMap(year =>
+  modalityOrder.map(mod => ({
+    year,
+    modality: mod,
+    count: growthCounts.get(year)?.get(mod) || 0
+  }))
+);
+```
+
+```js
+display(Plot.plot({
+  width,
+  height: 400,
+  x: {label: "Year →", tickFormat: "d"},
+  y: {label: "↑ Companies founded", grid: true},
+  color: {
+    domain: modalityOrder,
+    range: modalityOrder.map(m => modalityColors[m] || "#64748b"),
+    legend: true,
+    label: "Modality"
+  },
+  marks: [
+    Plot.areaY(
+      growthData,
+      Plot.stackY({
+        x: "year",
+        y: "count",
+        fill: "modality",
+        order: modalityOrder,
+        curve: "basis"
+      })
+    ),
+    Plot.ruleY([0])
+  ]
+}))
+```
+
+<p style="color: var(--theme-foreground-muted); font-size: 0.85rem; margin-top: 0.5rem;">
+  ${growthFiltered.length} companies with known founding year (2000+).
+</p>
+
+<p class="section-label">§8 Capital Flow</p>
+
+## Funding volume by year
+
+<p class="caption">
+  How much money went into neurotech each year, stacked by round type.
+  Only rounds with disclosed amounts are shown. Late-stage rounds
+  (Series C+) can dwarf seed in dollar terms even when seed deal count
+  is higher. Data from 2010 onward.
+</p>
+
+```js
+const roundTypeOrder = ["Pre-Seed", "Seed", "Series A", "Series B", "Series C+", "Grant", "Venture Round", "Post-IPO", "Debt/Note", "Other"];
+
+function normalizeRound(t) {
+  if (!t) return "Other";
+  const lc = t.toLowerCase().trim();
+  if (lc.startsWith("pre")) return "Pre-Seed";
+  if (lc === "seed") return "Seed";
+  if (lc === "series a") return "Series A";
+  if (lc === "series b") return "Series B";
+  if (/^series [c-z]/.test(lc)) return "Series C+";
+  if (lc === "grant") return "Grant";
+  if (lc.includes("venture")) return "Venture Round";
+  if (lc.includes("ipo")) return "Post-IPO";
+  if (lc.includes("debt") || lc.includes("note") || lc.includes("convertible")) return "Debt/Note";
+  return "Other";
+}
+
+const fundingByYear = fundingRounds
+  .filter(d => d.date && d.amount_usd > 0)
+  .map(d => ({
+    year: new Date(d.date).getFullYear(),
+    amount: +d.amount_usd,
+    round_type: normalizeRound(d.round_type)
+  }))
+  .filter(d => d.year >= 2010);
+```
+
+```js
+display(Plot.plot({
+  width,
+  height: 420,
+  x: {label: "Year →", tickFormat: "d", interval: 1},
+  y: {
+    label: "↑ Funding volume (USD)",
+    grid: true,
+    tickFormat: d => d >= 1e9 ? `$${(d / 1e9).toFixed(1)}B` : `$${(d / 1e6).toFixed(0)}M`
+  },
+  color: {
+    domain: roundTypeOrder,
+    legend: true,
+    label: "Round type"
+  },
+  marks: [
+    Plot.barY(
+      fundingByYear,
+      Plot.binX(
+        {y: "sum"},
+        {
+          x: "year",
+          y: "amount",
+          fill: "round_type",
+          interval: 1,
+          order: roundTypeOrder
+        }
+      )
+    ),
+    Plot.ruleY([0])
+  ]
+}))
+```
+
+<p style="color: var(--theme-foreground-muted); font-size: 0.85rem; margin-top: 0.5rem;">
+  ${fundingByYear.length} rounds with disclosed amounts (2010+).
+</p>
 
 <div class="about-block">
 
