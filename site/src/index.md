@@ -275,7 +275,7 @@ for (const r of s1AllRects) {
   r.dataset.region = colorToRegion[r.getAttribute("fill")] || "Other";
   r.dataset.origY = r.getAttribute("y");
   r.dataset.origH = r.getAttribute("height");
-  r.style.transition = "y 0.6s ease-out, height 0.6s ease-out";
+  r.style.transition = "y 0.35s ease-out, height 0.35s ease-out";
 }
 
 const s1Container = display(html`<div id="timeline-chart-container">${s1Chart}</div>`);
