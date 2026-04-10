@@ -531,48 +531,35 @@ const nFundedCompanies = new Set(fundingCurves.map(d => d.name)).size;
 ```
 
 ```js
-// ---- Filters: modality + region side-by-side, log scale toggle ----
+// ---- Build filter option lists ----
 const modalityCounts = d3.rollup(fundingEndpoints, v => v.length, d => d.modality);
 const filterOptions = [
   `All (${nFundedCompanies})`,
   ...modalityOrder.filter(m => modalityCounts.has(m)).map(m => `${m} (${modalityCounts.get(m)})`)
 ];
-
 const regionCounts = d3.rollup(fundingEndpoints, v => v.length, d => d.region);
 const regionFilterOptions = [
   `All (${nFundedCompanies})`,
   ...regionOrder.filter(r => regionCounts.has(r)).map(r => `${r} (${regionCounts.get(r)})`)
 ];
+```
 
-// Build inputs separately, then compose into a flex layout via document.createElement
-// (avoids `html` tagged template scoping issues inside Inputs.form template callback)
-const _modInput = Inputs.radio(filterOptions, {value: filterOptions[0], label: "Modality"});
-const _regInput = Inputs.radio(regionFilterOptions, {value: regionFilterOptions[0], label: "Region"});
-const _logInput = Inputs.toggle({label: "Log scale Y", value: true});
+```js
+const fundingFilter = view(Inputs.radio(filterOptions, {value: filterOptions[0], label: "Modality"}));
+```
 
-const _filterWrapper = (() => {
-  const row = document.createElement("div");
-  row.style.cssText = "display:flex; gap:3rem; align-items:flex-start; flex-wrap:wrap; margin-bottom:0.5rem;";
-  row.appendChild(_modInput);
-  row.appendChild(_regInput);
-  const logWrap = document.createElement("div");
-  logWrap.style.cssText = "margin-top:1.4rem; align-self:flex-start;";
-  logWrap.appendChild(_logInput);
-  row.appendChild(logWrap);
-  return row;
-})();
+```js
+const regionFilter = view(Inputs.radio(regionFilterOptions, {value: regionFilterOptions[0], label: "Region"}));
+```
 
-const fundingFilters = view(Inputs.form(
-  {modality: _modInput, region: _regInput, logScale: _logInput},
-  {template: () => _filterWrapper}
-));
+```js
+const useLogScale = view(Inputs.toggle({label: "Log scale Y", value: true}));
 ```
 
 ```js
 // Parse filter values
-const selectedModality = fundingFilters.modality.startsWith("All") ? null : fundingFilters.modality.replace(/\s*\(\d+\)$/, "");
-const selectedRegion   = fundingFilters.region.startsWith("All")   ? null : fundingFilters.region.replace(/\s*\(\d+\)$/, "");
-const useLogScale      = fundingFilters.logScale;
+const selectedModality = fundingFilter.startsWith("All") ? null : fundingFilter.replace(/\s*\(\d+\)$/, "");
+const selectedRegion   = regionFilter.startsWith("All")  ? null : regionFilter.replace(/\s*\(\d+\)$/, "");
 ```
 
 
