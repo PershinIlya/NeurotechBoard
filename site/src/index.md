@@ -622,6 +622,23 @@ if (lineGroup) {
   });
 }
 
+// Tag top-company text labels with modality/region
+const labelData = fundingEndpoints
+  .filter(d => d.totalFunding >= 50e6)
+  .sort((a, b) => d3.descending(a.totalFunding, b.totalFunding))
+  .slice(0, 20);
+const textGroup = fundingChart.querySelector('[aria-label="text"]');
+if (textGroup) {
+  const texts = textGroup.querySelectorAll("text");
+  texts.forEach((t, i) => {
+    if (i < labelData.length) {
+      t.setAttribute("data-modality", labelData[i].modality);
+      t.setAttribute("data-region", labelData[i].region);
+      t.style.transition = "opacity 0.8s ease-in-out";
+    }
+  });
+}
+
 // Tag dead endpoint markers (×) — first dot group
 const allDotGroups = Array.from(fundingChart.querySelectorAll('[aria-label="dot"]'));
 if (allDotGroups.length >= 1 && deadEndpoints.length > 0) {
@@ -667,12 +684,14 @@ const chartContainer = display(html`<div id="funding-chart-container">${fundingC
 
   const anyFilter = selectedModality !== null || selectedRegion !== null;
 
-  const paths = container.querySelectorAll("path[data-modality]");
-  const dots  = container.querySelectorAll("circle[data-modality]");
+  const paths  = container.querySelectorAll("path[data-modality]");
+  const dots   = container.querySelectorAll("circle[data-modality]");
+  const labels = container.querySelectorAll("text[data-modality]");
 
   // 1. Reset every element to the unfiltered default state
-  for (const p of paths) { p.style.strokeOpacity = "0.45"; p.style.strokeWidth = "1.2px"; }
-  for (const d of dots)  { d.style.opacity = "1"; }
+  for (const p of paths)  { p.style.strokeOpacity = "0.45"; p.style.strokeWidth = "1.2px"; }
+  for (const d of dots)   { d.style.opacity = "1"; }
+  for (const l of labels) { l.style.opacity = "1"; }
 
   if (!anyFilter) return;   // no active filter → stay at default
 
@@ -695,6 +714,14 @@ const chartContainer = display(html`<div id="funding-chart-container">${fundingC
     const isActive = (selectedModality === null || mod === selectedModality)
                   && (selectedRegion   === null || reg === selectedRegion);
     dot.style.opacity = isActive ? "1" : "0.1";
+  }
+
+  for (const label of labels) {
+    const mod = label.getAttribute("data-modality");
+    const reg = label.getAttribute("data-region");
+    const isActive = (selectedModality === null || mod === selectedModality)
+                  && (selectedRegion   === null || reg === selectedRegion);
+    label.style.opacity = isActive ? "1" : "0";
   }
 })();
 ```
@@ -758,63 +785,7 @@ display(Plot.plot({
 }))
 ```
 
-<p class="section-label">§4 Applications × Categories</p>
-
-## Where the categories land
-
-<p class="caption">
-  A heatmap of how the form-factor categories cross-tabulate with
-  application domains. Darker cells mean more companies. The
-  Medical/Therapeutic × Therapeutics corner is the drug-delivery and
-  neurostim cluster; the Consumer/Wellness × Wearable corner is the
-  wellness-wearable world.
-</p>
-
-```js
-display(Plot.plot({
-  width,
-  height: 320,
-  marginLeft: 100,
-  marginBottom: 50,
-  padding: 0.02,
-  x: {label: "Application →", domain: applicationOrder},
-  y: {label: "Modality ↑", domain: modalityOrder.slice().reverse()},
-  color: {
-    type: "linear",
-    scheme: "blues",
-    legend: true,
-    label: "Companies"
-  },
-  marks: [
-    Plot.cell(
-      companies,
-      Plot.group(
-        {fill: "count"},
-        {
-          x: "application",
-          y: "primary_modality",
-          tip: true
-        }
-      )
-    ),
-    Plot.text(
-      companies,
-      Plot.group(
-        {text: "count"},
-        {
-          x: "application",
-          y: "primary_modality",
-          fill: "black",
-          stroke: "white",
-          strokeWidth: 3
-        }
-      )
-    )
-  ]
-}))
-```
-
-<p class="section-label">§5 Geography</p>
+<p class="section-label">§4 Geography</p>
 
 ## Top countries by company count
 
@@ -872,7 +843,7 @@ display(Plot.plot({
 }))
 ```
 
-<p class="section-label">§6 Competitive Matrix</p>
+<p class="section-label">§5 Competitive Matrix</p>
 
 ## Modality × Region heatmap
 
@@ -923,7 +894,7 @@ display(Plot.plot({
 }))
 ```
 
-<p class="section-label">§7 Growth by Modality</p>
+<p class="section-label">§6 Growth by Modality</p>
 
 ## Which categories are rising
 
@@ -980,7 +951,7 @@ display(Plot.plot({
   ${growthFiltered.length} companies with known founding year (2000+).
 </p>
 
-<p class="section-label">§8 Capital Flow</p>
+<p class="section-label">§7 Capital Flow</p>
 
 ## Funding volume by year
 
