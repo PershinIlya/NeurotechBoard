@@ -592,7 +592,8 @@ const nFundedCompanies = new Set(fundingCurves.map(d => d.name)).size;
 ```
 
 ```js
-// ---- Filters: Modality + Region side-by-side, Log scale toggle separated by a divider ----
+// ---- Filters: independent reactive bindings so modality/region changes
+// ---- don't re-trigger useLogScale and cause a full chart re-render.
 const modalityCounts = d3.rollup(fundingEndpoints, v => v.length, d => d.modality);
 const filterOptions = [
   `All (${nFundedCompanies})`,
@@ -608,23 +609,27 @@ const _modInput = Inputs.radio(filterOptions,       {value: filterOptions[0],   
 const _regInput = Inputs.radio(regionFilterOptions, {value: regionFilterOptions[0], label: "Region"});
 const _logInput = Inputs.toggle({label: "Log scale Y", value: true});
 
-const fundingFilters = view(Inputs.form(
-  {modality: _modInput, region: _regInput, logScale: _logInput},
-  {
-    template: (inputs) => {
-      const footer = document.createElement("div");
-      footer.style.cssText = "display:flex; justify-content:flex-end; padding-top:0.125rem;";
-      footer.appendChild(inputs.logScale);
-      return makeControlCard(inputs.modality, inputs.region, footer);
-    }
-  }
-));
+const _logFooter = document.createElement("div");
+_logFooter.style.cssText = "display:flex; justify-content:flex-end; padding-top:0.125rem;";
+_logFooter.appendChild(_logInput);
+display(makeControlCard(_modInput, _regInput, _logFooter));
 ```
 
 ```js
-const selectedModality = fundingFilters.modality.startsWith("All") ? null : fundingFilters.modality.replace(/\s*\(\d+\)$/, "");
-const selectedRegion   = fundingFilters.region.startsWith("All")   ? null : fundingFilters.region.replace(/\s*\(\d+\)$/, "");
-const useLogScale      = fundingFilters.logScale;
+const selectedModRaw = Generators.input(_modInput);
+```
+
+```js
+const selectedRegRaw = Generators.input(_regInput);
+```
+
+```js
+const useLogScale = Generators.input(_logInput);
+```
+
+```js
+const selectedModality = selectedModRaw.startsWith("All") ? null : selectedModRaw.replace(/\s*\(\d+\)$/, "");
+const selectedRegion   = selectedRegRaw.startsWith("All") ? null : selectedRegRaw.replace(/\s*\(\d+\)$/, "");
 ```
 
 
@@ -759,7 +764,7 @@ if (lineGroup) {
       // Inline transition — CSS transitions on SVG require the property
       // to be set via style (not attribute), AND the transition rule
       // must be on the element. Inline is the only reliable way.
-      p.style.transition = "stroke-opacity 0.6s ease-in-out, stroke-width 0.6s ease-in-out";
+      p.style.transition = "stroke-opacity 0.8s ease-in-out, stroke-width 0.8s ease-in-out";
     }
   });
 }
@@ -772,7 +777,7 @@ if (allDotGroups.length >= 1 && deadEndpoints.length > 0) {
     if (i < deadEndpoints.length) {
       c.setAttribute("data-modality", deadEndpoints[i].modality);
       c.setAttribute("data-region", deadEndpoints[i].region);
-      c.style.transition = "opacity 0.6s ease-in-out";
+      c.style.transition = "opacity 0.8s ease-in-out";
     }
   });
 }
@@ -784,7 +789,7 @@ if (allDotGroups.length > dormantGroupIdx && dormantEndpoints.length > 0) {
     if (i < dormantEndpoints.length) {
       c.setAttribute("data-modality", dormantEndpoints[i].modality);
       c.setAttribute("data-region", dormantEndpoints[i].region);
-      c.style.transition = "opacity 0.6s ease-in-out";
+      c.style.transition = "opacity 0.8s ease-in-out";
     }
   });
 }
@@ -796,6 +801,11 @@ const chartContainer = display(html`<div id="funding-chart-container">${fundingC
 // ---- Reactive animation ----
 // Re-runs when selectedModality, selectedRegion, or useLogScale changes.
 // void chartContainer ensures this runs AFTER the chart (re-)renders.
+//
+// When the chart re-renders (e.g. log↔linear toggle), the SVG is brand new.
+// We reset paths to their default state, force a reflow so the browser
+// registers the "from" values, then set the target styles. This gives
+// CSS transitions a valid start→end range to animate.
 (function animateFunding() {
   void chartContainer;  // ordering: wait for chart render
   void useLogScale;     // re-run when scale toggles (chart re-renders)
@@ -804,25 +814,34 @@ const chartContainer = display(html`<div id="funding-chart-container">${fundingC
 
   const anyFilter = selectedModality !== null || selectedRegion !== null;
 
-  // Animate line paths
   const paths = container.querySelectorAll("path[data-modality]");
+  const dots  = container.querySelectorAll("circle[data-modality]");
+
+  // 1. Reset every element to the unfiltered default state
+  for (const p of paths) { p.style.strokeOpacity = "0.45"; p.style.strokeWidth = "1.2px"; }
+  for (const d of dots)  { d.style.opacity = "1"; }
+
+  if (!anyFilter) return;   // no active filter → stay at default
+
+  // 2. Force reflow so the browser commits the default values
+  void container.offsetHeight;
+
+  // 3. Apply the filter target styles — CSS transition animates the change
   for (const path of paths) {
     const mod = path.getAttribute("data-modality");
     const reg = path.getAttribute("data-region");
     const isActive = (selectedModality === null || mod === selectedModality)
                   && (selectedRegion   === null || reg === selectedRegion);
-    path.style.strokeOpacity = !anyFilter ? "0.45" : (isActive ? "0.75" : "0.18");
-    path.style.strokeWidth   = !anyFilter ? "1.2px" : (isActive ? "2.2px" : "0.9px");
+    path.style.strokeOpacity = isActive ? "0.75" : "0.18";
+    path.style.strokeWidth   = isActive ? "2.2px" : "0.9px";
   }
 
-  // Animate dormant/dead dot markers
-  const dots = container.querySelectorAll("circle[data-modality]");
   for (const dot of dots) {
     const mod = dot.getAttribute("data-modality");
     const reg = dot.getAttribute("data-region");
     const isActive = (selectedModality === null || mod === selectedModality)
                   && (selectedRegion   === null || reg === selectedRegion);
-    dot.style.opacity = (!anyFilter || isActive) ? "1" : "0.1";
+    dot.style.opacity = isActive ? "1" : "0.1";
   }
 })();
 ```
