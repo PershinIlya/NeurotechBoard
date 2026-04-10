@@ -176,6 +176,22 @@ const applicationOrder = [
   "Research Tools",
   "Other"
 ];
+
+// Shared helper: wraps filter inputs in a subtle card border.
+// Each argument becomes a row separated by a hairline rule.
+function makeControlCard(...rows) {
+  const card = document.createElement("div");
+  card.style.cssText = "border:1px solid var(--theme-foreground-faintest); border-radius:8px; padding:0.875rem 1.25rem; background:var(--theme-background-alt); margin-bottom:0.75rem;";
+  rows.forEach((el, i) => {
+    if (i > 0) {
+      const sep = document.createElement("div");
+      sep.style.cssText = "height:1px; background:var(--theme-foreground-faintest); margin:0.625rem 0;";
+      card.appendChild(sep);
+    }
+    card.appendChild(el);
+  });
+  return card;
+}
 ```
 
 <p class="section-label">§1 Timeline</p>
@@ -191,6 +207,17 @@ const applicationOrder = [
 ```js
 // Filter to rows with a known year and clip outliers to 1990+ for the main chart
 const timelineData = companies.filter(d => d.founding_year && d.founding_year >= 1990);
+```
+
+```js
+const s1Filters = view(Inputs.form(
+  {regions: Inputs.checkbox(regionOrder, {value: regionOrder, label: "Regions"})},
+  {template: (inputs) => makeControlCard(inputs.regions)}
+));
+```
+
+```js
+const s1Data = timelineData.filter(d => s1Filters.regions.includes(d.region));
 ```
 
 ```js
@@ -216,7 +243,7 @@ display(Plot.plot({
   },
   marks: [
     Plot.rectY(
-      timelineData,
+      s1Data,
       Plot.binX(
         {y: "count"},
         {
@@ -333,9 +360,43 @@ const lifelineDormant = lifelineData.filter(
 ```
 
 ```js
+// §2 filter options
+const s2ModalityCounts = d3.rollup(lifelineData, v => v.length, d => d.primary_modality);
+const s2ModalityOptions = [
+  `All (${lifelineData.length})`,
+  ...modalityOrder.filter(m => s2ModalityCounts.has(m)).map(m => `${m} (${s2ModalityCounts.get(m)})`)
+];
+const s2StatusLabels = {"active": "Active", "dormant": "Dormant", "dead_domain": "Dead domain"};
+const s2StatusOptions = ["All", ...["active","dormant","dead_domain"].filter(s => lifelineData.some(d => d.lifecycle_status === s)).map(s => s2StatusLabels[s])];
+
+const s2Filters = view(Inputs.form(
+  {
+    modality: Inputs.radio(s2ModalityOptions, {value: s2ModalityOptions[0], label: "Category"}),
+    status:   Inputs.radio(s2StatusOptions,   {value: s2StatusOptions[0],   label: "Status"}),
+  },
+  {template: (inputs) => makeControlCard(inputs.modality, inputs.status)}
+));
+```
+
+```js
+// Parse §2 filter values and re-rank filtered data
+const s2Modality = s2Filters.modality.startsWith("All") ? null : s2Filters.modality.replace(/\s*\(\d+\)$/, "");
+const s2StatusKey = s2Filters.status === "All" ? null : Object.keys(s2StatusLabels).find(k => s2StatusLabels[k] === s2Filters.status);
+
+const s2Data = lifelineData
+  .filter(d => s2Modality === null || d.primary_modality === s2Modality)
+  .filter(d => s2StatusKey === null || d.lifecycle_status === s2StatusKey)
+  .sort((a, b) => d3.ascending(a.founding_year, b.founding_year))
+  .map((d, i) => ({...d, rank: i}));
+
+const s2Dead    = s2Data.filter(d => d.lifecycle_status === "dead_domain");
+const s2Dormant = s2Data.filter(d => d.lifecycle_status === "dormant");
+```
+
+```js
 display(Plot.plot({
   width,
-  height: 820,
+  height: Math.max(300, s2Data.length * 2 + 50),
   marginLeft: 20,
   marginRight: 30,
   marginTop: 10,
@@ -349,7 +410,7 @@ display(Plot.plot({
   y: {
     axis: null,
     label: null,
-    domain: [-1, lifelineData.length]
+    domain: [-1, s2Data.length]
   },
   color: {
     legend: true,
@@ -367,7 +428,7 @@ display(Plot.plot({
     // One horizontal line per company, founding_year → end_year.
     // Stroke width varies by funding_tier so mature companies visibly
     // thicken out of the seed-stage noise floor.
-    Plot.link(lifelineData, {
+    Plot.link(s2Data, {
       x1: "founding_year",
       x2: "end_year",
       y1: "rank",
@@ -388,7 +449,7 @@ display(Plot.plot({
       }
     }),
     // Red × at the end of dead_domain lines
-    Plot.dot(lifelineDead, {
+    Plot.dot(s2Dead, {
       x: "end_year",
       y: "rank",
       symbol: "times",
@@ -397,7 +458,7 @@ display(Plot.plot({
       r: 3.5
     }),
     // Gray circle at the end of dormant lines
-    Plot.dot(lifelineDormant, {
+    Plot.dot(s2Dormant, {
       x: "end_year",
       y: "rank",
       symbol: "circle",
@@ -551,18 +612,10 @@ const fundingFilters = view(Inputs.form(
   {modality: _modInput, region: _regInput, logScale: _logInput},
   {
     template: (inputs) => {
-      const wrap = document.createElement("div");
-      wrap.style.cssText = "display:grid; grid-template-columns:1fr 1fr auto; gap:2rem; align-items:start;";
-
-      wrap.appendChild(inputs.modality);
-      wrap.appendChild(inputs.region);
-
-      const logWrap = document.createElement("div");
-      logWrap.style.cssText = "padding-top:1.5rem;";
-      logWrap.appendChild(inputs.logScale);
-      wrap.appendChild(logWrap);
-
-      return wrap;
+      const footer = document.createElement("div");
+      footer.style.cssText = "display:flex; justify-content:flex-end; padding-top:0.125rem;";
+      footer.appendChild(inputs.logScale);
+      return makeControlCard(inputs.modality, inputs.region, footer);
     }
   }
 ));
