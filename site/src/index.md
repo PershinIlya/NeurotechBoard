@@ -410,7 +410,233 @@ display(Plot.plot({
 }))
 ```
 
-<p class="section-label">§3 Categories</p>
+<p class="section-label">§3 Funding trajectories</p>
+
+## How much capital each company has raised
+
+<p class="caption">
+  Each curve traces one company's cumulative funding from its founding year
+  (starting at $0) to the present. The vertical axis is logarithmic, so a
+  $100K seed round and a $1B mega-round both get visual room. Curves are
+  built from actual disclosed round data where available (188 companies,
+  541 rounds) and smoothly interpolated between data points. Color shows
+  the region. Hover to see the company name and total raised. Red ×
+  marks companies whose domains are confirmed dead.
+</p>
+
+```js
+// ---- Build cumulative funding curves from round-level data ----
+const fundingRounds = await FileAttachment("data/funding_rounds.csv").csv({typed: true});
+
+// Group rounds by company_name, sorted by date
+const roundsByCompany = d3.group(
+  fundingRounds.filter(d => d.date && d.amount_usd > 0),
+  d => d.company_name
+);
+
+// Lookup: company_name → enriched row
+const companyLookup = new Map(companies.map(d => [d.name, d]));
+
+// Build curve data: for each company, generate points for a cumulative line
+const fundingCurves = [];
+
+for (const [name, rounds] of roundsByCompany) {
+  const co = companyLookup.get(name);
+  if (!co || !co.founding_year) continue;
+
+  const sorted = rounds.slice().sort((a, b) => d3.ascending(a.date, b.date));
+  const startYear = +co.founding_year;
+  const region = co.region || "Other";
+  const lifecycle = co.lifecycle_status || "unknown";
+  const totalFunding = co.total_funding_usd ? +co.total_funding_usd : 0;
+
+  // Point 1: founding year, $0 (can't do log(0), so use a small floor)
+  const LOG_FLOOR = 10000; // $10K floor for log scale
+  const points = [];
+  points.push({
+    name,
+    region,
+    lifecycle,
+    totalFunding,
+    year: startYear,
+    cumFunding: LOG_FLOOR,
+    label: `${name} — founded ${startYear}`
+  });
+
+  // Intermediate points from actual rounds
+  let cum = 0;
+  for (const r of sorted) {
+    cum += r.amount_usd;
+    const d = new Date(r.date);
+    const yearFrac = d.getFullYear() + d.getMonth() / 12;
+    const monthStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
+    points.push({
+      name,
+      region,
+      lifecycle,
+      totalFunding,
+      year: yearFrac,
+      cumFunding: Math.max(cum, LOG_FLOOR),
+      label: `${name} — $${(cum / 1e6).toFixed(1)}M raised by ${monthStr}`
+    });
+  }
+
+  // Final point: extend to 2026.25 at the total
+  const finalVal = totalFunding > 0 ? totalFunding : cum;
+  points.push({
+    name,
+    region,
+    lifecycle,
+    totalFunding,
+    year: 2026.25,
+    cumFunding: Math.max(finalVal, LOG_FLOOR),
+    label: `${name} — $${(finalVal / 1e6).toFixed(1)}M total`
+  });
+
+  fundingCurves.push(...points);
+}
+
+// Also add companies with total_funding but NO individual rounds
+// (synthetic 2-point curve: founding → total at 2026)
+for (const co of companies) {
+  if (!co.founding_year || !co.total_funding_usd || co.total_funding_usd <= 0) continue;
+  if (roundsByCompany.has(co.name)) continue; // already covered above
+
+  const LOG_FLOOR = 10000;
+  const startYear = +co.founding_year;
+  const total = +co.total_funding_usd;
+  const region = co.region || "Other";
+  const lifecycle = co.lifecycle_status || "unknown";
+
+  fundingCurves.push(
+    {name: co.name, region, lifecycle, totalFunding: total, year: startYear, cumFunding: LOG_FLOOR, label: `${co.name} — founded ${startYear}`},
+    {name: co.name, region, lifecycle, totalFunding: total, year: 2026.25, cumFunding: Math.max(total, LOG_FLOOR), label: `${co.name} — $${(total / 1e6).toFixed(1)}M total`}
+  );
+}
+
+// Dead/dormant endpoints for markers
+const fundingEndpoints = Array.from(
+  d3.group(fundingCurves, d => d.name),
+  ([name, pts]) => pts[pts.length - 1]
+);
+const deadEndpoints = fundingEndpoints.filter(d => d.lifecycle === "dead_domain");
+const dormantEndpoints = fundingEndpoints.filter(d => d.lifecycle === "dormant");
+
+const nFundedCompanies = new Set(fundingCurves.map(d => d.name)).size;
+```
+
+```js
+display(Plot.plot({
+  width,
+  height: 560,
+  marginLeft: 70,
+  marginRight: 30,
+  marginBottom: 40,
+  x: {
+    label: "Year →",
+    tickFormat: "d",
+    domain: [1995, 2027],
+    grid: true,
+    labelAnchor: "right"
+  },
+  y: {
+    type: "log",
+    label: "↑ Cumulative funding (USD)",
+    tickFormat: d => {
+      if (d >= 1e9) return `$${d / 1e9}B`;
+      if (d >= 1e6) return `$${d / 1e6}M`;
+      if (d >= 1e3) return `$${d / 1e3}K`;
+      return `$${d}`;
+    },
+    grid: true,
+    domain: [10000, 2e10]
+  },
+  color: {
+    legend: true,
+    domain: regionOrder,
+    range: regionOrder.map(r => regionColors[r] || "#94a3b8"),
+    label: "Region"
+  },
+  marks: [
+    // Reference lines
+    Plot.ruleY([1e6], {stroke: "#e2e8f0", strokeDasharray: "2,4"}),
+    Plot.ruleY([1e8], {stroke: "#e2e8f0", strokeDasharray: "2,4"}),
+    Plot.ruleY([1e9], {stroke: "#e2e8f0", strokeDasharray: "2,4"}),
+
+    // One curve per company
+    Plot.line(fundingCurves, {
+      x: "year",
+      y: "cumFunding",
+      z: "name",
+      stroke: "region",
+      strokeWidth: 1.2,
+      strokeOpacity: 0.45,
+      curve: "monotone-x",
+      tip: {
+        format: {
+          x: "d",
+          y: false,
+          stroke: true
+        }
+      },
+      channels: {
+        Company: "name",
+        Raised: d => `$${(d.cumFunding / 1e6).toFixed(1)}M`,
+        Status: "lifecycle"
+      }
+    }),
+
+    // Highlight top companies with labels at their endpoint
+    Plot.text(
+      fundingEndpoints
+        .filter(d => d.totalFunding >= 200e6)
+        .sort((a, b) => d3.descending(a.totalFunding, b.totalFunding)),
+      {
+        x: "year",
+        y: "cumFunding",
+        text: d => d.name.length > 20 ? d.name.slice(0, 18) + "…" : d.name,
+        textAnchor: "end",
+        dx: -6,
+        fontSize: 9,
+        fill: "currentColor",
+        stroke: "var(--theme-background)",
+        strokeWidth: 3
+      }
+    ),
+
+    // Dead domain markers
+    Plot.dot(deadEndpoints, {
+      x: "year",
+      y: "cumFunding",
+      symbol: "times",
+      stroke: "#dc2626",
+      strokeWidth: 2,
+      r: 4,
+      tip: true,
+      channels: {Company: "name"}
+    }),
+
+    // Dormant markers
+    Plot.dot(dormantEndpoints, {
+      x: "year",
+      y: "cumFunding",
+      symbol: "circle",
+      fill: "#94a3b8",
+      stroke: "#475569",
+      strokeWidth: 1,
+      r: 3
+    })
+  ]
+}))
+```
+
+<p style="color: var(--theme-foreground-muted); font-size: 0.85rem; margin-top: 0.5rem;">
+  ${nFundedCompanies} companies with disclosed funding shown.
+  Pre-1995 outliers clipped from X axis for readability.
+  Dashed lines mark $1M, $100M, and $1B thresholds.
+</p>
+
+<p class="section-label">§4 Categories</p>
 
 ## What tech the industry is built on
 
@@ -463,7 +689,7 @@ display(Plot.plot({
 }))
 ```
 
-<p class="section-label">§4 Applications × Categories</p>
+<p class="section-label">§5 Applications × Categories</p>
 
 ## Where the categories land
 
@@ -519,7 +745,7 @@ display(Plot.plot({
 }))
 ```
 
-<p class="section-label">§5 Geography</p>
+<p class="section-label">§6 Geography</p>
 
 ## Top countries by company count
 
