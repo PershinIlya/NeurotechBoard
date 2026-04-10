@@ -1061,30 +1061,36 @@ display(Plot.plot({
 
 ### About the data
 
-This dashboard is built from a single, open CSV:
-[`data/processed/neurotech_enriched.csv`](https://github.com/PershinIlya/NeurotechBoard/blob/main/data/processed/neurotech_enriched.csv)
-in the [NeurotechBoard repository](https://github.com/PershinIlya/NeurotechBoard).
+This dashboard is powered by two datasets: a company-level table
+(${nCompanies} rows) and a funding-rounds table, both derived from
+[reccy.dev](https://app.reccy.dev/companies) and enriched in-house.
+The raw data is kept in a private repository; only the columns needed
+for visualization are served to the browser. Source code is on
+[GitHub](https://github.com/PershinIlya/NeurotechBoard).
 
-**Source:** companies scraped from [reccy.dev](https://app.reccy.dev/companies),
-snapshot 2026-04-09. 393 rows after dedup.
+**Source:** companies scraped from reccy.dev, snapshot 2026-04-09.
+${nCompanies} rows after dedup across ${nCountries} countries.
 
-**Enrichment:** founding years are web-verified with H/M/L confidence tiers
-and per-row source URLs ([methodology](https://github.com/PershinIlya/NeurotechBoard/blob/main/docs/methodology.md)).
-Modality and application fields are derived heuristically from reccy's
-industry tags and should be treated as a starting point, not ground truth.
+**Enrichment:** founding years are web-verified with H/M/L confidence
+tiers and per-row source URLs
+([methodology](https://github.com/PershinIlya/NeurotechBoard/blob/main/docs/methodology.md)).
+Modality, application, and region fields are derived heuristically from
+reccy's industry tags and should be treated as a starting point, not
+ground truth.
 
-**Lifecycle tracking** runs an automated domain-check pass over all 393
-company websites, classifying them into `active` / `dormant` / `dead_domain` /
-`unknown` tiers. A live website is a floor, not a ceiling — it doesn't
-guarantee the company is still operating, just that something answers.
+**Lifecycle tracking** runs an automated domain-check pass over all
+${nCompanies} company websites, classifying them into `active` /
+`dormant` / `dead_domain` / `unknown` tiers. A live website is a floor,
+not a ceiling — it doesn't guarantee the company is still operating,
+just that something answers.
 
 **Known limitations:** see the
 [discrepancies log](https://github.com/PershinIlya/NeurotechBoard/blob/main/docs/reccy_discrepancies.md).
 Reccy has country mismatches, duplicate rows, and occasionally scrapes a
-parked-domain title as the company name. We keep reccy's values as-is and
-log deltas rather than silently correcting.
+parked-domain title as the company name. We keep reccy's values as-is
+and log deltas rather than silently correcting.
 
-This is a personal pet project, released under a permissive license.
-Contributions, corrections, and pull requests welcome.
+This is a personal project. Contributions, corrections, and pull
+requests welcome.
 
 </div>
