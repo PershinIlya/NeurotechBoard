@@ -531,25 +531,42 @@ const nFundedCompanies = new Set(fundingCurves.map(d => d.name)).size;
 ```
 
 ```js
-// Category filter: "All" + each modality. Counts in labels.
-const modalityCounts = d3.rollup(
-  fundingEndpoints, v => v.length, d => d.modality
-);
+// ---- Filters: modality + region side-by-side, log scale toggle ----
+const modalityCounts = d3.rollup(fundingEndpoints, v => v.length, d => d.modality);
 const filterOptions = [
   `All (${nFundedCompanies})`,
-  ...modalityOrder
-    .filter(m => modalityCounts.has(m))
-    .map(m => `${m} (${modalityCounts.get(m)})`)
+  ...modalityOrder.filter(m => modalityCounts.has(m)).map(m => `${m} (${modalityCounts.get(m)})`)
 ];
-const fundingFilter = view(Inputs.radio(filterOptions, {
-  value: filterOptions[0],
-  label: "Category"
-}));
+
+const regionCounts = d3.rollup(fundingEndpoints, v => v.length, d => d.region);
+const regionFilterOptions = [
+  `All (${nFundedCompanies})`,
+  ...regionOrder.filter(r => regionCounts.has(r)).map(r => `${r} (${regionCounts.get(r)})`)
+];
+
+const fundingFilters = view(Inputs.form(
+  {
+    modality: Inputs.radio(filterOptions, {value: filterOptions[0], label: "Modality"}),
+    region:   Inputs.radio(regionFilterOptions, {value: regionFilterOptions[0], label: "Region"}),
+  },
+  {
+    template: ({modality, region}) => html`
+      <div style="display:flex; gap:3rem; align-items:flex-start; flex-wrap:wrap;">
+        <div>${modality}</div>
+        <div>${region}</div>
+      </div>`
+  }
+));
 ```
 
 ```js
-// Parse filter value back to modality name
-const selectedModality = fundingFilter.startsWith("All") ? null : fundingFilter.replace(/\s*\(\d+\)$/, "");
+const useLogScale = view(Inputs.toggle({label: "Log scale Y", value: true}));
+```
+
+```js
+// Parse filter values
+const selectedModality = fundingFilters.modality.startsWith("All") ? null : fundingFilters.modality.replace(/\s*\(\d+\)$/, "");
+const selectedRegion   = fundingFilters.region.startsWith("All")   ? null : fundingFilters.region.replace(/\s*\(\d+\)$/, "");
 ```
 
 
@@ -562,10 +579,9 @@ const selectedModality = fundingFilter.startsWith("All") ? null : fundingFilter.
 
 // Sort fundingCurves by company name so path order matches a known sequence.
 // d3.group preserves insertion order → we'll get paths in company-name order.
-const companyModalities = Array.from(
-  d3.group(fundingCurves, d => d.name),
-  ([name, pts]) => pts[0].modality
-);
+const companyGroups = Array.from(d3.group(fundingCurves, d => d.name), ([name, pts]) => pts[0]);
+const companyModalities = companyGroups.map(d => d.modality);
+const companyRegions    = companyGroups.map(d => d.region);
 
 const fundingChart = Plot.plot({
   width,
@@ -581,7 +597,7 @@ const fundingChart = Plot.plot({
     labelAnchor: "right"
   },
   y: {
-    type: "log",
+    type: useLogScale ? "log" : "linear",
     label: "↑ Cumulative funding (USD)",
     tickFormat: d => {
       if (d >= 1e9) return `$${d / 1e9}B`;
@@ -590,7 +606,7 @@ const fundingChart = Plot.plot({
       return `$${d}`;
     },
     grid: true,
-    domain: [10000, 2e10]
+    domain: useLogScale ? [10000, 2e10] : [0, 2e10]
   },
   color: {
     legend: true,
@@ -681,10 +697,11 @@ if (lineGroup) {
   paths.forEach((p, i) => {
     if (i < companyModalities.length) {
       p.setAttribute("data-modality", companyModalities[i]);
+      p.setAttribute("data-region", companyRegions[i]);
       // Inline transition — CSS transitions on SVG require the property
       // to be set via style (not attribute), AND the transition rule
       // must be on the element. Inline is the only reliable way.
-      p.style.transition = "stroke-opacity 0.8s ease-in-out, stroke-width 0.8s ease-in-out";
+      p.style.transition = "stroke-opacity 1.4s ease-in-out, stroke-width 1.4s ease-in-out";
     }
   });
 }
@@ -696,7 +713,8 @@ if (allDotGroups.length >= 1 && deadEndpoints.length > 0) {
   deadCircles.forEach((c, i) => {
     if (i < deadEndpoints.length) {
       c.setAttribute("data-modality", deadEndpoints[i].modality);
-      c.style.transition = "opacity 0.8s ease-in-out";
+      c.setAttribute("data-region", deadEndpoints[i].region);
+      c.style.transition = "opacity 1.4s ease-in-out";
     }
   });
 }
@@ -707,7 +725,8 @@ if (allDotGroups.length > dormantGroupIdx && dormantEndpoints.length > 0) {
   dormantCircles.forEach((c, i) => {
     if (i < dormantEndpoints.length) {
       c.setAttribute("data-modality", dormantEndpoints[i].modality);
-      c.style.transition = "opacity 0.8s ease-in-out";
+      c.setAttribute("data-region", dormantEndpoints[i].region);
+      c.style.transition = "opacity 1.4s ease-in-out";
     }
   });
 }
@@ -716,30 +735,36 @@ const chartContainer = display(html`<div id="funding-chart-container">${fundingC
 ```
 
 ```js
-// ---- Reactive animation: runs whenever selectedModality changes ----
-// CSS transitions (defined inline above) handle the smooth ease-in-out.
-// This cell just sets target values; CSS animates the transition.
+// ---- Reactive animation ----
+// Re-runs when selectedModality, selectedRegion, or useLogScale changes.
+// void chartContainer ensures this runs AFTER the chart (re-)renders.
 (function animateFunding() {
+  void chartContainer;  // ordering: wait for chart render
+  void useLogScale;     // re-run when scale toggles (chart re-renders)
   const container = document.getElementById("funding-chart-container");
   if (!container) return;
+
+  const anyFilter = selectedModality !== null || selectedRegion !== null;
 
   // Animate line paths
   const paths = container.querySelectorAll("path[data-modality]");
   for (const path of paths) {
     const mod = path.getAttribute("data-modality");
-    const isActive = selectedModality === null || mod === selectedModality;
-    const targetOpacity = selectedModality === null ? "0.45" : (isActive ? "0.75" : "0.18");
-    const targetWidth = selectedModality === null ? "1.2px" : (isActive ? "2.2px" : "0.9px");
-    path.style.strokeOpacity = targetOpacity;
-    path.style.strokeWidth = targetWidth;
+    const reg = path.getAttribute("data-region");
+    const isActive = (selectedModality === null || mod === selectedModality)
+                  && (selectedRegion   === null || reg === selectedRegion);
+    path.style.strokeOpacity = !anyFilter ? "0.45" : (isActive ? "0.75" : "0.18");
+    path.style.strokeWidth   = !anyFilter ? "1.2px" : (isActive ? "2.2px" : "0.9px");
   }
 
   // Animate dormant/dead dot markers
   const dots = container.querySelectorAll("circle[data-modality]");
   for (const dot of dots) {
     const mod = dot.getAttribute("data-modality");
-    const isActive = selectedModality === null || mod === selectedModality;
-    dot.style.opacity = selectedModality === null ? "1" : (isActive ? "1" : "0.1");
+    const reg = dot.getAttribute("data-region");
+    const isActive = (selectedModality === null || mod === selectedModality)
+                  && (selectedRegion   === null || reg === selectedRegion);
+    dot.style.opacity = (!anyFilter || isActive) ? "1" : "0.1";
   }
 })();
 ```
