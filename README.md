@@ -2,13 +2,17 @@
 
 Tracking the emergence and trajectory of neurotech companies over time. Source data pulled from [reccy.dev](https://app.reccy.dev/companies), enriched with founding years, geography, modality, and application taxonomy.
 
-## Current state (v0.3.1)
+## Current state (v0.3.2)
 
 - **393 companies** extracted from reccy.dev (out of 395 listed; 2 lost to dedup).
 - **Founding year coverage: 95.4%** (375/393). 188 from training knowledge, 187 web-verified across five batches; 18 empty (SKIPs / no reliable source).
 - **Country coverage: 94.4%** (371/393).
 - **Lifecycle coverage: 99.5%** (391/393). First automated pass via `src/check_domains.py`: 382 `active` (378 M + 4 L bot-blocked), 5 `dead_domain` (H), 4 `dormant` (M), 2 `unknown`.
-- **Funding data: 225 companies, 868 rounds.** Scraped from reccy.dev detail pages (2026-04-09). Retry pass recovered 55/79 error companies; remaining 24 are confirmed no-profile pages on reccy.dev.
+- **Funding data: 289 companies, 1139 rounds.** Full re-scrape of all 366 ok companies (2026-04-10). 64 companies newly gained funding rounds (0→n). 24 permanent no-profile errors unchanged.
+- **`official_name` bug fixed** — single-character extraction bug corrected for 288/366 companies. All matched rows now have proper legal names.
+- **Location coverage: 288 companies** have `location_full` (city + country from reccy detail header), up from ~85.
+- **Crunchbase slug coverage: 365/366 ok companies** (99.7%), up from 289.
+- **CSV match rate: 91.6%** (360/393), up from 79.6%. Fixed by id-based matching + backfilling missing `name` fields.
 - `founding_year_source` column: `'training_knowledge'` for legacy entries, explicit URL for web-verified entries.
 - Derived fields: modality, application, invasiveness, region, decade, half_year.
 
@@ -24,7 +28,8 @@ Tracking the emergence and trajectory of neurotech companies over time. Source d
 │   ├── build_dataset.py    # raw dump → processed csv
 │   ├── build_funding.py    # reccy detail dump → funding_rounds.csv + enriched csv patch
 │   ├── build_xlsx.py       # processed csv → local xlsx (for viewing)
-│   └── check_domains.py    # probes websites → domain_checks.json (lifecycle)
+│   ├── check_domains.py    # probes websites → domain_checks.json (lifecycle)
+│   └── patch_v032.py       # merges live re-scrape corrections into stored dump
 ├── docs/
 │   ├── methodology.md
 │   └── changelog.md
