@@ -5,7 +5,7 @@
 set -eu
 python3 -c "
 import csv, sys
-keep = ['company_name', 'date', 'amount_usd']
+keep = ['company_name', 'date', 'amount_usd', 'round_type']
 r = csv.DictReader(sys.stdin)
 w = csv.DictWriter(sys.stdout, fieldnames=keep, extrasaction='ignore', lineterminator='\n')
 w.writeheader()
