@@ -552,23 +552,16 @@ const fundingFilters = view(Inputs.form(
   {
     template: (inputs) => {
       const wrap = document.createElement("div");
-      wrap.style.cssText = "display:flex; gap:0; align-items:flex-start; flex-wrap:wrap; margin-bottom:0.25rem;";
+      wrap.style.cssText = "display:grid; grid-template-columns:1fr 1fr auto; gap:2rem; align-items:start;";
 
-      const left = document.createElement("div");
-      left.style.cssText = "display:flex; gap:2.5rem; flex-wrap:wrap; flex:1; min-width:0;";
-      left.appendChild(inputs.modality);
-      left.appendChild(inputs.region);
+      wrap.appendChild(inputs.modality);
+      wrap.appendChild(inputs.region);
 
-      const divider = document.createElement("div");
-      divider.style.cssText = "width:1px; background:#e2e8f0; margin:0.25rem 2rem 0; align-self:stretch; flex-shrink:0;";
+      const logWrap = document.createElement("div");
+      logWrap.style.cssText = "padding-top:1.5rem;";
+      logWrap.appendChild(inputs.logScale);
+      wrap.appendChild(logWrap);
 
-      const right = document.createElement("div");
-      right.style.cssText = "display:flex; align-items:flex-start; padding-top:0.25rem; flex-shrink:0;";
-      right.appendChild(inputs.logScale);
-
-      wrap.appendChild(left);
-      wrap.appendChild(divider);
-      wrap.appendChild(right);
       return wrap;
     }
   }
