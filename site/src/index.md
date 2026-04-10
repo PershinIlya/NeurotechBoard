@@ -461,11 +461,13 @@ const regionFilterOptions = [
 const _modInput = Inputs.radio(filterOptions,       {value: filterOptions[0],       label: "Modality"});
 const _regInput = Inputs.radio(regionFilterOptions, {value: regionFilterOptions[0], label: "Region"});
 const _logInput = Inputs.toggle({label: "Log scale Y", value: true});
+const _yearInput = Inputs.range([1990, 2020], {value: 1995, step: 1, label: "Start year"});
 
-const _logFooter = document.createElement("div");
-_logFooter.style.cssText = "display:flex; justify-content:flex-end; padding-top:0.125rem;";
-_logFooter.appendChild(_logInput);
-display(makeControlCard(_modInput, _regInput, _logFooter));
+const _bottomRow = document.createElement("div");
+_bottomRow.style.cssText = "display:flex; justify-content:space-between; align-items:center; gap:1rem;";
+_bottomRow.appendChild(_yearInput);
+_bottomRow.appendChild(_logInput);
+display(makeControlCard(_modInput, _regInput, _bottomRow));
 ```
 
 ```js
@@ -478,6 +480,10 @@ const selectedRegRaw = Generators.input(_regInput);
 
 ```js
 const useLogScale = Generators.input(_logInput);
+```
+
+```js
+const startYear = Generators.input(_yearInput);
 ```
 
 ```js
@@ -508,7 +514,7 @@ const fundingChart = Plot.plot({
   x: {
     label: "Year →",
     tickFormat: "d",
-    domain: [1995, 2027],
+    domain: [startYear, 2027],
     grid: true,
     labelAnchor: "right"
   },
@@ -679,6 +685,7 @@ const chartContainer = display(html`<div id="funding-chart-container">${fundingC
 (function animateFunding() {
   void chartContainer;  // ordering: wait for chart render
   void useLogScale;     // re-run when scale toggles (chart re-renders)
+  void startYear;       // re-run when year slider moves (chart re-renders)
   const container = document.getElementById("funding-chart-container");
   if (!container) return;
 
