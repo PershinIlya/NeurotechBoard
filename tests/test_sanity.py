@@ -175,3 +175,83 @@ def test_half_year_format():
     for r in rows:
         assert pattern.match(r['half_year']), \
             f"{r['name']}: bad half_year {r['half_year']!r}"
+
+
+# --- v0.3.0 funding / detail tests ---
+
+ROUNDS_CSV_PATH = ROOT / 'data' / 'processed' / 'funding_rounds.csv'
+
+
+def test_funding_rounds_csv_exists():
+    """funding_rounds.csv must exist after build_funding.py runs."""
+    assert ROUNDS_CSV_PATH.exists(), f"Missing {ROUNDS_CSV_PATH}"
+
+
+def test_funding_rounds_csv_columns():
+    with open(ROUNDS_CSV_PATH, newline='', encoding='utf-8') as f:
+        reader = csv.DictReader(f)
+        cols = set(reader.fieldnames or [])
+    required = {'company_name', 'reccy_id', 'round_type', 'date', 'amount_usd', 'lead_investors'}
+    assert required.issubset(cols), f"Missing columns in funding_rounds.csv: {required - cols}"
+
+
+def test_v030_columns_present():
+    """After build_funding.py, enriched CSV must have the new v0.3.0 columns."""
+    rows = load_rows()
+    required = {
+        'reccy_id', 'official_name', 'description', 'crunchbase_slug',
+        'location_full', 'total_funding_usd', 'funding_round_count',
+        'last_round_type', 'last_round_date', 'investor_count',
+        'has_undisclosed', 'news_count', 'latest_news_date',
+        'detail_source', 'detail_confidence',
+    }
+    assert required.issubset(set(rows[0].keys())), \
+        f"Missing v0.3.0 columns: {required - set(rows[0].keys())}"
+
+
+def test_funding_round_count_non_negative():
+    """funding_round_count must be a non-negative integer where present."""
+    for r in load_rows():
+        v = r.get('funding_round_count', '')
+        if v != '':
+            assert v.isdigit(), f"{r['name']}: bad funding_round_count {v!r}"
+
+
+def test_last_round_date_format():
+    """last_round_date must be empty or YYYY-MM-DD."""
+    import re
+    pattern = re.compile(r'^(\d{4}-\d{2}-\d{2})?$')
+    for r in load_rows():
+        v = r.get('last_round_date', '')
+        assert pattern.match(v), f"{r['name']}: bad last_round_date {v!r}"
+
+
+def test_total_funding_non_negative():
+    """total_funding_usd must be empty or a non-negative integer."""
+    for r in load_rows():
+        v = r.get('total_funding_usd', '')
+        if v != '':
+            assert v.lstrip('-').isdigit() and int(v) >= 0, \
+                f"{r['name']}: bad total_funding_usd {v!r}"
+
+
+def test_detail_confidence_values():
+    """detail_confidence must be H, M, L, or empty."""
+    valid = {'H', 'M', 'L', ''}
+    for r in load_rows():
+        v = r.get('detail_confidence', '')
+        assert v in valid, f"{r['name']}: bad detail_confidence {v!r}"
+
+
+def test_known_funding_spot_checks():
+    """Well-known companies that should have at least some funding data."""
+    rows = load_rows()
+    # Companies that definitely raised money and should show rounds
+    funded = ['synchron', 'neuralink', 'precision neuroscience', 'blackrock neurotech']
+    for name in funded:
+        row = find(rows, name)
+        if row is None:
+            continue
+        rc = row.get('funding_round_count', '')
+        assert rc != '' and int(rc) > 0, \
+            f"{name}: expected funding rounds, got funding_round_count={rc!r}"

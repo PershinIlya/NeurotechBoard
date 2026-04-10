@@ -2,12 +2,13 @@
 
 Tracking the emergence and trajectory of neurotech companies over time. Source data pulled from [reccy.dev](https://app.reccy.dev/companies), enriched with founding years, geography, modality, and application taxonomy.
 
-## Current state (v0.2.0)
+## Current state (v0.3.0)
 
 - **393 companies** extracted from reccy.dev (out of 395 listed; 2 lost to dedup).
 - **Founding year coverage: 95.4%** (375/393). 188 from training knowledge, 187 web-verified across five batches; 18 empty (SKIPs / no reliable source).
 - **Country coverage: 94.4%** (371/393).
-- **Lifecycle coverage: 99.5%** (391/393). First automated pass via `src/check_domains.py`: 382 `active` (378 M + 4 L bot-blocked), 5 `dead_domain` (H), 4 `dormant` (M), 2 `unknown`. `active` is a floor — later passes will upgrade rows to `acquired / merged / dissolved` where applicable. See `docs/methodology.md` for the full multi-state model and why it's not a single `death_date` column.
+- **Lifecycle coverage: 99.5%** (391/393). First automated pass via `src/check_domains.py`: 382 `active` (378 M + 4 L bot-blocked), 5 `dead_domain` (H), 4 `dormant` (M), 2 `unknown`.
+- **Funding data: 225 companies, 868 rounds.** Scraped from reccy.dev detail pages (2026-04-09). 79 companies had scrape errors (timeouts); a retry pass will recover most.
 - `founding_year_source` column: `'training_knowledge'` for legacy entries, explicit URL for web-verified entries.
 - Derived fields: modality, application, invasiveness, region, decade, half_year.
 
@@ -21,6 +22,7 @@ Tracking the emergence and trajectory of neurotech companies over time. Source d
 │                           # + domain_checks.json (auto lifecycle data)
 ├── src/
 │   ├── build_dataset.py    # raw dump → processed csv
+│   ├── build_funding.py    # reccy detail dump → funding_rounds.csv + enriched csv patch
 │   ├── build_xlsx.py       # processed csv → local xlsx (for viewing)
 │   └── check_domains.py    # probes websites → domain_checks.json (lifecycle)
 ├── docs/
@@ -50,6 +52,9 @@ python src/build_dataset.py
 
 # (Optional) Refresh lifecycle data by re-probing all websites
 python src/check_domains.py     # ~60s, writes data/processed/domain_checks.json
+
+# Add funding data (requires reccy detail dump in data/raw/)
+python src/build_funding.py
 
 # (Optional) Regenerate local xlsx for viewing
 python src/build_xlsx.py
