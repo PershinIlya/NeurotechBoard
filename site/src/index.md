@@ -550,32 +550,35 @@ const fundingFilter = view(Inputs.radio(filterOptions, {
 ```js
 // Parse filter value back to modality name
 const selectedModality = fundingFilter.startsWith("All") ? null : fundingFilter.replace(/\s*\(\d+\)$/, "");
-
-// Split curves into foreground (highlighted) and background (dimmed)
-const fgCurves = selectedModality
-  ? fundingCurves.filter(d => d.modality === selectedModality)
-  : fundingCurves;
-const bgCurves = selectedModality
-  ? fundingCurves.filter(d => d.modality !== selectedModality)
-  : [];
-
-// Same split for endpoints (labels + markers)
-const fgEndpoints = selectedModality
-  ? fundingEndpoints.filter(d => d.modality === selectedModality)
-  : fundingEndpoints;
-const fgDead = selectedModality
-  ? deadEndpoints.filter(d => d.modality === selectedModality)
-  : deadEndpoints;
-const fgDormant = selectedModality
-  ? dormantEndpoints.filter(d => d.modality === selectedModality)
-  : dormantEndpoints;
-
-// Lower label threshold when filtering (show more names since less clutter)
-const labelThreshold = selectedModality ? 20e6 : 200e6;
 ```
 
+<style>
+  /* Smooth transitions on all SVG paths inside the funding chart.
+     When JS toggles stroke-opacity / stroke-width, CSS animates it. */
+  #funding-chart-container path,
+  #funding-chart-container text.label-text {
+    transition: stroke-opacity 0.45s ease-in-out,
+                stroke-width 0.45s ease-in-out,
+                fill-opacity 0.45s ease-in-out,
+                opacity 0.45s ease-in-out;
+  }
+</style>
+
 ```js
-display(Plot.plot({
+// ---- Render the chart ONCE with a single Plot.line for all curves ----
+// Plot.line with z:"name" creates one <path> per company inside a single
+// <g aria-label="line">. After rendering, we build an index mapping each
+// <path> to its company's modality. The reactive animation cell then
+// toggles styles on each path via CSS transitions — no re-render needed.
+
+// Sort fundingCurves by company name so path order matches a known sequence.
+// d3.group preserves insertion order → we'll get paths in company-name order.
+const companyModalities = Array.from(
+  d3.group(fundingCurves, d => d.name),
+  ([name, pts]) => pts[0].modality
+);
+
+const fundingChart = Plot.plot({
   width,
   height: 560,
   marginLeft: 70,
@@ -612,34 +615,17 @@ display(Plot.plot({
     Plot.ruleY([1e8], {stroke: "#e2e8f0", strokeDasharray: "2,4"}),
     Plot.ruleY([1e9], {stroke: "#e2e8f0", strokeDasharray: "2,4"}),
 
-    // Background (dimmed) curves — shown only when a category is selected
-    bgCurves.length > 0
-      ? Plot.line(bgCurves, {
-          x: "year",
-          y: "cumFunding",
-          z: "name",
-          stroke: "#d1d5db",
-          strokeWidth: 0.6,
-          strokeOpacity: 0.25,
-          curve: "monotone-x"
-        })
-      : null,
-
-    // Foreground (highlighted) curves
-    Plot.line(fgCurves, {
+    // ALL curves in one mark — one <path> per company (z channel)
+    Plot.line(fundingCurves, {
       x: "year",
       y: "cumFunding",
       z: "name",
       stroke: "region",
-      strokeWidth: selectedModality ? 1.8 : 1.2,
-      strokeOpacity: selectedModality ? 0.7 : 0.45,
+      strokeWidth: 1.2,
+      strokeOpacity: 0.45,
       curve: "monotone-x",
       tip: {
-        format: {
-          x: "d",
-          y: false,
-          stroke: true
-        }
+        format: { x: "d", y: false, stroke: true }
       },
       channels: {
         Company: "name",
@@ -649,12 +635,12 @@ display(Plot.plot({
       }
     }),
 
-    // Labels on top companies
+    // Labels for top companies
     Plot.text(
-      fgEndpoints
-        .filter(d => d.totalFunding >= labelThreshold)
+      fundingEndpoints
+        .filter(d => d.totalFunding >= 50e6)
         .sort((a, b) => d3.descending(a.totalFunding, b.totalFunding))
-        .slice(0, 15),
+        .slice(0, 20),
       {
         x: "year",
         y: "cumFunding",
@@ -668,9 +654,9 @@ display(Plot.plot({
       }
     ),
 
-    // Dead domain markers (foreground only)
-    fgDead.length > 0
-      ? Plot.dot(fgDead, {
+    // Dead domain markers
+    deadEndpoints.length > 0
+      ? Plot.dot(deadEndpoints, {
           x: "year",
           y: "cumFunding",
           symbol: "times",
@@ -682,9 +668,9 @@ display(Plot.plot({
         })
       : null,
 
-    // Dormant markers (foreground only)
-    fgDormant.length > 0
-      ? Plot.dot(fgDormant, {
+    // Dormant markers
+    dormantEndpoints.length > 0
+      ? Plot.dot(dormantEndpoints, {
           x: "year",
           y: "cumFunding",
           symbol: "circle",
@@ -695,7 +681,42 @@ display(Plot.plot({
         })
       : null
   ].filter(Boolean)
-}))
+});
+
+// Tag each <path> in the line group with a data-modality attribute
+// so the animation cell can target them. Plot.line creates paths in
+// the same order as d3.group(data, z) iterates unique z values.
+const lineGroup = fundingChart.querySelector('[aria-label="line"]');
+if (lineGroup) {
+  const paths = lineGroup.querySelectorAll("path");
+  paths.forEach((p, i) => {
+    if (i < companyModalities.length) {
+      p.setAttribute("data-modality", companyModalities[i]);
+    }
+  });
+}
+
+const chartContainer = display(html`<div id="funding-chart-container">${fundingChart}</div>`);
+```
+
+```js
+// ---- Reactive animation: runs whenever selectedModality changes ----
+// CSS transitions (defined above) handle the smooth 0.45s ease-in-out.
+// This cell just sets target values; CSS animates the transition.
+(function animateFunding() {
+  const container = document.getElementById("funding-chart-container");
+  if (!container) return;
+
+  const paths = container.querySelectorAll("path[data-modality]");
+  for (const path of paths) {
+    const mod = path.getAttribute("data-modality");
+    const isActive = selectedModality === null || mod === selectedModality;
+    const targetOpacity = selectedModality === null ? "0.45" : (isActive ? "0.7" : "0.04");
+    const targetWidth = selectedModality === null ? "1.2px" : (isActive ? "2px" : "0.4px");
+    path.style.strokeOpacity = targetOpacity;
+    path.style.strokeWidth = targetWidth;
+  }
+})();
 ```
 
 <p style="color: var(--theme-foreground-muted); font-size: 0.85rem; margin-top: 0.5rem;">
