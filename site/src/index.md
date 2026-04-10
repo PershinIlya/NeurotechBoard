@@ -684,7 +684,30 @@ if (lineGroup) {
       // Inline transition — CSS transitions on SVG require the property
       // to be set via style (not attribute), AND the transition rule
       // must be on the element. Inline is the only reliable way.
-      p.style.transition = "stroke-opacity 0.5s ease, stroke-width 0.5s ease";
+      p.style.transition = "stroke-opacity 0.8s ease-in-out, stroke-width 0.8s ease-in-out";
+    }
+  });
+}
+
+// Tag dead endpoint markers (×) — first dot group
+const allDotGroups = Array.from(fundingChart.querySelectorAll('[aria-label="dot"]'));
+if (allDotGroups.length >= 1 && deadEndpoints.length > 0) {
+  const deadCircles = allDotGroups[0].querySelectorAll("circle");
+  deadCircles.forEach((c, i) => {
+    if (i < deadEndpoints.length) {
+      c.setAttribute("data-modality", deadEndpoints[i].modality);
+      c.style.transition = "opacity 0.8s ease-in-out";
+    }
+  });
+}
+// Tag dormant endpoint markers (●) — second dot group (or first if no dead)
+const dormantGroupIdx = deadEndpoints.length > 0 ? 1 : 0;
+if (allDotGroups.length > dormantGroupIdx && dormantEndpoints.length > 0) {
+  const dormantCircles = allDotGroups[dormantGroupIdx].querySelectorAll("circle");
+  dormantCircles.forEach((c, i) => {
+    if (i < dormantEndpoints.length) {
+      c.setAttribute("data-modality", dormantEndpoints[i].modality);
+      c.style.transition = "opacity 0.8s ease-in-out";
     }
   });
 }
@@ -694,20 +717,29 @@ const chartContainer = display(html`<div id="funding-chart-container">${fundingC
 
 ```js
 // ---- Reactive animation: runs whenever selectedModality changes ----
-// CSS transitions (defined above) handle the smooth 0.45s ease-in-out.
+// CSS transitions (defined inline above) handle the smooth ease-in-out.
 // This cell just sets target values; CSS animates the transition.
 (function animateFunding() {
   const container = document.getElementById("funding-chart-container");
   if (!container) return;
 
+  // Animate line paths
   const paths = container.querySelectorAll("path[data-modality]");
   for (const path of paths) {
     const mod = path.getAttribute("data-modality");
     const isActive = selectedModality === null || mod === selectedModality;
-    const targetOpacity = selectedModality === null ? "0.45" : (isActive ? "0.75" : "0.12");
-    const targetWidth = selectedModality === null ? "1.2px" : (isActive ? "2.2px" : "0.7px");
+    const targetOpacity = selectedModality === null ? "0.45" : (isActive ? "0.75" : "0.18");
+    const targetWidth = selectedModality === null ? "1.2px" : (isActive ? "2.2px" : "0.9px");
     path.style.strokeOpacity = targetOpacity;
     path.style.strokeWidth = targetWidth;
+  }
+
+  // Animate dormant/dead dot markers
+  const dots = container.querySelectorAll("circle[data-modality]");
+  for (const dot of dots) {
+    const mod = dot.getAttribute("data-modality");
+    const isActive = selectedModality === null || mod === selectedModality;
+    dot.style.opacity = selectedModality === null ? "1" : (isActive ? "1" : "0.1");
   }
 })();
 ```
