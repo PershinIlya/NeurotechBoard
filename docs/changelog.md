@@ -2,6 +2,72 @@
 
 All notable changes to the NeurotechBoard dataset are documented here. Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Dataset follows semver loosely (see README).
 
+## [0.3.0] — 2026-04-10
+
+Schema change: introduces **funding and company detail enrichment** from reccy.dev detail pages, scraped in a single browser pass across all 393 companies.
+
+### Added
+
+**`data/raw/reccy_detail_dump_2026-04-09.json`** — raw detail-page scrape: 390 companies (311 ok, 79 errors — timeouts and pages not yet loaded). Each ok record contains: `id`, `name`, `official_name`, `location_full`, `crunchbase_slug`, `description`, `funding_rounds` (array of `{type, date, amount_usd, lead_investors[]}`), `news_count`, `latest_news_date`, `partnerships`, `team_changes`, `awards`.
+
+**`data/processed/funding_rounds.csv`** — one row per funding round: `company_name`, `reccy_id`, `round_type`, `date`, `amount_usd`, `lead_investors`. 868 rows covering 225 companies.
+
+**18 new columns in `neurotech_enriched.csv`** (v0.3.0 schema):
+- `reccy_id` — internal reccy company ID
+- `official_name` — legal/official name from detail-page header
+- `description` — first descriptive paragraph (~500 chars)
+- `crunchbase_slug` — slug portion of the Crunchbase URL, if present
+- `location_full` — city + state/country from detail-page header
+- `total_funding_usd` — sum of disclosed round amounts (empty if none disclosed)
+- `funding_round_count` — total rounds scraped (including undisclosed)
+- `last_round_type` — round type of most-recent round by date
+- `last_round_date` — announced date of most-recent round (YYYY-MM-DD)
+- `investor_count` — unique lead-investor names across all rounds
+- `has_undisclosed` — 1 if any round has null amount, else 0
+- `news_count` — count from reccy News tab
+- `latest_news_date` — approximate date of most-recent article (YYYY-MM-DD)
+- `partnerships` — partnership-news count
+- `team_changes` — team-change-news count
+- `awards` — award-news count
+- `detail_source` — `reccy_detail_2026-04-09`
+- `detail_confidence` — `M` (reccy is a secondary aggregator)
+
+**`src/build_funding.py`** — processes the raw JSON dump into the two output artefacts above. Match strategy: normalised name matching (lowercase, collapse whitespace) with substring fallback for partial names.
+
+**8 new sanity tests:**
+- `test_funding_rounds_csv_exists` / `test_funding_rounds_csv_columns`
+- `test_v030_columns_present`
+- `test_funding_round_count_non_negative`
+- `test_last_round_date_format`
+- `test_total_funding_non_negative`
+- `test_detail_confidence_values`
+- `test_known_funding_spot_checks` — Synchron, Neuralink, Precision Neuroscience, Blackrock Neurotech all have funding_round_count > 0
+
+### Metrics (2026-04-10)
+
+| Metric | Value |
+|---|---|
+| Companies with funding data | 225 / 311 ok (72%) |
+| Total funding rounds | 868 |
+| Companies with Crunchbase slug | 286 |
+| Companies with news activity | 9 |
+| Enriched CSV match rate | 310 / 393 (78.9%) |
+| Scrape errors (timeouts / empty) | 79 |
+
+**Notable funding data captured:**
+- Neuralink: Series A–E + Secondary, most recent Series E ($650M, Dec 2025)
+- Synchron: Series A–D, most recent Series D ($200M, Nov 2025)
+- Science Corp: Series C ($230M, Mar 2026)
+- ONWARD Medical: multiple Post-IPO rounds
+- Saluda Medical: $530M+ across 8 rounds
+
+### Known limitations
+
+- 79 companies (20%) have scrape errors — mostly timeouts from rate limiting during the browser pass. A retry pass would recover most of these.
+- `official_name` field is unreliable — the regex used during scraping produced single-character values for many rows (extracts the wrong DOM node). Treat as empty for now.
+- `location_full` is populated for only a subset — reccy's detail pages don't always show city/country in the header.
+- Match rate (78.9%) is below the 85% warning threshold but expected given the 79 error rows; the remaining 4 unmatched rows are name-normalisation mismatches.
+
 ## [0.2.0] — 2026-04-09
 
 Schema change: introduces **lifecycle tracking** for all 393 companies, plus the first automated pass that populates it. This is the "are they still alive?" question — distinct from the "when were they born?" question that `founding_year` answers. See `docs/methodology.md` → "Lifecycle tracking" for the full design rationale.
