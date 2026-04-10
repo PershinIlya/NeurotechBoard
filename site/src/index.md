@@ -599,7 +599,7 @@ const fundingChart = Plot.plot({
       return `$${d}`;
     },
     grid: true,
-    domain: useLogScale ? [10000, 2e10] : [0, 2e10]
+    domain: useLogScale ? [10000, 2e10] : [0, 2e9]
   },
   color: {
     legend: true,
@@ -694,7 +694,7 @@ if (lineGroup) {
       // Inline transition — CSS transitions on SVG require the property
       // to be set via style (not attribute), AND the transition rule
       // must be on the element. Inline is the only reliable way.
-      p.style.transition = "stroke-opacity 1.4s ease-in-out, stroke-width 1.4s ease-in-out";
+      p.style.transition = "stroke-opacity 0.6s ease-in-out, stroke-width 0.6s ease-in-out";
     }
   });
 }
@@ -707,7 +707,7 @@ if (allDotGroups.length >= 1 && deadEndpoints.length > 0) {
     if (i < deadEndpoints.length) {
       c.setAttribute("data-modality", deadEndpoints[i].modality);
       c.setAttribute("data-region", deadEndpoints[i].region);
-      c.style.transition = "opacity 1.4s ease-in-out";
+      c.style.transition = "opacity 0.6s ease-in-out";
     }
   });
 }
@@ -719,7 +719,7 @@ if (allDotGroups.length > dormantGroupIdx && dormantEndpoints.length > 0) {
     if (i < dormantEndpoints.length) {
       c.setAttribute("data-modality", dormantEndpoints[i].modality);
       c.setAttribute("data-region", dormantEndpoints[i].region);
-      c.style.transition = "opacity 1.4s ease-in-out";
+      c.style.transition = "opacity 0.6s ease-in-out";
     }
   });
 }
