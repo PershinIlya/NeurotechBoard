@@ -2,6 +2,39 @@
 
 All notable changes to the NeurotechBoard dataset are documented here. Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Dataset follows semver loosely (see README).
 
+## [0.3.2] — 2026-04-10
+
+Full-scale data revision across all 366 successfully-scraped companies. A second browser pass re-scraped every company's detail page on reccy.dev, capturing fields the original scraper missed or corrupted, then applied a conservative patch to the stored dump.
+
+### Added
+
+- **`data/raw/reccy_detail_dump_v032_patched.json`** — patched version of the stored dump with corrections applied from the live re-scrape. The original `reccy_detail_dump_2026-04-09.json` is preserved unchanged as the audit baseline.
+- **`src/patch_v032.py`** — patch script that merges live re-scrape data into the stored dump using conservative rules (only fills gaps, never overwrites existing good data).
+
+### Fixed
+
+- **`official_name` single-character bug** — the original scraper extracted only the first character of the legal name from the wrong DOM node (e.g. `"Z"` for Optohive, `"M"` for Omnipemf). Fixed for **288 of 366** companies using the live re-scrape.
+- **`location_full` missing for most companies** — the original scraper missed the city/country header in many cases. Filled for **241 companies** from the live pass. 72 matched rows still have no location (reccy.dev genuinely omits it for those).
+- **`crunchbase_slug` missing** — added for **76 companies** that had an empty slug in the stored dump but a valid one in the live pass.
+- **`description` very short or empty** — filled for **47 companies** (stored length ≤ 5 chars). Live description is a 150-char excerpt; used only where stored was effectively absent.
+- **Funding rounds: 0 → n** — **64 companies** that had zero stored rounds now have rounds from the live pass. Stored round data is preserved unchanged when it already existed (stored parser has higher recall than the live text extractor). Float amounts from JS arithmetic were rounded to integers.
+- **`build_funding.py` name-matching** — 52 records in the stored dump had no `name` field (only `official_name`), making them invisible to name-based CSV matching. Fixed by: (1) `patch_v032.py` now backfills the `name` field from `official_name`, and (2) `build_funding.py` now tries reccy_id–based matching first (exact, fast) before falling back to normalised-name and substring matching. Match rate improved from **79.6% → 91.6%** (360/393 rows).
+
+### Metrics (2026-04-10)
+
+| Metric | v0.3.1 | v0.3.2 | Δ |
+|---|---|---|---|
+| Companies with profile data (ok) | 366 / 390 | 366 / 390 | — |
+| official_name single-char bug | 287 rows | 0 rows | −287 |
+| Companies with location_full | ~85 | 288 | +203 |
+| Companies with Crunchbase slug | 289 | 365 | +76 |
+| Companies with funding data | 225 | 289 | +64 |
+| Total funding rounds | 868 | 1139 | +271 |
+| Enriched CSV match rate | 313 / 393 (79.6%) | 360 / 393 (91.6%) | +47 rows |
+| Tests passing | 21 / 21 | 21 / 21 | — |
+
+---
+
 ## [0.3.1] — 2026-04-10
 
 Patch: retry pass for the 79 detail-page scrape errors from v0.3.0.

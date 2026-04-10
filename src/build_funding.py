@@ -76,12 +76,22 @@ def load_dump(path: Path) -> list[dict]:
 
 
 def build_company_index(rows: list[dict]) -> dict[str, dict]:
-    """Return normalised-name → row dict.  Last writer wins for duplicates."""
+    """Return normalised-name → row dict.  Last writer wins for duplicates.
+
+    Also indexes by reccy id (prefixed "id:") for direct id-based lookups,
+    and falls back to official_name when name is missing.
+    """
     idx: dict[str, dict] = {}
     for r in rows:
-        key = _norm(r.get("name") or "")
+        # primary: by normalised display name (or official_name if name absent)
+        name = r.get("name") or r.get("official_name") or ""
+        key = _norm(name)
         if key:
             idx[key] = r
+        # secondary: by reccy id for fast exact-match in patch_enriched_csv
+        rid = r.get("id", "")
+        if rid:
+            idx[f"id:{rid}"] = r
     return idx
 
 
@@ -205,12 +215,20 @@ def patch_enriched_csv(
 
     matched = 0
     for row in rows:
-        key = _norm(row.get("name") or "")
-        detail = company_index.get(key)
+        # Try exact id match first (most reliable)
+        rid = row.get("reccy_id", "")
+        detail = company_index.get(f"id:{rid}") if rid else None
+
+        if detail is None:
+            key = _norm(row.get("name") or "")
+            detail = company_index.get(key)
 
         if detail is None:
             # Try partial / alias matching: strip common suffixes
+            key = _norm(row.get("name") or "")
             for k in company_index:
+                if k.startswith("id:"):
+                    continue
                 if key and (key in k or k in key):
                     detail = company_index[k]
                     break
