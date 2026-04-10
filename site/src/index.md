@@ -210,17 +210,21 @@ const timelineData = companies.filter(d => d.founding_year && d.founding_year >=
 ```
 
 ```js
-const s1Filters = view(Inputs.form(
-  {regions: Inputs.checkbox(regionOrder, {value: regionOrder, label: "Regions"})},
-  {template: (inputs) => makeControlCard(inputs.regions)}
-));
+// §1 filter — independent reactive binding (chart renders ALL data once)
+const _s1RegionInput = Inputs.checkbox(regionOrder, {value: regionOrder, label: "Regions"});
+display(makeControlCard(_s1RegionInput));
 ```
 
 ```js
-const s1Data = timelineData.filter(d => s1Filters.regions.includes(d.region));
+const s1SelectedRegions = Generators.input(_s1RegionInput);
 ```
 
 ```js
+// Render chart ONCE with ALL regions. Animation cell toggles individual
+// bar segments via CSS transitions — no re-render needed.
+const colorToRegion = {};
+regionOrder.forEach(r => { colorToRegion[regionColors[r]] = r; });
+
 const s1Chart = Plot.plot({
   width,
   height: 380,
@@ -243,7 +247,7 @@ const s1Chart = Plot.plot({
   },
   marks: [
     Plot.rectY(
-      s1Data,
+      timelineData,
       Plot.binX(
         {y: "count"},
         {
@@ -265,15 +269,12 @@ const s1Chart = Plot.plot({
   ]
 });
 
-// Collapse each bar to its bottom edge so it can grow upward via CSS transition
-const s1Rects = s1Chart.querySelectorAll('[aria-label="rect"] rect');
-for (const r of s1Rects) {
-  const targetY = +r.getAttribute("y");
-  const targetH = +r.getAttribute("height");
-  r.dataset.targetY = targetY;
-  r.dataset.targetH = targetH;
-  r.style.y = `${targetY + targetH}px`;
-  r.style.height = "0px";
+// Tag each rect with its region and store original geometry for stacking
+const s1AllRects = s1Chart.querySelectorAll('[aria-label="rect"] rect');
+for (const r of s1AllRects) {
+  r.dataset.region = colorToRegion[r.getAttribute("fill")] || "Other";
+  r.dataset.origY = r.getAttribute("y");
+  r.dataset.origH = r.getAttribute("height");
   r.style.transition = "y 0.6s ease-out, height 0.6s ease-out";
 }
 
@@ -281,18 +282,44 @@ const s1Container = display(html`<div id="timeline-chart-container">${s1Chart}</
 ```
 
 ```js
-// Grow bars upward from baseline after chart (re-)renders
+// Reactive animation: recompute stack positions when checkboxes change.
+// Only the toggled region's bars grow/shrink; neighbours shift to fill gaps.
 (function animateTimeline() {
   void s1Container;
   const container = document.getElementById("timeline-chart-container");
   if (!container) return;
 
+  const selected = new Set(s1SelectedRegions);
   const rects = container.querySelectorAll('[aria-label="rect"] rect');
-  void container.offsetHeight;  // force reflow — browser commits collapsed state
 
+  // Group rects by x (each x = one year bin)
+  const byX = new Map();
   for (const r of rects) {
-    r.style.y = `${r.dataset.targetY}px`;
-    r.style.height = `${r.dataset.targetH}px`;
+    const x = r.getAttribute("x");
+    if (!byX.has(x)) byX.set(x, []);
+    byX.get(x).push(r);
+  }
+
+  for (const binRects of byX.values()) {
+    // Sort bottom-up (highest origY = closest to baseline = bottom of stack)
+    binRects.sort((a, b) => +b.dataset.origY - +a.dataset.origY);
+    // Baseline = bottom edge of the lowest rect in the original layout
+    const baseline = Math.max(...binRects.map(r => +r.dataset.origY + +r.dataset.origH));
+
+    let currentY = baseline;
+    for (const r of binRects) {
+      const origH = +r.dataset.origH;
+      if (selected.has(r.dataset.region)) {
+        currentY -= origH;
+        r.style.y = `${currentY}px`;
+        r.style.height = `${origH}px`;
+        r.style.pointerEvents = "auto";
+      } else {
+        r.style.y = `${currentY}px`;
+        r.style.height = "0px";
+        r.style.pointerEvents = "none";
+      }
+    }
   }
 })();
 ```
