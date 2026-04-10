@@ -531,7 +531,7 @@ const nFundedCompanies = new Set(fundingCurves.map(d => d.name)).size;
 ```
 
 ```js
-// ---- Build filter option lists ----
+// ---- Filters: Modality + Region side-by-side, Log scale toggle separated by a divider ----
 const modalityCounts = d3.rollup(fundingEndpoints, v => v.length, d => d.modality);
 const filterOptions = [
   `All (${nFundedCompanies})`,
@@ -542,24 +542,43 @@ const regionFilterOptions = [
   `All (${nFundedCompanies})`,
   ...regionOrder.filter(r => regionCounts.has(r)).map(r => `${r} (${regionCounts.get(r)})`)
 ];
+
+const _modInput = Inputs.radio(filterOptions,       {value: filterOptions[0],       label: "Modality"});
+const _regInput = Inputs.radio(regionFilterOptions, {value: regionFilterOptions[0], label: "Region"});
+const _logInput = Inputs.toggle({label: "Log scale Y", value: true});
+
+const fundingFilters = view(Inputs.form(
+  {modality: _modInput, region: _regInput, logScale: _logInput},
+  {
+    template: (inputs) => {
+      const wrap = document.createElement("div");
+      wrap.style.cssText = "display:flex; gap:0; align-items:flex-start; flex-wrap:wrap; margin-bottom:0.25rem;";
+
+      const left = document.createElement("div");
+      left.style.cssText = "display:flex; gap:2.5rem; flex-wrap:wrap; flex:1; min-width:0;";
+      left.appendChild(inputs.modality);
+      left.appendChild(inputs.region);
+
+      const divider = document.createElement("div");
+      divider.style.cssText = "width:1px; background:#e2e8f0; margin:0.25rem 2rem 0; align-self:stretch; flex-shrink:0;";
+
+      const right = document.createElement("div");
+      right.style.cssText = "display:flex; align-items:flex-start; padding-top:0.25rem; flex-shrink:0;";
+      right.appendChild(inputs.logScale);
+
+      wrap.appendChild(left);
+      wrap.appendChild(divider);
+      wrap.appendChild(right);
+      return wrap;
+    }
+  }
+));
 ```
 
 ```js
-const fundingFilter = view(Inputs.radio(filterOptions, {value: filterOptions[0], label: "Modality"}));
-```
-
-```js
-const regionFilter = view(Inputs.radio(regionFilterOptions, {value: regionFilterOptions[0], label: "Region"}));
-```
-
-```js
-const useLogScale = view(Inputs.toggle({label: "Log scale Y", value: true}));
-```
-
-```js
-// Parse filter values
-const selectedModality = fundingFilter.startsWith("All") ? null : fundingFilter.replace(/\s*\(\d+\)$/, "");
-const selectedRegion   = regionFilter.startsWith("All")  ? null : regionFilter.replace(/\s*\(\d+\)$/, "");
+const selectedModality = fundingFilters.modality.startsWith("All") ? null : fundingFilters.modality.replace(/\s*\(\d+\)$/, "");
+const selectedRegion   = fundingFilters.region.startsWith("All")   ? null : fundingFilters.region.replace(/\s*\(\d+\)$/, "");
+const useLogScale      = fundingFilters.logScale;
 ```
 
 
