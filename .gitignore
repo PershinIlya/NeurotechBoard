@@ -38,3 +38,5 @@ site/node_modules/
 site/dist/
 site/.observablehq/
 site/src/.observablehq/
+data/raw/*_assembly_report.json
+data/raw/*_assembly_report.json
