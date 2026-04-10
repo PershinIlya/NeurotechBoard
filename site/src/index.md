@@ -599,7 +599,7 @@ const fundingChart = Plot.plot({
       return `$${d}`;
     },
     grid: true,
-    domain: useLogScale ? [10000, 2e10] : [0, 2e9]
+    domain: useLogScale ? [10000, 2e10] : [0, 6e8]
   },
   color: {
     legend: true,
