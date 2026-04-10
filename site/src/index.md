@@ -646,14 +646,15 @@ if (textGroup) {
 }
 
 // Tag dead endpoint markers (×) — first dot group
+// "times" symbol renders as <path>, not <circle>
 const allDotGroups = Array.from(fundingChart.querySelectorAll('[aria-label="dot"]'));
 if (allDotGroups.length >= 1 && deadEndpoints.length > 0) {
-  const deadCircles = allDotGroups[0].querySelectorAll("circle");
-  deadCircles.forEach((c, i) => {
+  const deadPaths = allDotGroups[0].querySelectorAll("path");
+  deadPaths.forEach((p, i) => {
     if (i < deadEndpoints.length) {
-      c.setAttribute("data-modality", deadEndpoints[i].modality);
-      c.setAttribute("data-region", deadEndpoints[i].region);
-      c.style.transition = "opacity 0.8s ease-in-out";
+      p.setAttribute("data-modality", deadEndpoints[i].modality);
+      p.setAttribute("data-region", deadEndpoints[i].region);
+      p.style.transition = "opacity 0.8s ease-in-out";
     }
   });
 }
@@ -691,8 +692,8 @@ const chartContainer = display(html`<div id="funding-chart-container">${fundingC
 
   const anyFilter = selectedModality !== null || selectedRegion !== null;
 
-  const paths  = container.querySelectorAll("path[data-modality]");
-  const dots   = container.querySelectorAll("circle[data-modality]");
+  const paths  = container.querySelectorAll('[aria-label="line"] path[data-modality]');
+  const dots   = container.querySelectorAll('[aria-label="dot"] [data-modality]');
   const labels = container.querySelectorAll("text[data-modality]");
 
   // 1. Reset every element to the unfiltered default state
@@ -1033,6 +1034,101 @@ display(Plot.plot({
 
 <p style="color: var(--theme-foreground-muted); font-size: 0.85rem; margin-top: 0.5rem;">
   ${fundingByYear.length} rounds with disclosed amounts (2010+).
+</p>
+
+<p class="section-label">§8 Category CAGR</p>
+
+## Which categories grow fastest
+
+<p class="caption">
+  Compound Annual Growth Rate of cumulative company count per modality.
+  Pick a start and end year to see which categories expanded fastest
+  over that window. A 20% CAGR means the category doubles roughly
+  every 3.8 years.
+</p>
+
+```js
+const _cagrStartInput = Inputs.range([2005, 2020], {value: 2014, step: 1, label: "From"});
+const _cagrEndInput   = Inputs.range([2018, 2026], {value: 2024, step: 1, label: "To"});
+display(makeControlCard(_cagrStartInput, _cagrEndInput));
+```
+
+```js
+const cagrStart = Generators.input(_cagrStartInput);
+```
+
+```js
+const cagrEnd = Generators.input(_cagrEndInput);
+```
+
+```js
+const cagrData = (() => {
+  const withYear = companies.filter(d => d.founding_year);
+  const years = cagrEnd > cagrStart ? cagrEnd - cagrStart : 1;
+
+  return modalityOrder.map(mod => {
+    const countStart = withYear.filter(d => d.founding_year <= cagrStart && (d.primary_modality || "Other") === mod).length;
+    const countEnd   = withYear.filter(d => d.founding_year <= cagrEnd   && (d.primary_modality || "Other") === mod).length;
+    const cagr = countStart > 0
+      ? Math.pow(countEnd / countStart, 1 / years) - 1
+      : countEnd > 0 ? 1 : 0;
+    return {modality: mod, cagr, countStart, countEnd, pct: (cagr * 100).toFixed(1)};
+  }).filter(d => d.countEnd > 0)
+    .sort((a, b) => d3.descending(a.cagr, b.cagr));
+})();
+```
+
+```js
+display(Plot.plot({
+  width,
+  height: Math.max(280, cagrData.length * 40 + 60),
+  marginLeft: 170,
+  marginRight: 80,
+  x: {
+    label: "CAGR →",
+    grid: true,
+    tickFormat: d => `${(d * 100).toFixed(0)}%`,
+    domain: [0, d3.max(cagrData, d => d.cagr) * 1.15]
+  },
+  y: {label: null, domain: cagrData.map(d => d.modality), tickFormat: m => {
+    const d = cagrData.find(v => v.modality === m);
+    return d ? `${m}  ${d.countStart}→${d.countEnd}` : m;
+  }},
+  color: {
+    domain: modalityOrder,
+    range: modalityOrder.map(m => modalityColors[m] || "#64748b")
+  },
+  marks: [
+    Plot.barX(cagrData, {
+      x: "cagr",
+      y: "modality",
+      fill: "modality",
+      tip: true,
+      channels: {
+        "CAGR": d => `${d.pct}%`,
+        "Start count": "countStart",
+        "End count": "countEnd"
+      }
+    }),
+    Plot.ruleX([0]),
+    Plot.text(cagrData, {
+      x: "cagr",
+      y: "modality",
+      text: d => `${d.pct}%`,
+      textAnchor: "start",
+      dx: 6,
+      fill: "currentColor",
+      fontWeight: "bold",
+      fontSize: 12
+    })
+  ]
+}))
+```
+
+<p style="color: var(--theme-foreground-muted); font-size: 0.85rem; margin-top: 0.5rem;">
+  CAGR = (count<sub>${cagrEnd}</sub> / count<sub>${cagrStart}</sub>)<sup>1/${cagrEnd - cagrStart}</sup> − 1.
+  Only categories with at least one company by end year shown.
+  Y-axis labels show start→end cumulative company count.
 </p>
 
 <div class="about-block">
