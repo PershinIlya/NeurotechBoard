@@ -221,7 +221,7 @@ const s1Data = timelineData.filter(d => s1Filters.regions.includes(d.region));
 ```
 
 ```js
-display(Plot.plot({
+const s1Chart = Plot.plot({
   width,
   height: 380,
   marginLeft: 50,
@@ -263,7 +263,38 @@ display(Plot.plot({
     ),
     Plot.ruleY([0])
   ]
-}))
+});
+
+// Collapse each bar to its bottom edge so it can grow upward via CSS transition
+const s1Rects = s1Chart.querySelectorAll('[aria-label="rect"] rect');
+for (const r of s1Rects) {
+  const targetY = +r.getAttribute("y");
+  const targetH = +r.getAttribute("height");
+  r.dataset.targetY = targetY;
+  r.dataset.targetH = targetH;
+  r.style.y = `${targetY + targetH}px`;
+  r.style.height = "0px";
+  r.style.transition = "y 0.6s ease-out, height 0.6s ease-out";
+}
+
+const s1Container = display(html`<div id="timeline-chart-container">${s1Chart}</div>`);
+```
+
+```js
+// Grow bars upward from baseline after chart (re-)renders
+(function animateTimeline() {
+  void s1Container;
+  const container = document.getElementById("timeline-chart-container");
+  if (!container) return;
+
+  const rects = container.querySelectorAll('[aria-label="rect"] rect');
+  void container.offsetHeight;  // force reflow — browser commits collapsed state
+
+  for (const r of rects) {
+    r.style.y = `${r.dataset.targetY}px`;
+    r.style.height = `${r.dataset.targetH}px`;
+  }
+})();
 ```
 
 <p class="section-label">§2 Lifelines</p>
