@@ -2,6 +2,35 @@
 
 All notable changes to the NeurotechBoard dataset are documented here. Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Dataset follows semver loosely (see README).
 
+## [0.3.1] — 2026-04-10
+
+Patch: retry pass for the 79 detail-page scrape errors from v0.3.0.
+
+### Changed
+
+- **`data/raw/reccy_detail_dump_2026-04-09.json`** — 55 previously-errored companies now have full profile data (official_name, description, location_full, crunchbase_slug). Re-scraped with longer timeouts (15s vs 9s per company) and without rate-limiting issues. 24 companies remain as errors — confirmed no-profile pages on reccy.dev (`no_profile` or `no_doc` error codes), not recoverable by retry.
+- **`data/processed/neurotech_enriched.csv`** — match rate improved from 78.9% → 79.6% (313/393). No new funding rounds added (the 55 recovered companies have empty funding_rounds arrays on reccy.dev); profile fields (description, location_full, crunchbase_slug) populated for them.
+- **`data/processed/funding_rounds.csv`** — unchanged (still 868 rows, 225 companies).
+
+### Confirmed permanent errors (24 companies)
+
+These 24 companies have no detail page on reccy.dev and will not be recovered by further retries:
+
+Neurolight, Presidio Medical, Hinge Health Inc., Connectome, Vistim Labs Inc., Constellation, Synaptrix-labs, Cirtecmed, iota Biosciences Inc., Nia Therapeutics Inc., Noctrix Health, Phagenesis Limited, PIGPUG HEALTH, PSYONIC, Mad Science Group Inc., Cionic, Cortec-neuro, Ceribell, NeuroX, Nerivio, Newrotex, Wise Neuro, NeuroEM, UroMems SAS.
+
+### Metrics (2026-04-10)
+
+| Metric | Value |
+|---|---|
+| Companies with profile data (ok) | 366 / 390 scraped (93.8%) |
+| Companies with funding data | 225 / 366 ok (61%) |
+| Total funding rounds | 868 |
+| Companies with Crunchbase slug | 289 |
+| Enriched CSV match rate | 313 / 393 (79.6%) |
+| Permanent scrape errors | 24 (confirmed no-profile on reccy.dev) |
+
+---
+
 ## [0.3.0] — 2026-04-10
 
 Schema change: introduces **funding and company detail enrichment** from reccy.dev detail pages, scraped in a single browser pass across all 393 companies.
@@ -63,7 +92,7 @@ Schema change: introduces **funding and company detail enrichment** from reccy.d
 
 ### Known limitations
 
-- 79 companies (20%) have scrape errors — mostly timeouts from rate limiting during the browser pass. A retry pass would recover most of these.
+- 79 companies (20%) had scrape errors — mostly timeouts. Retry pass in v0.3.1 recovered 55; 24 are confirmed permanent no-profile pages.
 - `official_name` field is unreliable — the regex used during scraping produced single-character values for many rows (extracts the wrong DOM node). Treat as empty for now.
 - `location_full` is populated for only a subset — reccy's detail pages don't always show city/country in the header.
 - Match rate (78.9%) is below the 85% warning threshold but expected given the 79 error rows; the remaining 4 unmatched rows are name-normalisation mismatches.
