@@ -153,8 +153,7 @@ const modalityOrder = [
   "Diagnostics",
   "Software/AI",
   "Research Tools",
-  "Hardware",
-  "Other"
+  "Hardware"
 ];
 const modalityColors = {
   "Wearable":       "#2563eb",
@@ -164,7 +163,6 @@ const modalityColors = {
   "Software/AI":    "#059669",
   "Research Tools": "#10b981",
   "Hardware":       "#dc2626",
-  "Other":          "#64748b",
 };
 
 const applicationOrder = [
